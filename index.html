@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helyx — Premium Research Peptides</title>
+    <meta name="description" content="Helyx delivers ultra-pure research peptides backed by rigorous third-party testing and full transparency. GHK-Cu, Retatrutide, MHT, Selank, Semax and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Age Verification Modal -->
+    <div id="age-gate" class="age-gate">
+        <div class="age-gate__backdrop"></div>
+        <div class="age-gate__modal">
+            <div class="age-gate__logo">
+                <img src="assets/helyx-logo.svg" alt="Helyx" class="age-gate__logo-img">
+            </div>
+            <h2 class="age-gate__title">Age & Use Verification Required</h2>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
+            <div class="age-gate__checkboxes">
+                <label class="age-gate__label">
+                    <input type="checkbox" id="age-check-1">
+                    <span class="age-gate__checkmark"></span>
+                    I confirm I am 21 years of age or older.
+                </label>
+                <label class="age-gate__label">
+                    <input type="checkbox" id="age-check-2">
+                    <span class="age-gate__checkmark"></span>
+                    I agree that all products are for laboratory and in-vitro research use only and are <strong>not intended for human or animal consumption</strong>.
+                </label>
+                <label class="age-gate__label">
+                    <input type="checkbox" id="age-check-3">
+                    <span class="age-gate__checkmark"></span>
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                </label>
+            </div>
+            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo">
+                <img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img">
+            </a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link nav__link--active">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="nav__cart-count" id="cart-count">0</span>
+                </a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero__bg">
+            <div class="hero__gradient"></div>
+            <div class="hero__particles" id="particles"></div>
+            <div class="hero__helix-anim">
+                <canvas id="helix-canvas"></canvas>
+            </div>
+        </div>
+        <div class="hero__content">
+            <h1 class="hero__title anim-fade-up" data-delay="100">
+                The Future of<br>
+                <span class="hero__title-gradient">Peptide Science</span>
+            </h1>
+            <p class="hero__subtitle anim-fade-up" data-delay="200">
+                Ultra-pure research peptides backed by rigorous third-party testing, full Certificates of Analysis, and radical transparency. Built for serious research.
+            </p>
+            <div class="hero__cta anim-fade-up" data-delay="300">
+                <a href="products.html" class="btn btn--primary btn--lg">
+                    Explore Peptides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="lab.html" class="btn btn--ghost btn--lg">
+                    View Our Lab
+                </a>
+            </div>
+        </div>
+        <div class="hero__scroll anim-fade-up" data-delay="600">
+            <div class="hero__scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar" id="trust-bar">
+        <div class="container">
+            <div class="trust-bar__grid">
+                <div class="trust-bar__item anim-fade-up" data-delay="0">
+                    <div class="trust-bar__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <div class="trust-bar__text">
+                        <strong>99%+ Purity</strong>
+                        <span>Every batch verified</span>
+                    </div>
+                </div>
+                <div class="trust-bar__item anim-fade-up" data-delay="100">
+                    <div class="trust-bar__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <div class="trust-bar__text">
+                        <strong>COA Included</strong>
+                        <span>Full lab reports</span>
+                    </div>
+                </div>
+                <div class="trust-bar__item anim-fade-up" data-delay="200">
+                    <div class="trust-bar__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5a2 2 0 01-2 2h-1"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </div>
+                    <div class="trust-bar__text">
+                        <strong>Fast Shipping</strong>
+                        <span>Ships within 24h</span>
+                    </div>
+                </div>
+                <div class="trust-bar__item anim-fade-up" data-delay="300">
+                    <div class="trust-bar__icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    </div>
+                    <div class="trust-bar__text">
+                        <strong>Secure Checkout</strong>
+                        <span>SSL encrypted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="container">
+            <div class="mission__grid">
+                <div class="mission__left">
+                    <span class="section-tag anim-fade-up">Our Mission</span>
+                    <h2 class="section-title anim-fade-up" data-delay="100">
+                        Advancing research through<br>
+                        <span class="text-gradient">uncompromising quality</span>
+                    </h2>
+                </div>
+                <div class="mission__right anim-fade-up" data-delay="200">
+                    <p class="mission__text">
+                        Helyx exists to provide the scientific community with research peptides of the highest caliber. Every compound we offer is synthesized under strict GMP-adjacent protocols, tested by independent third-party laboratories, and accompanied by comprehensive Certificates of Analysis.
+                    </p>
+                    <p class="mission__text">
+                        We believe transparency isn't optional — it's foundational. From raw material sourcing to final quality control, we document and share every step of our process.
+                    </p>
+                    <a href="about.html" class="link-arrow">
+                        Learn more about our approach
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured" id="featured">
+        <div class="container">
+            <div class="featured__header">
+                <div>
+                    <span class="section-tag anim-fade-up">Research Compounds</span>
+                    <h2 class="section-title anim-fade-up" data-delay="100">Featured Peptides</h2>
+                </div>
+                <a href="products.html" class="link-arrow anim-fade-up" data-delay="200">
+                    View all peptides
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="featured__grid">
+                <!-- Product Card 1: GHK-Cu -->
+                <div class="product-card anim-fade-up" data-delay="0" data-product="ghk-cu">
+                    <div class="product-card__image">
+                        <div class="product-card__badge">Best Seller</div>
+                        <div class="product-card__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg">
+                                <defs>
+                                    <linearGradient id="vial-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#b0b0b0;stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:0.8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/>
+                                <rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/>
+                                <rect x="25" y="90" width="70" height="100" rx="0 0 8 8" fill="url(#vial-grad-1)" class="vial-fill"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__cat">Copper Peptide</span>
+                        <h3 class="product-card__name">GHK-Cu</h3>
+                        <p class="product-card__desc">50mg · ≥99% Purity · COA Included</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">$54.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="GHK-Cu 50mg" data-price="54.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Retatrutide -->
+                <div class="product-card anim-fade-up" data-delay="100" data-product="retatrutide">
+                    <div class="product-card__image">
+                        <div class="product-card__badge product-card__badge--new">New</div>
+                        <div class="product-card__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg">
+                                <defs>
+                                    <linearGradient id="vial-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#a0a0a0;stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#a0a0a0;stop-opacity:0.8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/>
+                                <rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/>
+                                <rect x="25" y="80" width="70" height="110" rx="0 0 8 8" fill="url(#vial-grad-2)" class="vial-fill"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__cat">Triple Agonist</span>
+                        <h3 class="product-card__name">Retatrutide</h3>
+                        <p class="product-card__desc">10mg · ≥99% Purity · COA Included</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">$89.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Retatrutide 10mg" data-price="89.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: Selank -->
+                <div class="product-card anim-fade-up" data-delay="200" data-product="selank">
+                    <div class="product-card__image">
+                        <div class="product-card__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg">
+                                <defs>
+                                    <linearGradient id="vial-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#888888;stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#888888;stop-opacity:0.8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/>
+                                <rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/>
+                                <rect x="25" y="100" width="70" height="90" rx="0 0 8 8" fill="url(#vial-grad-3)" class="vial-fill"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__cat">Nootropic Peptide</span>
+                        <h3 class="product-card__name">Selank</h3>
+                        <p class="product-card__desc">5mg · ≥99% Purity · COA Included</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">$42.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Selank 5mg" data-price="42.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4: Semax -->
+                <div class="product-card anim-fade-up" data-delay="300" data-product="semax">
+                    <div class="product-card__image">
+                        <div class="product-card__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg">
+                                <defs>
+                                    <linearGradient id="vial-grad-4" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#b0b0b0;stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:0.8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/>
+                                <rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/>
+                                <rect x="25" y="95" width="70" height="95" rx="0 0 8 8" fill="url(#vial-grad-4)" class="vial-fill"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__cat">Nootropic Peptide</span>
+                        <h3 class="product-card__name">Semax</h3>
+                        <p class="product-card__desc">5mg · ≥99% Purity · COA Included</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">$44.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Semax 5mg" data-price="44.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5: MHT -->
+                <div class="product-card anim-fade-up" data-delay="400" data-product="mht">
+                    <div class="product-card__image">
+                        <div class="product-card__badge product-card__badge--trending">Trending</div>
+                        <div class="product-card__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg">
+                                <defs>
+                                    <linearGradient id="vial-grad-5" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#cccccc;stop-opacity:0.2"/>
+                                        <stop offset="100%" style="stop-color:#cccccc;stop-opacity:0.8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/>
+                                <rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/>
+                                <rect x="25" y="85" width="70" height="105" rx="0 0 8 8" fill="url(#vial-grad-5)" class="vial-fill"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__cat">Research Blend</span>
+                        <h3 class="product-card__name">MHT</h3>
+                        <p class="product-card__desc">10mg · ≥99% Purity · COA Included</p>
+                        <div class="product-card__footer">
+                            <span class="product-card__price">$72.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="MHT 10mg" data-price="72.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Helyx Section -->
+    <section class="why" id="why">
+        <div class="container">
+            <div class="why__header">
+                <span class="section-tag anim-fade-up">Why Helyx</span>
+                <h2 class="section-title anim-fade-up" data-delay="100">
+                    Setting the standard in<br>
+                    <span class="text-gradient">research peptide quality</span>
+                </h2>
+            </div>
+            <div class="why__grid">
+                <div class="why__card anim-fade-up" data-delay="0">
+                    <div class="why__card-num">01</div>
+                    <h3 class="why__card-title">Third-Party Lab Verified</h3>
+                    <p class="why__card-text">Every single batch undergoes independent HPLC and mass spectrometry testing. We publish full COAs — not summaries, not excerpts — the complete reports.</p>
+                </div>
+                <div class="why__card anim-fade-up" data-delay="100">
+                    <div class="why__card-num">02</div>
+                    <h3 class="why__card-title">Radical Transparency</h3>
+                    <p class="why__card-text">Our dedicated Lab page shows you exactly where and how our peptides are synthesized, tested, and stored. No black boxes. No vague claims.</p>
+                </div>
+                <div class="why__card anim-fade-up" data-delay="200">
+                    <div class="why__card-num">03</div>
+                    <h3 class="why__card-title">Research-Only Focus</h3>
+                    <p class="why__card-text">We exclusively supply peptides for legitimate laboratory research. Our compounds are not intended for human or animal use — and we enforce this strictly.</p>
+                </div>
+                <div class="why__card anim-fade-up" data-delay="300">
+                    <div class="why__card-num">04</div>
+                    <h3 class="why__card-title">Expert Formulation</h3>
+                    <p class="why__card-text">Our team includes biochemists and peptide scientists who oversee compound selection, purity standards, and storage protocols to ensure peak stability.</p>
+                </div>
+                <div class="why__card anim-fade-up" data-delay="400">
+                    <div class="why__card-num">05</div>
+                    <h3 class="why__card-title">Climate-Controlled Fulfillment</h3>
+                    <p class="why__card-text">All peptides are stored and shipped under controlled conditions to preserve molecular integrity from our facility to your laboratory.</p>
+                </div>
+                <div class="why__card anim-fade-up" data-delay="500">
+                    <div class="why__card-num">06</div>
+                    <h3 class="why__card-title">Responsive Research Support</h3>
+                    <p class="why__card-text">Our science team is available to answer questions about compound specifications, handling protocols, and storage — Monday through Friday.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stats__item anim-fade-up" data-delay="0">
+                    <div class="stats__number" data-target="99">0</div>
+                    <div class="stats__suffix">%+</div>
+                    <div class="stats__label">Purity Guaranteed</div>
+                </div>
+                <div class="stats__item anim-fade-up" data-delay="100">
+                    <div class="stats__number" data-target="5000">0</div>
+                    <div class="stats__suffix">+</div>
+                    <div class="stats__label">Orders Fulfilled</div>
+                </div>
+                <div class="stats__item anim-fade-up" data-delay="200">
+                    <div class="stats__number" data-target="24">0</div>
+                    <div class="stats__suffix">h</div>
+                    <div class="stats__label">Avg. Ship Time</div>
+                </div>
+                <div class="stats__item anim-fade-up" data-delay="300">
+                    <div class="stats__number" data-target="15">0</div>
+                    <div class="stats__suffix">+</div>
+                    <div class="stats__label">Compounds Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <div class="cta-section__inner anim-fade-up">
+                <div class="cta-section__content">
+                    <h2 class="cta-section__title">Ready to advance your research?</h2>
+                    <p class="cta-section__text">Explore our full catalog of research-grade peptides, each backed by comprehensive third-party testing and documentation.</p>
+                    <div class="cta-section__actions">
+                        <a href="products.html" class="btn btn--primary btn--lg">Browse Catalog</a>
+                        <a href="lab.html" class="btn btn--ghost btn--lg">Tour Our Lab</a>
+                    </div>
+                </div>
+                <div class="cta-section__visual">
+                    <div class="cta-section__molecule">
+                        <svg viewBox="0 0 200 200" class="molecule-svg">
+                            <circle cx="100" cy="40" r="8" fill="#b0b0b0" opacity="0.8"/>
+                            <circle cx="50" cy="90" r="6" fill="#a0a0a0" opacity="0.8"/>
+                            <circle cx="150" cy="90" r="6" fill="#888888" opacity="0.8"/>
+                            <circle cx="70" cy="150" r="7" fill="#b0b0b0" opacity="0.8"/>
+                            <circle cx="130" cy="150" r="7" fill="#cccccc" opacity="0.8"/>
+                            <circle cx="100" cy="100" r="10" fill="#b0b0b0" opacity="0.9"/>
+                            <line x1="100" y1="40" x2="50" y2="90" stroke="#b0b0b0" stroke-width="1" opacity="0.4"/>
+                            <line x1="100" y1="40" x2="150" y2="90" stroke="#888888" stroke-width="1" opacity="0.4"/>
+                            <line x1="50" y1="90" x2="100" y2="100" stroke="#a0a0a0" stroke-width="1" opacity="0.4"/>
+                            <line x1="150" y1="90" x2="100" y2="100" stroke="#888888" stroke-width="1" opacity="0.4"/>
+                            <line x1="100" y1="100" x2="70" y2="150" stroke="#b0b0b0" stroke-width="1" opacity="0.4"/>
+                            <line x1="100" y1="100" x2="130" y2="150" stroke="#cccccc" stroke-width="1" opacity="0.4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/helyx-logo.svg" alt="Helyx" class="footer__logo">
+                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only. We prioritize transparent COAs, consistent quality, and responsive support.</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Twitter/X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__col-title">Products</h4>
+                    <a href="products.html" class="footer__link">All Peptides</a>
+                    <a href="products.html#ghk-cu" class="footer__link">GHK-Cu</a>
+                    <a href="products.html#retatrutide" class="footer__link">Retatrutide</a>
+                    <a href="products.html#selank" class="footer__link">Selank</a>
+                    <a href="products.html#semax" class="footer__link">Semax</a>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__col-title">Company</h4>
+                    <a href="about.html" class="footer__link">About Peptides</a>
+                    <a href="lab.html" class="footer__link">Our Lab</a>
+                    <a href="blog.html" class="footer__link">Blog</a>
+                    <a href="checkout.html" class="footer__link">Cart</a>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__col-title">Support</h4>
+                    <a href="#" class="footer__link">Contact Us</a>
+                    <a href="#" class="footer__link">Shipping Policy</a>
+                    <a href="#" class="footer__link">Refund Policy</a>
+                    <a href="#" class="footer__link">Terms & Conditions</a>
+                    <a href="#" class="footer__link">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer">
+                    <strong>Disclaimer:</strong> All products on this website are intended for laboratory research and in-vitro use only. These products are not medicines, supplements, or food items and are <strong>not intended for human or animal consumption</strong>. None of the products or statements on this website have been evaluated by the U.S. Food and Drug Administration (FDA). Our products are not intended to diagnose, treat, cure, or prevent any disease. By purchasing, you agree to use these products solely for legitimate research purposes in accordance with all applicable laws and regulations.
+                </div>
+                <div class="footer__copy">
+                    © 2026 Helyx Solutions LLC. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

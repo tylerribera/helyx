@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Peptides — Helyx</title>
+    <meta name="description" content="Browse Helyx's full catalog of ultra-pure research peptides. GHK-Cu, Retatrutide, MHT, Selank, Semax and more. All ≥99% purity with COA.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Age Gate -->
+    <div id="age-gate" class="age-gate">
+        <div class="age-gate__backdrop"></div>
+        <div class="age-gate__modal">
+            <div class="age-gate__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="age-gate__logo-img"></div>
+            <h2 class="age-gate__title">Age & Use Verification Required</h2>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
+            <div class="age-gate__checkboxes">
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-2"><span class="age-gate__checkmark"></span>I agree that all products are for laboratory and in-vitro research use only and are <strong>not intended for human or animal consumption</strong>.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
+            </div>
+            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link nav__link--active">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="nav__cart-count" id="cart-count">0</span>
+                </a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Research Compounds</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                Premium Research <span class="text-gradient">Peptides</span>
+            </h1>
+            <p class="page-header__desc anim-fade-up" data-delay="200">
+                Every compound is independently tested, accompanied by a full Certificate of Analysis, and shipped under climate-controlled conditions. For laboratory research use only.
+            </p>
+        </div>
+    </section>
+
+    <!-- Research Disclaimer -->
+    <section class="container" style="margin-bottom: 32px;">
+        <div class="research-banner anim-fade-up">
+            <span class="research-banner__icon">⚠️</span>
+            <div><strong>Research Use Only:</strong> All peptides sold by Helyx are intended strictly for in-vitro laboratory research. These products are not intended for human or animal consumption, diagnosis, treatment, cure, or prevention of any disease. Purchasers must be qualified researchers.</div>
+        </div>
+    </section>
+
+    <!-- Filter -->
+    <section class="products-filter">
+        <div class="container">
+            <div class="products-filter__inner anim-fade-up" data-delay="300">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="copper">Copper Peptides</button>
+                <button class="filter-btn" data-filter="metabolic">Metabolic</button>
+                <button class="filter-btn" data-filter="nootropic">Nootropic</button>
+                <button class="filter-btn" data-filter="blend">Research Blends</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-grid-section">
+        <div class="container">
+            <div class="products-grid" id="products-grid">
+
+                <!-- GHK-Cu -->
+                <div class="product-detail anim-fade-up" data-category="copper">
+                    <div class="product-detail__image">
+                        <div class="product-detail__badge">Best Seller</div>
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#b0b0b0;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="90" width="70" height="100" rx="0 0 8 8" fill="url(#pg1)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Copper Peptide</span>
+                        <h3 class="product-detail__name">GHK-Cu</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">Copper-binding tripeptide investigated in research contexts related to tissue remodeling, collagen signaling, and wound healing pathways. Widely studied in dermatological research.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">50mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">403.93 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$54.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="GHK-Cu 50mg" data-price="54.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Retatrutide -->
+                <div class="product-detail anim-fade-up" data-delay="80" data-category="metabolic">
+                    <div class="product-detail__image">
+                        <div class="product-detail__badge product-detail__badge--new">New</div>
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#a0a0a0;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#a0a0a0;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="80" width="70" height="110" rx="0 0 8 8" fill="url(#pg2)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Triple Agonist</span>
+                        <h3 class="product-detail__name">Retatrutide</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">An investigational tri-agonist peptide (GIP/GLP-1/glucagon receptor) currently under clinical study. Used in metabolic pathway research and receptor binding assays.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">10mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">~4,113 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$89.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Retatrutide 10mg" data-price="89.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MHT -->
+                <div class="product-detail anim-fade-up" data-delay="160" data-category="blend">
+                    <div class="product-detail__image">
+                        <div class="product-detail__badge product-detail__badge--trending">Trending</div>
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#cccccc;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#cccccc;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="85" width="70" height="105" rx="0 0 8 8" fill="url(#pg3)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Research Blend</span>
+                        <h3 class="product-detail__name">MHT</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">A research-grade peptide blend formulated for in-vitro studies involving multi-target receptor activation. Designed for advanced research protocols investigating metabolic and hormonal pathways.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">10mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Testing</span><span class="product-detail__spec-value">HPLC + MS</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$72.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="MHT 10mg" data-price="72.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selank -->
+                <div class="product-detail anim-fade-up" data-delay="240" data-category="nootropic">
+                    <div class="product-detail__image">
+                        <div class="product-detail__badge product-detail__badge--popular">Popular</div>
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#888888;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#888888;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="100" width="70" height="90" rx="0 0 8 8" fill="url(#pg4)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Nootropic Peptide</span>
+                        <h3 class="product-detail__name">Selank</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">A synthetic analogue of the immunomodulatory peptide tuftsin, studied in research settings for its effects on BDNF expression, anxiolytic pathways, and immune modulation in cell models.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">5mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">751.87 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$42.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Selank 5mg" data-price="42.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semax -->
+                <div class="product-detail anim-fade-up" data-delay="320" data-category="nootropic">
+                    <div class="product-detail__image">
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg5" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#b0b0b0;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="95" width="70" height="95" rx="0 0 8 8" fill="url(#pg5)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Nootropic Peptide</span>
+                        <h3 class="product-detail__name">Semax</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">A synthetic peptide derived from ACTH(4-10), studied for its neuroprotective and neurotrophic properties in research models. Investigated in BDNF/NGF pathway studies.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">5mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">813.93 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$44.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="Semax 5mg" data-price="44.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BPC-157 -->
+                <div class="product-detail anim-fade-up" data-delay="400" data-category="blend">
+                    <div class="product-detail__image">
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg6" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#999999;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#999999;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="88" width="70" height="102" rx="0 0 8 8" fill="url(#pg6)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Research Peptide</span>
+                        <h3 class="product-detail__name">BPC-157</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">A pentadecapeptide (body protection compound) studied in in-vitro and preclinical models for its effects on angiogenesis, nitric oxide modulation, and tissue repair pathways.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">5mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">1,419.53 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$48.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="BPC-157 5mg" data-price="48.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TB-500 -->
+                <div class="product-detail anim-fade-up" data-delay="480" data-category="blend">
+                    <div class="product-detail__image">
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg7" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#8c8c8c;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#8c8c8c;stop-opacity:0.8"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="92" width="70" height="98" rx="0 0 8 8" fill="url(#pg7)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Research Peptide</span>
+                        <h3 class="product-detail__name">TB-500</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">A synthetic fragment of thymosin beta-4, studied in research settings for its potential role in cell migration, actin regulation, and inflammatory response modulation in vitro.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">5mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">4,963 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$52.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="TB-500 5mg" data-price="52.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GHK-Cu 200mg -->
+                <div class="product-detail anim-fade-up" data-delay="560" data-category="copper">
+                    <div class="product-detail__image">
+                        <div class="product-detail__badge product-detail__badge--popular">Bulk</div>
+                        <div class="product-detail__vial">
+                            <svg viewBox="0 0 120 200" class="vial-svg"><defs><linearGradient id="pg8" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#b0b0b0;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:0.9"/></linearGradient></defs><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="70" width="70" height="120" rx="0 0 8 8" fill="url(#pg8)"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-detail__body">
+                        <span class="product-detail__cat">Copper Peptide</span>
+                        <h3 class="product-detail__name">GHK-Cu 200mg</h3>
+                        <div class="product-detail__purity">≥99% Purity Verified</div>
+                        <p class="product-detail__desc">Bulk research-grade GHK-Cu for extended study protocols. Same ultra-high purity standard as our standard vials, ideal for long-term in-vitro research projects.</p>
+                        <div class="product-detail__specs">
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Quantity</span><span class="product-detail__spec-value">200mg</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Form</span><span class="product-detail__spec-value">Lyophilized</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Mol. Wt.</span><span class="product-detail__spec-value">403.93 g/mol</span></div>
+                            <div class="product-detail__spec"><span class="product-detail__spec-label">Storage</span><span class="product-detail__spec-value">-20°C</span></div>
+                        </div>
+                        <div class="product-detail__footer">
+                            <span class="product-detail__price">$175.00</span>
+                            <button class="btn btn--sm btn--primary add-to-cart" data-name="GHK-Cu 200mg" data-price="175.00">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/helyx-logo.svg" alt="Helyx" class="footer__logo">
+                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only.</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Twitter/X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a><a href="products.html" class="footer__link">GHK-Cu</a><a href="products.html" class="footer__link">Retatrutide</a><a href="products.html" class="footer__link">Selank</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a><a href="blog.html" class="footer__link">Blog</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="#" class="footer__link">Terms</a><a href="#" class="footer__link">Privacy</a></div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are intended for laboratory research and in-vitro use only. These products are <strong>not intended for human or animal consumption</strong>. None of the products have been evaluated by the FDA. By purchasing, you agree to use these products solely for legitimate research purposes.</div>
+                <div class="footer__copy">© 2026 Helyx Solutions LLC. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script>
+        // Product Filter
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = document.querySelectorAll('.filter-btn');
+            const products = document.querySelectorAll('.product-detail');
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+
+                    products.forEach(p => {
+                        if (filter === 'all' || p.dataset.category === filter) {
+                            p.style.display = '';
+                            p.style.opacity = '0';
+                            p.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                p.style.transition = 'opacity 0.5s, transform 0.5s';
+                                p.style.opacity = '1';
+                                p.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            p.style.opacity = '0';
+                            p.style.transform = 'translateY(20px)';
+                            setTimeout(() => { p.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Helyx</title>
+    <meta name="description" content="Stay current with the latest peptide research news, scientific breakthroughs, quality guides, and the history of peptide science. From the Helyx research team.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Age Gate -->
+    <div id="age-gate" class="age-gate">
+        <div class="age-gate__backdrop"></div>
+        <div class="age-gate__modal">
+            <div class="age-gate__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="age-gate__logo-img"></div>
+            <h2 class="age-gate__title">Age & Use Verification Required</h2>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
+            <div class="age-gate__checkboxes">
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-2"><span class="age-gate__checkmark"></span>All products are for laboratory use only, <strong>not for human or animal consumption</strong>.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+            </div>
+            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link nav__link--active">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Helyx Blog</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                Research Notes & <span class="text-gradient">Insights</span>
+            </h1>
+            <p class="page-header__desc anim-fade-up" data-delay="200">
+                The latest in peptide science — breakthroughs, quality guides, industry news, and the fascinating history behind the compounds shaping modern research.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid-section">
+        <div class="container">
+            <div class="blog-grid">
+
+                <!-- Blog 1 -->
+                <article class="blog-card anim-fade-up" data-delay="0">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--1">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                        </div>
+                        <span class="blog-card__tag">Breakthrough</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">February 18, 2026</div>
+                        <h3 class="blog-card__title">Retatrutide Phase 3 Results: What Researchers Need to Know</h3>
+                        <p class="blog-card__excerpt">The latest clinical data on the tri-agonist peptide Retatrutide (LY3437943) has shown unprecedented results in metabolic research. Here's what the published data reveals and what it means for ongoing in-vitro studies.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog 2 -->
+                <article class="blog-card anim-fade-up" data-delay="100">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--2">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(180,180,180,0.4)" stroke-width="0.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span class="blog-card__tag">Quality Guide</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">February 10, 2026</div>
+                        <h3 class="blog-card__title">How to Identify High-Quality Research Peptides: A Scientist's Checklist</h3>
+                        <p class="blog-card__excerpt">Not all peptide suppliers are created equal. Learn the 8 critical factors that separate legitimate research-grade compounds from substandard products — including COA red flags, purity benchmarks, and storage indicators.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog 3 -->
+                <article class="blog-card anim-fade-up" data-delay="200">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--3">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(160,160,160,0.4)" stroke-width="0.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                        </div>
+                        <span class="blog-card__tag">History</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">January 28, 2026</div>
+                        <h3 class="blog-card__title">The History of Peptide Science: From Insulin to Modern Research Compounds</h3>
+                        <p class="blog-card__excerpt">Peptide science spans over a century — from the first isolation of insulin in 1921 to today's AI-designed sequences. Trace the milestones that shaped one of biochemistry's most exciting fields.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog 4 -->
+                <article class="blog-card anim-fade-up" data-delay="300">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--4">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,0.4)" stroke-width="0.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <span class="blog-card__tag">Research News</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">January 15, 2026</div>
+                        <h3 class="blog-card__title">GHK-Cu: New Findings in Collagen Signaling and Tissue Remodeling Research</h3>
+                        <p class="blog-card__excerpt">Recent published studies have expanded our understanding of how GHK-Cu interacts with tissue remodeling pathways. A review of the latest peer-reviewed literature on this copper-binding tripeptide.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog 5 -->
+                <article class="blog-card anim-fade-up" data-delay="400">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--5">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(16,185,129,0.4)" stroke-width="0.5"><path d="M9 3h6M12 3v7M7.5 10h9l1.5 11H6L7.5 10z"/></svg>
+                        </div>
+                        <span class="blog-card__tag">Science</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">January 5, 2026</div>
+                        <h3 class="blog-card__title">Understanding BDNF Pathways: How Selank and Semax Are Advancing Neuroscience Research</h3>
+                        <p class="blog-card__excerpt">Brain-derived neurotrophic factor (BDNF) plays a central role in neural plasticity. Explore how the nootropic peptides Selank and Semax are being used to investigate BDNF-related signaling in research models.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog 6 -->
+                <article class="blog-card anim-fade-up" data-delay="500">
+                    <div class="blog-card__image">
+                        <div class="blog-card__image-bg blog-card__image-bg--6">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        </div>
+                        <span class="blog-card__tag">Industry</span>
+                    </div>
+                    <div class="blog-card__body">
+                        <div class="blog-card__date">December 20, 2025</div>
+                        <h3 class="blog-card__title">The FDA, Research Peptides, and What Suppliers Need to Get Right</h3>
+                        <p class="blog-card__excerpt">Navigating the regulatory landscape of research peptides is essential for both suppliers and buyers. Here's what you need to know about FDA classification, labeling requirements, and compliance best practices.</p>
+                        <span class="blog-card__read-more">
+                            Read Article
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section style="padding: 80px 0; background: var(--bg-secondary);">
+        <div class="container">
+            <div style="max-width:600px; margin:0 auto; text-align:center;" class="anim-fade-up">
+                <span class="section-tag">Stay Updated</span>
+                <h2 class="section-title">Subscribe to the <span class="text-gradient">Helyx Journal</span></h2>
+                <p style="font-size:1.0625rem; color:var(--text-secondary); margin-bottom:32px; line-height:1.7;">Get research roundups, new product announcements, and exclusive insights delivered to your inbox. No spam, ever.</p>
+                <form style="display:flex; gap:12px; max-width:460px; margin:0 auto;" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed!'; this.querySelector('button').style.background='var(--accent-green)';">
+                    <input type="email" placeholder="your@email.com" required style="flex:1; padding:14px 20px; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-full); color:var(--text-primary); outline:none; font-size:0.9375rem;" onfocus="this.style.borderColor='var(--accent-primary)'" onblur="this.style.borderColor=''">
+                    <button type="submit" class="btn btn--primary btn--md">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/helyx-logo.svg" alt="Helyx" class="footer__logo">
+                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only.</p>
+                </div>
+                <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a><a href="products.html" class="footer__link">GHK-Cu</a><a href="products.html" class="footer__link">Retatrutide</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a><a href="blog.html" class="footer__link">Blog</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="#" class="footer__link">Terms</a></div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong></div>
+                <div class="footer__copy">© 2026 Helyx Solutions LLC. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+</body>
+</html>

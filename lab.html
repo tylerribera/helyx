@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Lab — Helyx</title>
+    <meta name="description" content="See inside the Helyx lab. Full transparency into our synthesis, testing, and quality control processes. Third-party COAs for every batch.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Age Gate -->
+    <div id="age-gate" class="age-gate">
+        <div class="age-gate__backdrop"></div>
+        <div class="age-gate__modal">
+            <div class="age-gate__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="age-gate__logo-img"></div>
+            <h2 class="age-gate__title">Age & Use Verification Required</h2>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
+            <div class="age-gate__checkboxes">
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-2"><span class="age-gate__checkmark"></span>All products are for laboratory use only, <strong>not for human or animal consumption</strong>.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+            </div>
+            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link nav__link--active">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Radical Transparency</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                Inside the <span class="text-gradient">Helyx Lab</span>
+            </h1>
+            <p class="page-header__desc anim-fade-up" data-delay="200">
+                We believe you deserve to know exactly how your research compounds are made, tested, and shipped. Here's our entire process — no black boxes, no vague claims.
+            </p>
+        </div>
+    </section>
+
+    <!-- Quality Standards -->
+    <section class="lab-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:56px;">
+                <span class="section-tag anim-fade-up">Our Standards</span>
+                <h2 class="section-title anim-fade-up" data-delay="100">Quality at <span class="text-gradient">Every Step</span></h2>
+            </div>
+            <div class="lab-quality-grid">
+                <div class="lab-quality-card anim-fade-up" data-delay="0">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6M12 3v7M7.5 10h9l1.5 11H6L7.5 10z"/></svg>
+                    </div>
+                    <h4>SPPS Synthesis</h4>
+                    <p>All peptides are manufactured using solid-phase peptide synthesis (SPPS) under controlled conditions, ensuring precise amino acid sequences and minimal impurities.</p>
+                </div>
+                <div class="lab-quality-card anim-fade-up" data-delay="100">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h4>HPLC Purification</h4>
+                    <p>Crude peptides are purified via high-performance liquid chromatography to achieve ≥99% purity. We accept nothing less than research-grade standards.</p>
+                </div>
+                <div class="lab-quality-card anim-fade-up" data-delay="200">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h4>Mass Spectrometry ID</h4>
+                    <p>Every batch undergoes mass spectrometry analysis to confirm molecular identity. The measured mass must match the theoretical mass within acceptable tolerance.</p>
+                </div>
+                <div class="lab-quality-card anim-fade-up" data-delay="300">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h4>Third-Party COAs</h4>
+                    <p>We never self-certify. Every Certificate of Analysis comes from independent, accredited third-party laboratories. Full, unredacted reports are available upon request.</p>
+                </div>
+                <div class="lab-quality-card anim-fade-up" data-delay="400">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    </div>
+                    <h4>Climate-Controlled Storage</h4>
+                    <p>All inventory is stored at -20°C in dedicated cold storage units. Temperature logs are maintained and auditable to guarantee compound stability from synthesis to shipment.</p>
+                </div>
+                <div class="lab-quality-card anim-fade-up" data-delay="500">
+                    <div class="lab-quality-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5a2 2 0 01-2 2h-1"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </div>
+                    <h4>Insulated Shipping</h4>
+                    <p>Orders ship in insulated packaging with cold packs when necessary. Every shipment is tracked, and peptides are sealed in inert-gas-flushed vials to prevent degradation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="lab-section" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:56px;">
+                <span class="section-tag anim-fade-up">From Synthesis to Shipment</span>
+                <h2 class="section-title anim-fade-up" data-delay="100">Our Process, <span class="text-gradient">Step by Step</span></h2>
+                <p style="font-size:1.0625rem; color:var(--text-secondary); max-width:600px; margin:0 auto; line-height:1.7;" class="anim-fade-up" data-delay="200">Every Helyx peptide follows this exact workflow. No shortcuts, no exceptions.</p>
+            </div>
+
+            <div class="lab-timeline">
+                <div class="lab-timeline__item anim-fade-up" data-delay="0">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 01</div>
+                        <h3 class="lab-timeline__title">Raw Material Sourcing</h3>
+                        <p class="lab-timeline__text">Amino acids and reagents are sourced from vetted, GMP-compliant suppliers. Each incoming material is inspected and documented before entering the synthesis pipeline.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="100">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 02</div>
+                        <h3 class="lab-timeline__title">Solid-Phase Synthesis</h3>
+                        <p class="lab-timeline__text">Peptides are assembled using automated SPPS systems. The process is monitored at every coupling cycle to ensure correct amino acid incorporation and sequence fidelity.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="200">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 03</div>
+                        <h3 class="lab-timeline__title">Cleavage & Crude Analysis</h3>
+                        <p class="lab-timeline__text">The peptide is cleaved from the resin and analyzed in crude form via analytical HPLC to assess initial purity and identify any deletion sequences or side products.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="300">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 04</div>
+                        <h3 class="lab-timeline__title">HPLC Purification</h3>
+                        <p class="lab-timeline__text">Preparative HPLC purification isolates the target peptide from impurities. Fractions are collected and re-analyzed to confirm ≥99% purity before proceeding.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="400">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 05</div>
+                        <h3 class="lab-timeline__title">Lyophilization</h3>
+                        <p class="lab-timeline__text">Purified peptide solutions are freeze-dried (lyophilized) to produce a stable, dry powder. This maximizes shelf life and ensures consistent reconstitution properties.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="500">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 06</div>
+                        <h3 class="lab-timeline__title">Third-Party Testing</h3>
+                        <p class="lab-timeline__text">Samples from every batch are sent to independent, accredited labs for HPLC purity analysis and mass spectrometry identity confirmation. No batch ships without passing both tests.</p>
+                    </div>
+                </div>
+                <div class="lab-timeline__item anim-fade-up" data-delay="600">
+                    <div class="lab-timeline__dot"></div>
+                    <div class="lab-timeline__content">
+                        <div class="lab-timeline__step">Step 07</div>
+                        <h3 class="lab-timeline__title">Packaging & Cold Shipment</h3>
+                        <p class="lab-timeline__text">Verified peptides are sealed in sterile, inert-gas-flushed vials, stored at -20°C, and shipped with insulated packaging and cold packs to maintain chain-of-cold integrity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample COA -->
+    <section class="lab-section">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:56px;">
+                <span class="section-tag anim-fade-up">Full Disclosure</span>
+                <h2 class="section-title anim-fade-up" data-delay="100">Sample Certificate of <span class="text-gradient">Analysis</span></h2>
+                <p style="font-size:1.0625rem; color:var(--text-secondary); max-width:600px; margin:0 auto; line-height:1.7;" class="anim-fade-up" data-delay="200">Every product ships with a COA like this. Here's what a real third-party lab report looks like for our GHK-Cu.</p>
+            </div>
+
+            <div class="coa-preview anim-scale-up" data-delay="300">
+                <div>
+                    <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:8px;">GHK-Cu — Batch #HX-2026-0214</h3>
+                    <p style="font-size:0.875rem; color:var(--text-tertiary); margin-bottom:24px;">Independent testing by AccuBioLab · Report Date: Feb 14, 2026</p>
+                    <table class="coa-preview__table">
+                        <thead>
+                            <tr><th>Parameter</th><th>Specification</th><th>Result</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Purity (HPLC)</td><td>≥98%</td><td>99.47%</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Identity (MS)</td><td>403.93 ± 0.5</td><td>403.91</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Appearance</td><td>White powder</td><td>White powder</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Net Peptide Content</td><td>≥80%</td><td>87.3%</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Water Content (KF)</td><td>≤8%</td><td>5.2%</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Acetate Content</td><td>≤15%</td><td>7.8%</td><td class="pass">✓ Pass</td></tr>
+                            <tr><td>Endotoxin (LAL)</td><td>&lt;0.5 EU/mg</td><td>&lt;0.1 EU/mg</td><td class="pass">✓ Pass</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align:center;">
+                    <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:var(--radius-lg); padding:40px;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1" style="margin-bottom:20px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        <h4 style="font-family:var(--font-display); margin-bottom:8px;">Full COA Available</h4>
+                        <p style="font-size:0.875rem; color:var(--text-tertiary); margin-bottom:20px;">Every order includes the complete, unredacted third-party lab report for your batch.</p>
+                        <span class="btn btn--primary btn--md">Request COA Sample</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/helyx-logo.svg" alt="Helyx" class="footer__logo">
+                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only.</p>
+                </div>
+                <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a><a href="products.html" class="footer__link">GHK-Cu</a><a href="products.html" class="footer__link">Retatrutide</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a><a href="blog.html" class="footer__link">Blog</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="#" class="footer__link">Terms</a></div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong></div>
+                <div class="footer__copy">© 2026 Helyx Solutions LLC. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+</body>
+</html>

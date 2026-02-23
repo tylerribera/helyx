@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Helyx</title>
+    <meta name="description" content="Complete your research peptide order. Secure SSL-encrypted checkout with multiple payment options.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Age Gate -->
+    <div id="age-gate" class="age-gate">
+        <div class="age-gate__backdrop"></div>
+        <div class="age-gate__modal">
+            <div class="age-gate__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="age-gate__logo-img"></div>
+            <h2 class="age-gate__title">Age & Use Verification Required</h2>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
+            <div class="age-gate__checkboxes">
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-2"><span class="age-gate__checkmark"></span>All products are for laboratory use only, <strong>not for human or animal consumption</strong>.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+            </div>
+            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart nav__link--active" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Secure Checkout</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                Your <span class="text-gradient">Cart</span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- Research Disclaimer -->
+    <section class="container" style="margin-bottom: 32px;">
+        <div class="research-banner anim-fade-up">
+            <span class="research-banner__icon">⚠️</span>
+            <div><strong>Research Use Agreement:</strong> By completing this purchase, you confirm that all products are intended for legitimate laboratory research purposes only. These products are <strong>not for human or animal consumption</strong> and are not intended to diagnose, treat, cure, or prevent any disease.</div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Cart Items -->
+                <div class="checkout-cart anim-fade-up" data-delay="0">
+                    <h2 class="checkout-cart__title">Order Summary</h2>
+                    <div id="cart-items">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="cart-summary" class="cart-summary" style="display:none;">
+                        <div class="cart-summary__row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="cart-summary__row">
+                            <span>Shipping</span>
+                            <span id="shipping">Calculated at next step</span>
+                        </div>
+                        <div class="cart-summary__row cart-summary__row--total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="checkout-form anim-fade-up" data-delay="200">
+                    <h2 class="checkout-form__title">Payment Details</h2>
+
+                    <!-- Payment Method Selection -->
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-method="card">
+                            <div class="payment-method__icon">💳</div>
+                            Credit Card
+                        </div>
+                        <div class="payment-method" data-method="crypto">
+                            <div class="payment-method__icon">₿</div>
+                            Crypto
+                        </div>
+                        <div class="payment-method" data-method="wire">
+                            <div class="payment-method__icon">🏦</div>
+                            Wire Transfer
+                        </div>
+                    </div>
+
+                    <form id="checkout-form" onsubmit="handleCheckout(event)">
+                        <!-- Contact -->
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="researcher@institution.edu" required>
+                        </div>
+
+                        <div class="checkout-form__separator"></div>
+
+                        <!-- Shipping Info -->
+                        <h3 style="font-family:var(--font-display); font-size:1.125rem; margin-bottom:20px;">Shipping Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="institution">Institution / Lab Name</label>
+                            <input type="text" id="institution" placeholder="University Research Lab">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" placeholder="123 Research Blvd" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" placeholder="San Diego" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" required>
+                                    <option value="">Select State</option>
+                                    <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                                    <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                                    <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                                    <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                                    <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                                    <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                                    <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                                    <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                                    <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                                    <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                                    <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                                    <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                                    <option>Wisconsin</option><option>Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" placeholder="92101" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country">
+                                    <option>United States</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="checkout-form__separator"></div>
+
+                        <!-- Card Info -->
+                        <div id="card-form-section">
+                            <h3 style="font-family:var(--font-display); font-size:1.125rem; margin-bottom:20px;">Card Details</h3>
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="4242 4242 4242 4242" maxlength="19" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="card-exp">Expiration</label>
+                                    <input type="text" id="card-exp" placeholder="MM / YY" maxlength="7" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-cvc">CVC</label>
+                                    <input type="text" id="card-cvc" placeholder="123" maxlength="4" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Research Agreement -->
+                        <div style="margin-top:20px;">
+                            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:0.8125rem; color:var(--text-secondary); line-height:1.5;">
+                                <input type="checkbox" id="research-agreement" required style="margin-top:3px; accent-color:var(--accent-primary);">
+                                I confirm that all products are being purchased for <strong>legitimate laboratory research purposes only</strong> and will not be used for human or animal consumption. I accept the Terms of Service.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
+                            Complete Order
+                        </button>
+
+                        <div class="checkout-form__secure">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                            Secured with 256-bit SSL encryption
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="assets/helyx-logo.svg" alt="Helyx" class="footer__logo">
+                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only.</p>
+                </div>
+                <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Terms</a></div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong></div>
+                <div class="footer__copy">© 2026 Helyx Solutions LLC. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script>
+        // ── Checkout Page Logic ──────────────────────────────────
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const summary = document.getElementById('cart-summary');
+            
+            if (!Cart.items.length) {
+                container.innerHTML = `
+                    <div class="checkout-cart__empty">
+                        <div class="checkout-cart__empty-icon">🛒</div>
+                        <p>Your cart is empty</p>
+                        <a href="products.html" class="btn btn--primary btn--md">Browse Peptides</a>
+                    </div>`;
+                summary.style.display = 'none';
+                return;
+            }
+
+            summary.style.display = 'block';
+            container.innerHTML = Cart.items.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item__vial">
+                        <svg viewBox="0 0 120 200" width="30"><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="90" width="70" height="100" rx="0 0 8 8" fill="rgba(255,255,255,0.4)"/></svg>
+                    </div>
+                    <div class="cart-item__info">
+                        <div class="cart-item__name">${item.name}</div>
+                        <div class="cart-item__price">$${item.price.toFixed(2)} each</div>
+                    </div>
+                    <div class="cart-item__qty">
+                        <button class="cart-item__qty-btn" onclick="updateQty('${item.name}', ${item.qty - 1})">−</button>
+                        <span class="cart-item__qty-num">${item.qty}</span>
+                        <button class="cart-item__qty-btn" onclick="updateQty('${item.name}', ${item.qty + 1})">+</button>
+                    </div>
+                    <button class="cart-item__remove" onclick="removeItem('${item.name}')" title="Remove">×</button>
+                </div>
+            `).join('');
+
+            const subtotal = Cart.getTotal();
+            const shipping = subtotal >= 200 ? 0 : 12.99;
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Free (orders $200+)' : `$${shipping.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function updateQty(name, qty) {
+            if (qty < 1) {
+                Cart.remove(name);
+            } else {
+                Cart.updateQty(name, qty);
+            }
+            renderCart();
+        }
+
+        function removeItem(name) {
+            Cart.remove(name);
+            renderCart();
+        }
+
+        // Payment method toggle
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+                const cardSection = document.getElementById('card-form-section');
+                if (method.dataset.method === 'card') {
+                    cardSection.style.display = '';
+                } else {
+                    cardSection.style.display = 'none';
+                }
+            });
+        });
+
+        // Research agreement enables submit
+        document.getElementById('research-agreement').addEventListener('change', function() {
+            document.getElementById('submit-btn').disabled = !this.checked;
+        });
+
+        // Card number formatting
+        document.getElementById('card-number').addEventListener('input', function() {
+            let v = this.value.replace(/\s/g, '').replace(/\D/g, '');
+            this.value = v.replace(/(.{4})/g, '$1 ').trim();
+        });
+
+        // Expiry formatting
+        document.getElementById('card-exp').addEventListener('input', function() {
+            let v = this.value.replace(/\D/g, '');
+            if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2,4);
+            this.value = v;
+        });
+
+        // Handle checkout
+        function handleCheckout(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = 'Processing...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                btn.textContent = '✓ Order Confirmed!';
+                btn.style.background = 'var(--accent-green)';
+                btn.style.opacity = '1';
+                
+                // Clear cart
+                Cart.items = [];
+                Cart.save();
+                Cart.updateUI();
+
+                setTimeout(() => {
+                    renderCart();
+                    btn.textContent = 'Complete Order';
+                    btn.style.background = '';
+                    btn.disabled = true;
+                }, 3000);
+            }, 2000);
+        }
+
+        // Listen for cart updates
+        window.addEventListener('cart-updated', renderCart);
+
+        // Init
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>

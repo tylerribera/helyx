@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40">
+  <defs>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="50%" style="stop-color:#cccccc"/>
+      <stop offset="100%" style="stop-color:#888888"/>
+    </linearGradient>
+  </defs>
+  <!-- Helix Icon -->
+  <g transform="translate(2, 4)">
+    <path d="M8 0C8 0 2 8 2 16C2 24 8 32 8 32" stroke="url(#logo-grad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M16 0C16 0 22 8 22 16C22 24 16 32 16 32" stroke="url(#logo-grad)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <line x1="5" y1="8" x2="19" y2="8" stroke="url(#logo-grad)" stroke-width="1.2" opacity="0.4"/>
+    <line x1="3" y1="16" x2="21" y2="16" stroke="url(#logo-grad)" stroke-width="1.2" opacity="0.4"/>
+    <line x1="5" y1="24" x2="19" y2="24" stroke="url(#logo-grad)" stroke-width="1.2" opacity="0.4"/>
+  </g>
+  <!-- Text -->
+  <text x="34" y="26" font-family="'Inter', -apple-system, sans-serif" font-size="24" font-weight="500" fill="#ebebeb" letter-spacing="3">HELYX</text>
+  <text x="34" y="37" font-family="'Inter', sans-serif" font-size="8" font-weight="400" fill="#555555" letter-spacing="3.5">SOLUTIONS</text>
+</svg>
