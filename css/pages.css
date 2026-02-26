@@ -157,11 +157,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s var(--ease-out);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .product-detail:hover .product-detail__img {
-    transform: scale(1.06);
+    animation: vialFloatDetail 2.4s ease-in-out infinite;
+}
+
+@keyframes vialFloatDetail {
+    0% { transform: translateY(0px) scale(1.04); }
+    50% { transform: translateY(-12px) scale(1.06); }
+    100% { transform: translateY(0px) scale(1.04); }
 }
 
 .product-detail__body {
