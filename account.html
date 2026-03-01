@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account — Helyx</title>
+    <meta name="description" content="Manage your Helyx account, update profile details, and change your password.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <style>
+        .account-section { padding: 140px 20px 80px; min-height: 100vh; }
+        .account-header { margin-bottom: 48px; }
+        .account-header__greeting { font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+        .account-header__email { font-size: 0.875rem; color: var(--text-tertiary); }
+        .account-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; }
+        @media (max-width: 768px) { .account-grid { grid-template-columns: 1fr; } }
+        .account-card { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 32px; }
+        .account-card__title { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+        .account-card__title svg { width: 18px; height: 18px; color: var(--text-tertiary); }
+        .account-card__title span { opacity: 0.6; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.6875rem; font-weight: 500; color: var(--text-tertiary); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .form-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-primary); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.875rem; font-family: inherit; transition: border-color 0.3s; box-sizing: border-box; }
+        .form-input:focus { outline: none; border-color: var(--text-tertiary); }
+        .form-input::placeholder { color: var(--text-tertiary); }
+        .form-input:disabled { opacity: 0.5; cursor: not-allowed; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-actions { display: flex; gap: 12px; margin-top: 8px; }
+        .btn-save { padding: 10px 24px; background: var(--text-primary); color: var(--bg-primary); border: none; border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: opacity 0.3s; }
+        .btn-save:hover { opacity: 0.9; }
+        .btn-save:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-save.loading { position: relative; color: transparent; }
+        .btn-save.loading::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 2px solid transparent; border-top-color: var(--bg-primary); border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .btn-logout { padding: 10px 24px; background: transparent; color: #ef4444; border: 1px solid rgba(239,68,68,0.3); border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.3s; }
+        .btn-logout:hover { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.5); }
+        .account-message { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.8125rem; margin-bottom: 16px; display: none; }
+        .account-message.error { display: block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+        .account-message.success { display: block; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; }
+        .account-meta { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-primary); }
+        .account-meta__item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 0.8125rem; }
+        .account-meta__label { color: var(--text-tertiary); }
+        .account-meta__value { color: var(--text-secondary); }
+        .form-note { font-size: 0.6875rem; color: var(--text-tertiary); margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.svg" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
+            </div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="nav__cart-count" id="cart-count">0</span>
+                </a>
+                <a href="account.html" class="nav__link nav__link--auth" id="nav-auth-link">Account</a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Section -->
+    <section class="account-section">
+        <div class="container">
+            <div class="account-header anim-fade-up">
+                <h1 class="account-header__greeting" id="account-greeting">My Account</h1>
+                <p class="account-header__email" id="account-email"></p>
+            </div>
+
+            <div class="account-grid">
+                <!-- Profile Card -->
+                <div class="account-card anim-fade-up" data-delay="100">
+                    <div class="account-card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Profile Details
+                    </div>
+                    <div class="account-message" id="profile-message"></div>
+                    <form id="profile-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-first">First Name</label>
+                                <input type="text" id="profile-first" class="form-input" autocomplete="given-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-last">Last Name</label>
+                                <input type="text" id="profile-last" class="form-input" autocomplete="family-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" class="form-input" disabled>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save" id="profile-save">Save Changes</button>
+                        </div>
+                    </form>
+
+                    <div class="account-meta">
+                        <div class="account-meta__item">
+                            <span class="account-meta__label">Member Since</span>
+                            <span class="account-meta__value" id="member-since">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Card -->
+                <div class="account-card anim-fade-up" data-delay="200">
+                    <div class="account-card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        Change Password
+                    </div>
+                    <div class="account-message" id="password-message"></div>
+                    <form id="password-form" novalidate>
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" class="form-input" placeholder="Enter current password" required autocomplete="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" class="form-input" placeholder="Min. 8 characters" required autocomplete="new-password">
+                            <div class="form-note">Must contain uppercase, lowercase, and a number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" class="form-input" placeholder="Re-enter new password" required autocomplete="new-password">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save" id="password-save">Update Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <div class="anim-fade-up" data-delay="300" style="margin-top: 32px;">
+                <button class="btn-logout" id="logout-btn">Sign Out</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="padding: 24px 0;">
+        <div class="container">
+            <div class="footer__copy" style="text-align: center;">© 2026 Helyx LLC. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

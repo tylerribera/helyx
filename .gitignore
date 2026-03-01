@@ -1,0 +1,19 @@
+# Dependencies
+server/node_modules/
+
+# Environment
+server/.env
+
+# Database
+server/helyx.db
+server/helyx.db-shm
+server/helyx.db-wal
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.swp
+*.swo

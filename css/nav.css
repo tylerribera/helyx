@@ -116,6 +116,28 @@
     transform: scale(1.4);
 }
 
+/* Auth Link */
+.nav__link--auth {
+    margin-left: 4px;
+    padding: 6px 18px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s var(--ease-out);
+}
+
+.nav__link--auth:hover {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.04);
+}
+
+.nav__link--auth::after {
+    display: none;
+}
+
 /* Mobile Toggle */
 .nav__mobile-toggle {
     display: none;
