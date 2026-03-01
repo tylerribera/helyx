@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
     <!-- Age Gate -->
@@ -28,7 +34,7 @@
                 <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
             </div>
             <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
-            <button class="age-gate__exit" onclick="window.location.href='https://google.com'">Exit</button>
+            <button class="age-gate__exit" id="age-gate-exit">Exit</button>
         </div>
     </div>
 
@@ -262,23 +268,35 @@
             }
 
             summary.style.display = 'block';
-            container.innerHTML = Cart.items.map(item => `
-                <div class="cart-item">
+            container.innerHTML = '';
+            Cart.items.forEach(item => {
+                const safeName = sanitize(item.name);
+                const safePrice = parseFloat(item.price).toFixed(2);
+                const safeQty = parseInt(item.qty);
+
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                row.innerHTML = `
                     <div class="cart-item__vial">
                         <svg viewBox="0 0 120 200" width="30"><rect x="30" y="10" width="60" height="20" rx="3" fill="#c0c0c0"/><rect x="25" y="30" width="70" height="160" rx="8" fill="none" stroke="#888888" stroke-width="1.5"/><rect x="25" y="90" width="70" height="100" rx="0 0 8 8" fill="rgba(255,255,255,0.4)"/></svg>
                     </div>
                     <div class="cart-item__info">
-                        <div class="cart-item__name">${item.name}</div>
-                        <div class="cart-item__price">$${item.price.toFixed(2)} each</div>
+                        <div class="cart-item__name">${safeName}</div>
+                        <div class="cart-item__price">$${safePrice} each</div>
                     </div>
                     <div class="cart-item__qty">
-                        <button class="cart-item__qty-btn" onclick="updateQty('${item.name}', ${item.qty - 1})">−</button>
-                        <span class="cart-item__qty-num">${item.qty}</span>
-                        <button class="cart-item__qty-btn" onclick="updateQty('${item.name}', ${item.qty + 1})">+</button>
+                        <button class="cart-item__qty-btn cart-qty-dec">−</button>
+                        <span class="cart-item__qty-num">${safeQty}</span>
+                        <button class="cart-item__qty-btn cart-qty-inc">+</button>
                     </div>
-                    <button class="cart-item__remove" onclick="removeItem('${item.name}')" title="Remove">×</button>
-                </div>
-            `).join('');
+                    <button class="cart-item__remove cart-remove-btn" title="Remove">×</button>`;
+
+                // Attach event listeners instead of inline onclick
+                row.querySelector('.cart-qty-dec').addEventListener('click', () => updateQty(item.name, item.qty - 1));
+                row.querySelector('.cart-qty-inc').addEventListener('click', () => updateQty(item.name, item.qty + 1));
+                row.querySelector('.cart-remove-btn').addEventListener('click', () => removeItem(item.name));
+                container.appendChild(row);
+            });
 
             const subtotal = Cart.getTotal();
             const shipping = subtotal >= 200 ? 0 : 12.99;

@@ -3,16 +3,38 @@
    Shared functionality: nav, cart, animations, age gate
    ═══════════════════════════════════════════════════════════════ */
 
+// ── HTTPS Enforcement ────────────────────────────────────────
+if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
+
+// ── Input Sanitization ───────────────────────────────────────
+function sanitize(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
 // ── Cart State ────────────────────────────────────────────────
 const Cart = {
-    items: JSON.parse(localStorage.getItem('helyx_cart') || '[]'),
+    items: (() => {
+        try {
+            const data = JSON.parse(localStorage.getItem('helyx_cart') || '[]');
+            return Array.isArray(data) ? data.filter(i => i.name && typeof i.price === 'number' && typeof i.qty === 'number') : [];
+        } catch { return []; }
+    })(),
 
     add(name, price) {
+        // Sanitize inputs
+        name = String(name).replace(/[<>"'&]/g, '');
+        price = parseFloat(price);
+        if (!name || isNaN(price) || price <= 0) return;
+
         const existing = this.items.find(i => i.name === name);
         if (existing) {
             existing.qty += 1;
         } else {
-            this.items.push({ name, price: parseFloat(price), qty: 1 });
+            this.items.push({ name, price, qty: 1 });
         }
         this.save();
         this.updateUI();
@@ -95,6 +117,14 @@ function initAgeGate() {
         gate.style.transition = 'opacity 0.5s';
         setTimeout(() => gate.classList.add('hidden'), 500);
     });
+
+    // Exit button (redirects away)
+    const exitBtn = document.getElementById('age-gate-exit');
+    if (exitBtn) {
+        exitBtn.addEventListener('click', () => {
+            window.location.href = 'https://google.com';
+        });
+    }
 }
 
 // ── Navigation ────────────────────────────────────────────────
@@ -183,7 +213,9 @@ function initAddToCartButtons() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (!href || href === '#' || !/^#[\w-]+$/.test(href)) return;
+            const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
