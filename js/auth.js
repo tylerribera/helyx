@@ -3,7 +3,9 @@
    Handles login, register, forgot/reset password, account mgmt
    ═══════════════════════════════════════════════════════════════ */
 
-const API_BASE = window.location.origin + '/api/auth';
+const API_BASE = window.location.hostname === 'localhost'
+    ? window.location.origin + '/api/auth'
+    : 'https://api.helyx.us/api/auth';
 
 // ── Helpers ───────────────────────────────────────────────────
 function getToken() {
