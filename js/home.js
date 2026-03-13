@@ -1,34 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    HELYX — Home Page JavaScript
-   Subtle parallax on hero visual
    ═══════════════════════════════════════════════════════════════ */
-
-// ── Gentle mouse-driven parallax on hero visual ───────────────
-function initHeroParallax() {
-    const visual = document.querySelector('.hero__visual');
-    if (!visual) return;
-
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        const cx = window.innerWidth / 2;
-        const cy = window.innerHeight / 2;
-        targetX = ((e.clientX - cx) / cx) * 12;
-        targetY = ((e.clientY - cy) / cy) * 12;
-    });
-
-    function animate() {
-        currentX += (targetX - currentX) * 0.06;
-        currentY += (targetY - currentY) * 0.06;
-        visual.style.transform = `translate(${currentX}px, ${currentY}px)`;
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
 
 // ── Counter animation for data strip values ───────────────────
 function initStripCounters() {
@@ -73,6 +45,5 @@ function animateValue(el) {
 
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    initHeroParallax();
     initStripCounters();
 });
