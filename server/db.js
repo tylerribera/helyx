@@ -45,9 +45,37 @@ db.exec(`
         expires_at  TEXT    NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS user_preferences (
+        user_id                      INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+        newsletter_opt_in            INTEGER NOT NULL DEFAULT 1,
+        product_alerts_opt_in        INTEGER NOT NULL DEFAULT 1,
+        research_digest_opt_in       INTEGER NOT NULL DEFAULT 0,
+        preferred_research_category  TEXT    NOT NULL DEFAULT 'general',
+        updated_at                   TEXT    NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS saved_compounds (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id         INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        compound_slug   TEXT    NOT NULL,
+        compound_name   TEXT    NOT NULL,
+        created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+        UNIQUE(user_id, compound_slug)
+    );
+
+    CREATE TABLE IF NOT EXISTS account_activity (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id         INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        activity_type   TEXT    NOT NULL,
+        description     TEXT    NOT NULL,
+        created_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+    );
+
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token);
     CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token);
+    CREATE INDEX IF NOT EXISTS idx_saved_compounds_user ON saved_compounds(user_id);
+    CREATE INDEX IF NOT EXISTS idx_activity_user_created ON account_activity(user_id, created_at DESC);
 `);
 
 module.exports = db;

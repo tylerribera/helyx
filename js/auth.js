@@ -7,7 +7,6 @@ const API_BASE = window.location.hostname === 'localhost'
     ? window.location.origin + '/api/auth'
     : 'https://api.helyx.us/api/auth';
 
-// ── Helpers ───────────────────────────────────────────────────
 function getToken() {
     return localStorage.getItem('helyx_auth_token');
 }
@@ -24,7 +23,9 @@ function clearToken() {
 function getUser() {
     try {
         return JSON.parse(localStorage.getItem('helyx_user'));
-    } catch { return null; }
+    } catch {
+        return null;
+    }
 }
 
 function setUser(user) {
@@ -34,7 +35,7 @@ function setUser(user) {
 async function apiRequest(endpoint, options = {}) {
     const token = getToken();
     const headers = { 'Content-Type': 'application/json', ...options.headers };
-    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (token) headers.Authorization = `Bearer ${token}`;
 
     const res = await fetch(`${API_BASE}${endpoint}`, {
         ...options,
@@ -47,36 +48,35 @@ async function apiRequest(endpoint, options = {}) {
     return data;
 }
 
+function isAccountMessageId(id) {
+    return id === 'profile-message' || id === 'password-message' || id === 'preferences-message' || id === 'saved-message';
+}
+
 function showMessage(elementId, text, type = 'error') {
     const el = document.getElementById(elementId);
     if (!el) return;
     el.textContent = text;
-    el.className = `auth-message ${type}`;
-    if (el.className.includes('account-message')) {
-        el.className = `account-message ${type}`;
-    }
+    el.className = `${isAccountMessageId(elementId) ? 'account-message' : 'auth-message'} ${type}`;
 }
 
 function clearMessage(elementId) {
     const el = document.getElementById(elementId);
     if (!el) return;
     el.textContent = '';
-    el.className = el.className.includes('account') ? 'account-message' : 'auth-message';
+    el.className = isAccountMessageId(elementId) ? 'account-message' : 'auth-message';
 }
 
 function setLoading(btnId, loading) {
     const btn = document.getElementById(btnId);
     if (!btn) return;
-    if (loading) {
-        btn.classList.add('loading');
-        btn.disabled = true;
-    } else {
-        btn.classList.remove('loading');
-        btn.disabled = false;
-    }
+    btn.disabled = loading;
+    btn.classList.toggle('loading', loading);
 }
 
-// ── Update nav auth link globally ─────────────────────────────
+function toSlug(input) {
+    return input.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 function updateNavAuth() {
     const link = document.getElementById('nav-auth-link');
     if (!link) return;
@@ -91,25 +91,20 @@ function updateNavAuth() {
     }
 }
 
-// ══════════════════════════════════════════════════════════════
-// LOGIN PAGE
-// ══════════════════════════════════════════════════════════════
 function initLoginPage() {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     if (!loginForm || !registerForm) return;
 
-    // If already logged in, redirect to account
     if (getToken() && getUser()) {
         window.location.href = 'account.html';
         return;
     }
 
-    // Tab switching
-    document.querySelectorAll('.auth-tab').forEach(tab => {
+    document.querySelectorAll('.auth-tab').forEach((tab) => {
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.querySelectorAll('.auth-tab').forEach((t) => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach((form) => form.classList.remove('active'));
             tab.classList.add('active');
             const target = tab.dataset.tab;
             document.querySelector(`.auth-form[data-tab="${target}"]`).classList.add('active');
@@ -117,7 +112,6 @@ function initLoginPage() {
         });
     });
 
-    // Login submit
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearMessage('auth-message');
@@ -146,7 +140,6 @@ function initLoginPage() {
         }
     });
 
-    // Register submit
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearMessage('auth-message');
@@ -189,9 +182,6 @@ function initLoginPage() {
     });
 }
 
-// ══════════════════════════════════════════════════════════════
-// FORGOT PASSWORD PAGE
-// ══════════════════════════════════════════════════════════════
 function initForgotPage() {
     const form = document.getElementById('forgot-form');
     if (!form) return;
@@ -222,20 +212,16 @@ function initForgotPage() {
     });
 }
 
-// ══════════════════════════════════════════════════════════════
-// RESET PASSWORD PAGE
-// ══════════════════════════════════════════════════════════════
 function initResetPage() {
     const form = document.getElementById('reset-form');
     if (!form) return;
 
-    // Get token from URL
     const params = new URLSearchParams(window.location.search);
     const resetToken = params.get('token');
-
     if (!resetToken) {
         showMessage('auth-message', 'Invalid reset link. Please request a new one.');
-        document.getElementById('reset-submit').disabled = true;
+        const submit = document.getElementById('reset-submit');
+        if (submit) submit.disabled = true;
         return;
     }
 
@@ -250,12 +236,10 @@ function initResetPage() {
             showMessage('auth-message', 'Please fill in both fields');
             return;
         }
-
         if (newPassword !== confirm) {
             showMessage('auth-message', 'Passwords do not match');
             return;
         }
-
         if (newPassword.length < 8) {
             showMessage('auth-message', 'Password must be at least 8 characters');
             return;
@@ -267,9 +251,11 @@ function initResetPage() {
                 method: 'POST',
                 body: JSON.stringify({ token: resetToken, newPassword })
             });
-            showMessage('auth-message', data.message + ' Redirecting...', 'success');
+            showMessage('auth-message', `${data.message} Redirecting...`, 'success');
             form.reset();
-            setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
         } catch (err) {
             showMessage('auth-message', err.message);
         } finally {
@@ -278,130 +264,30 @@ function initResetPage() {
     });
 }
 
-// ══════════════════════════════════════════════════════════════
-// ACCOUNT PAGE
-// ══════════════════════════════════════════════════════════════
-function initAccountPage() {
-    const profileForm = document.getElementById('profile-form');
-    const passwordForm = document.getElementById('password-form');
-    const logoutBtn = document.getElementById('logout-btn');
-    if (!profileForm) return;
-
-    // Check if logged in
-    if (!getToken()) {
-        window.location.href = 'login.html';
-        return;
-    }
-
-    // Load user data
-    loadProfile();
-
-    // Profile form submit
-    profileForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearMessage('profile-message');
-
-        const firstName = document.getElementById('profile-first').value.trim();
-        const lastName = document.getElementById('profile-last').value.trim();
-
-        setLoading('profile-save', true);
-        try {
-            const data = await apiRequest('/me', {
-                method: 'PUT',
-                body: JSON.stringify({ firstName, lastName })
-            });
-            setUser(data.user);
-            showMessage('profile-message', 'Profile updated successfully', 'success');
-            // Update the message element class for account page
-            const el = document.getElementById('profile-message');
-            el.className = 'account-message success';
-            updateGreeting(data.user);
-        } catch (err) {
-            const el = document.getElementById('profile-message');
-            el.textContent = err.message;
-            el.className = 'account-message error';
-        } finally {
-            setLoading('profile-save', false);
-        }
-    });
-
-    // Password form submit
-    if (passwordForm) {
-        passwordForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            clearMessage('password-message');
-
-            const currentPassword = document.getElementById('current-password').value;
-            const newPassword = document.getElementById('new-password').value;
-            const confirm = document.getElementById('confirm-password').value;
-
-            if (!currentPassword || !newPassword || !confirm) {
-                const el = document.getElementById('password-message');
-                el.textContent = 'Please fill in all fields';
-                el.className = 'account-message error';
-                return;
-            }
-
-            if (newPassword !== confirm) {
-                const el = document.getElementById('password-message');
-                el.textContent = 'New passwords do not match';
-                el.className = 'account-message error';
-                return;
-            }
-
-            setLoading('password-save', true);
-            try {
-                const data = await apiRequest('/change-password', {
-                    method: 'PUT',
-                    body: JSON.stringify({ currentPassword, newPassword })
-                });
-                const el = document.getElementById('password-message');
-                el.textContent = data.message;
-                el.className = 'account-message success';
-                passwordForm.reset();
-            } catch (err) {
-                const el = document.getElementById('password-message');
-                el.textContent = err.message;
-                el.className = 'account-message error';
-            } finally {
-                setLoading('password-save', false);
-            }
-        });
-    }
-
-    // Logout
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-            try {
-                await apiRequest('/logout', { method: 'POST' });
-            } catch { /* ignore logout errors */ }
-            clearToken();
-            window.location.href = 'index.html';
-        });
-    }
-}
-
 async function loadProfile() {
     try {
         const data = await apiRequest('/me');
         const user = data.user;
         setUser(user);
 
-        document.getElementById('profile-first').value = user.first_name || '';
-        document.getElementById('profile-last').value = user.last_name || '';
-        document.getElementById('profile-email').value = user.email || '';
+        const first = document.getElementById('profile-first');
+        const last = document.getElementById('profile-last');
+        const email = document.getElementById('profile-email');
+        if (first) first.value = user.first_name || '';
+        if (last) last.value = user.last_name || '';
+        if (email) email.value = user.email || '';
 
         updateGreeting(user);
 
-        // Member since
         const since = document.getElementById('member-since');
         if (since && user.created_at) {
             since.textContent = new Date(user.created_at).toLocaleDateString('en-US', {
-                year: 'numeric', month: 'long', day: 'numeric'
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
             });
         }
-    } catch (err) {
-        // Token expired or invalid
+    } catch {
         clearToken();
         window.location.href = 'login.html';
     }
@@ -419,9 +305,260 @@ function updateGreeting(user) {
     }
 }
 
-// ══════════════════════════════════════════════════════════════
-// INIT — detect which page and run appropriate setup
-// ══════════════════════════════════════════════════════════════
+async function loadPreferences() {
+    const form = document.getElementById('preferences-form');
+    if (!form) return;
+
+    try {
+        const data = await apiRequest('/preferences');
+        const preferences = data.preferences || {};
+
+        const newsletter = document.getElementById('pref-newsletter');
+        const alerts = document.getElementById('pref-alerts');
+        const digest = document.getElementById('pref-digest');
+        const category = document.getElementById('pref-category');
+
+        if (newsletter) newsletter.checked = !!preferences.newsletter_opt_in;
+        if (alerts) alerts.checked = !!preferences.product_alerts_opt_in;
+        if (digest) digest.checked = !!preferences.research_digest_opt_in;
+        if (category) category.value = preferences.preferred_research_category || 'general';
+    } catch {
+        // optional section
+    }
+}
+
+async function loadSavedCompounds() {
+    const list = document.getElementById('saved-list');
+    const empty = document.getElementById('saved-empty');
+    if (!list || !empty) return;
+
+    try {
+        const data = await apiRequest('/saved-compounds');
+        const compounds = data.compounds || [];
+
+        list.innerHTML = '';
+        if (!compounds.length) {
+            empty.style.display = 'block';
+            return;
+        }
+
+        empty.style.display = 'none';
+        compounds.forEach((compound) => {
+            const item = document.createElement('li');
+            item.className = 'saved-item';
+            item.innerHTML = `
+                <span class="saved-item__name">${compound.compound_name}</span>
+                <button type="button" class="btn-secondary" data-remove-saved-id="${compound.id}">Remove</button>
+            `;
+            list.appendChild(item);
+        });
+    } catch {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+    }
+}
+
+async function loadActivity() {
+    const list = document.getElementById('activity-list');
+    const empty = document.getElementById('activity-empty');
+    if (!list || !empty) return;
+
+    try {
+        const data = await apiRequest('/activity');
+        const items = data.activity || [];
+
+        list.innerHTML = '';
+        if (!items.length) {
+            empty.style.display = 'block';
+            return;
+        }
+
+        empty.style.display = 'none';
+        items.forEach((entry) => {
+            const item = document.createElement('li');
+            item.className = 'activity-item';
+            item.innerHTML = `
+                <div class="activity-item__desc">${entry.description}</div>
+                <div class="activity-item__time">${new Date(entry.created_at).toLocaleString()}</div>
+            `;
+            list.appendChild(item);
+        });
+    } catch {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+    }
+}
+
+function initAccountPage() {
+    const profileForm = document.getElementById('profile-form');
+    if (!profileForm) return;
+
+    const passwordForm = document.getElementById('password-form');
+    const preferencesForm = document.getElementById('preferences-form');
+    const savedForm = document.getElementById('saved-form');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (!getToken()) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    loadProfile();
+    loadPreferences();
+    loadSavedCompounds();
+    loadActivity();
+
+    profileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearMessage('profile-message');
+
+        const firstName = document.getElementById('profile-first').value.trim();
+        const lastName = document.getElementById('profile-last').value.trim();
+
+        setLoading('profile-save', true);
+        try {
+            const data = await apiRequest('/me', {
+                method: 'PUT',
+                body: JSON.stringify({ firstName, lastName })
+            });
+            setUser(data.user);
+            showMessage('profile-message', 'Profile updated successfully', 'success');
+            updateGreeting(data.user);
+            loadActivity();
+        } catch (err) {
+            showMessage('profile-message', err.message);
+        } finally {
+            setLoading('profile-save', false);
+        }
+    });
+
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessage('password-message');
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+
+            if (!currentPassword || !newPassword || !confirm) {
+                showMessage('password-message', 'Please fill in all fields');
+                return;
+            }
+
+            if (newPassword !== confirm) {
+                showMessage('password-message', 'New passwords do not match');
+                return;
+            }
+
+            setLoading('password-save', true);
+            try {
+                const data = await apiRequest('/change-password', {
+                    method: 'PUT',
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+                showMessage('password-message', data.message, 'success');
+                passwordForm.reset();
+                loadActivity();
+            } catch (err) {
+                showMessage('password-message', err.message);
+            } finally {
+                setLoading('password-save', false);
+            }
+        });
+    }
+
+    if (preferencesForm) {
+        preferencesForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessage('preferences-message');
+
+            const payload = {
+                newsletterOptIn: !!document.getElementById('pref-newsletter')?.checked,
+                productAlertsOptIn: !!document.getElementById('pref-alerts')?.checked,
+                researchDigestOptIn: !!document.getElementById('pref-digest')?.checked,
+                preferredResearchCategory: document.getElementById('pref-category')?.value || 'general'
+            };
+
+            setLoading('preferences-save', true);
+            try {
+                await apiRequest('/preferences', {
+                    method: 'PUT',
+                    body: JSON.stringify(payload)
+                });
+                showMessage('preferences-message', 'Preferences updated successfully', 'success');
+                loadActivity();
+            } catch (err) {
+                showMessage('preferences-message', err.message);
+            } finally {
+                setLoading('preferences-save', false);
+            }
+        });
+    }
+
+    if (savedForm) {
+        savedForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessage('saved-message');
+
+            const nameInput = document.getElementById('saved-name');
+            const compoundName = nameInput ? nameInput.value.trim() : '';
+            if (!compoundName) {
+                showMessage('saved-message', 'Enter a compound name to save');
+                return;
+            }
+
+            setLoading('saved-add', true);
+            try {
+                await apiRequest('/saved-compounds', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        compoundName,
+                        compoundSlug: toSlug(compoundName)
+                    })
+                });
+                showMessage('saved-message', 'Compound saved', 'success');
+                if (nameInput) nameInput.value = '';
+                loadSavedCompounds();
+                loadActivity();
+            } catch (err) {
+                showMessage('saved-message', err.message);
+            } finally {
+                setLoading('saved-add', false);
+            }
+        });
+    }
+
+    document.addEventListener('click', async (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        const removeId = target.getAttribute('data-remove-saved-id');
+        if (!removeId) return;
+
+        clearMessage('saved-message');
+        try {
+            await apiRequest(`/saved-compounds/${removeId}`, { method: 'DELETE' });
+            showMessage('saved-message', 'Compound removed', 'success');
+            loadSavedCompounds();
+            loadActivity();
+        } catch (err) {
+            showMessage('saved-message', err.message);
+        }
+    });
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await apiRequest('/logout', { method: 'POST' });
+            } catch {
+                // ignore
+            }
+            clearToken();
+            window.location.href = 'index.html';
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateNavAuth();
     initLoginPage();

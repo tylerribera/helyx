@@ -25,6 +25,16 @@ const SALT_ROUNDS = 12;
 const TOKEN_EXPIRY = '7d';
 const RESET_EXPIRY_MINUTES = 60;
 
+function logActivity(userId, type, description) {
+    try {
+        db.prepare(
+            'INSERT INTO account_activity (user_id, activity_type, description) VALUES (?, ?, ?)'
+        ).run(userId, type, description);
+    } catch (err) {
+        console.error('Activity log error:', err.message);
+    }
+}
+
 // ── Helper: set auth cookie ──────────────────────────────────
 function setAuthCookie(res, token) {
     const isSecure = process.env.COOKIE_SECURE === 'true';
@@ -83,6 +93,12 @@ router.post('/register', async (req, res) => {
         const token = jwt.sign({ userId: result.lastInsertRowid }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
         setAuthCookie(res, token);
 
+        db.prepare(
+            'INSERT OR IGNORE INTO user_preferences (user_id) VALUES (?)'
+        ).run(result.lastInsertRowid);
+
+        logActivity(result.lastInsertRowid, 'account_created', 'Account created');
+
         // Send welcome email (non-blocking)
         sendWelcomeEmail(cleanEmail, cleanFirst).catch(err => {
             console.error('Failed to send welcome email:', err.message);
@@ -130,6 +146,7 @@ router.post('/login', async (req, res) => {
         // Generate JWT
         const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
         setAuthCookie(res, token);
+        logActivity(user.id, 'login', 'Signed in to account');
 
         res.json({
             message: 'Logged in successfully',
@@ -175,6 +192,8 @@ router.put('/me', requireAuth, (req, res) => {
             "UPDATE users SET first_name = ?, last_name = ?, updated_at = datetime('now') WHERE id = ?"
         ).run(cleanFirst, cleanLast, req.user.id);
 
+        logActivity(req.user.id, 'profile_updated', 'Updated profile details');
+
         res.json({
             message: 'Profile updated',
             user: { ...req.user, first_name: cleanFirst, last_name: cleanLast }
@@ -215,6 +234,8 @@ router.put('/change-password', requireAuth, async (req, res) => {
         db.prepare(
             "UPDATE users SET password_hash = ?, updated_at = datetime('now') WHERE id = ?"
         ).run(hash, req.user.id);
+
+        logActivity(req.user.id, 'password_changed', 'Changed account password');
 
         res.json({ message: 'Password changed successfully' });
     } catch (err) {
@@ -309,6 +330,164 @@ router.post('/reset-password', async (req, res) => {
     } catch (err) {
         console.error('Reset password error:', err);
         res.status(500).json({ error: 'Something went wrong — please try again' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// GET /api/auth/preferences
+// ══════════════════════════════════════════════════════════════
+router.get('/preferences', requireAuth, (req, res) => {
+    try {
+        db.prepare('INSERT OR IGNORE INTO user_preferences (user_id) VALUES (?)').run(req.user.id);
+        const preferences = db.prepare(
+            `SELECT newsletter_opt_in, product_alerts_opt_in, research_digest_opt_in, preferred_research_category, updated_at
+             FROM user_preferences WHERE user_id = ?`
+        ).get(req.user.id);
+
+        res.json({ preferences });
+    } catch (err) {
+        console.error('Get preferences error:', err);
+        res.status(500).json({ error: 'Failed to load preferences' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// PUT /api/auth/preferences
+// ══════════════════════════════════════════════════════════════
+router.put('/preferences', requireAuth, (req, res) => {
+    try {
+        const validCategories = ['general', 'longevity', 'cognitive', 'recovery', 'metabolic'];
+        const newsletterOptIn = req.body.newsletterOptIn ? 1 : 0;
+        const productAlertsOptIn = req.body.productAlertsOptIn ? 1 : 0;
+        const researchDigestOptIn = req.body.researchDigestOptIn ? 1 : 0;
+        const preferredResearchCategory = String(req.body.preferredResearchCategory || 'general').trim().toLowerCase();
+
+        if (!validCategories.includes(preferredResearchCategory)) {
+            return res.status(400).json({ error: 'Invalid preferred category' });
+        }
+
+        db.prepare(
+            `INSERT INTO user_preferences (user_id, newsletter_opt_in, product_alerts_opt_in, research_digest_opt_in, preferred_research_category, updated_at)
+             VALUES (?, ?, ?, ?, ?, datetime('now'))
+             ON CONFLICT(user_id) DO UPDATE SET
+               newsletter_opt_in = excluded.newsletter_opt_in,
+               product_alerts_opt_in = excluded.product_alerts_opt_in,
+               research_digest_opt_in = excluded.research_digest_opt_in,
+               preferred_research_category = excluded.preferred_research_category,
+               updated_at = datetime('now')`
+        ).run(
+            req.user.id,
+            newsletterOptIn,
+            productAlertsOptIn,
+            researchDigestOptIn,
+            preferredResearchCategory
+        );
+
+        logActivity(req.user.id, 'preferences_updated', 'Updated communication preferences');
+
+        const preferences = db.prepare(
+            `SELECT newsletter_opt_in, product_alerts_opt_in, research_digest_opt_in, preferred_research_category, updated_at
+             FROM user_preferences WHERE user_id = ?`
+        ).get(req.user.id);
+
+        res.json({ message: 'Preferences updated', preferences });
+    } catch (err) {
+        console.error('Update preferences error:', err);
+        res.status(500).json({ error: 'Failed to update preferences' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// GET /api/auth/saved-compounds
+// ══════════════════════════════════════════════════════════════
+router.get('/saved-compounds', requireAuth, (req, res) => {
+    try {
+        const compounds = db.prepare(
+            `SELECT id, compound_slug, compound_name, created_at
+             FROM saved_compounds
+             WHERE user_id = ?
+             ORDER BY created_at DESC`
+        ).all(req.user.id);
+
+        res.json({ compounds });
+    } catch (err) {
+        console.error('Get saved compounds error:', err);
+        res.status(500).json({ error: 'Failed to load saved compounds' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// POST /api/auth/saved-compounds
+// ══════════════════════════════════════════════════════════════
+router.post('/saved-compounds', requireAuth, (req, res) => {
+    try {
+        const slug = validator.escape(String(req.body.compoundSlug || '').trim().toLowerCase()).slice(0, 64);
+        const name = validator.escape(String(req.body.compoundName || '').trim()).slice(0, 80);
+
+        if (!slug || !name) {
+            return res.status(400).json({ error: 'Compound name and slug are required' });
+        }
+
+        db.prepare(
+            `INSERT INTO saved_compounds (user_id, compound_slug, compound_name)
+             VALUES (?, ?, ?)
+             ON CONFLICT(user_id, compound_slug) DO NOTHING`
+        ).run(req.user.id, slug, name);
+
+        logActivity(req.user.id, 'compound_saved', `Saved compound: ${name}`);
+
+        res.status(201).json({ message: 'Compound saved successfully' });
+    } catch (err) {
+        console.error('Save compound error:', err);
+        res.status(500).json({ error: 'Failed to save compound' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// DELETE /api/auth/saved-compounds/:id
+// ══════════════════════════════════════════════════════════════
+router.delete('/saved-compounds/:id', requireAuth, (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        if (!Number.isInteger(id) || id <= 0) {
+            return res.status(400).json({ error: 'Invalid saved compound id' });
+        }
+
+        const existing = db.prepare(
+            'SELECT id, compound_name FROM saved_compounds WHERE id = ? AND user_id = ?'
+        ).get(id, req.user.id);
+
+        if (!existing) {
+            return res.status(404).json({ error: 'Saved compound not found' });
+        }
+
+        db.prepare('DELETE FROM saved_compounds WHERE id = ? AND user_id = ?').run(id, req.user.id);
+        logActivity(req.user.id, 'compound_removed', `Removed saved compound: ${existing.compound_name}`);
+
+        res.json({ message: 'Saved compound removed' });
+    } catch (err) {
+        console.error('Delete saved compound error:', err);
+        res.status(500).json({ error: 'Failed to remove saved compound' });
+    }
+});
+
+// ══════════════════════════════════════════════════════════════
+// GET /api/auth/activity
+// ══════════════════════════════════════════════════════════════
+router.get('/activity', requireAuth, (req, res) => {
+    try {
+        const activity = db.prepare(
+            `SELECT id, activity_type, description, created_at
+             FROM account_activity
+             WHERE user_id = ?
+             ORDER BY created_at DESC
+             LIMIT 20`
+        ).all(req.user.id);
+
+        res.json({ activity });
+    } catch (err) {
+        console.error('Get activity error:', err);
+        res.status(500).json({ error: 'Failed to load activity' });
     }
 });
 

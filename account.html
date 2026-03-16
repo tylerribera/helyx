@@ -38,6 +38,8 @@
         .btn-save:hover { opacity: 0.9; }
         .btn-save:disabled { opacity: 0.4; cursor: not-allowed; }
         .btn-save.loading { position: relative; color: transparent; }
+        .btn-secondary { padding: 10px 16px; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-primary); border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.3s; }
+        .btn-secondary:hover { border-color: var(--text-tertiary); color: var(--text-primary); }
         .btn-save.loading::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border: 2px solid transparent; border-top-color: var(--bg-primary); border-radius: 50%; animation: spin 0.6s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .btn-logout { padding: 10px 24px; background: transparent; color: #ef4444; border: 1px solid rgba(239,68,68,0.3); border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.3s; }
@@ -50,6 +52,23 @@
         .account-meta__label { color: var(--text-tertiary); }
         .account-meta__value { color: var(--text-secondary); }
         .form-note { font-size: 0.6875rem; color: var(--text-tertiary); margin-top: 4px; }
+        .prefs-option { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-primary); }
+        .prefs-option:last-of-type { border-bottom: none; }
+        .prefs-option__label { font-size: 0.8125rem; color: var(--text-secondary); }
+        .prefs-select { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-primary); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.875rem; font-family: inherit; margin-top: 12px; }
+        .prefs-select:focus { outline: none; border-color: var(--text-tertiary); }
+        .saved-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .saved-row .form-input { margin-bottom: 0; }
+        .saved-list { list-style: none; padding: 0; margin: 0; }
+        .saved-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-primary); }
+        .saved-item:last-child { border-bottom: none; }
+        .saved-item__name { color: var(--text-secondary); font-size: 0.875rem; }
+        .saved-empty { font-size: 0.8125rem; color: var(--text-tertiary); }
+        .activity-list { list-style: none; padding: 0; margin: 0; }
+        .activity-item { border-bottom: 1px solid var(--border-primary); padding: 12px 0; }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-item__desc { color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 4px; }
+        .activity-item__time { color: var(--text-tertiary); font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -144,6 +163,64 @@
                             <button type="submit" class="btn-save" id="password-save">Update Password</button>
                         </div>
                     </form>
+                </div>
+
+                <div class="account-card anim-fade-up" data-delay="260">
+                    <div class="account-card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
+                        Communication Preferences
+                    </div>
+                    <div class="account-message" id="preferences-message"></div>
+                    <form id="preferences-form" novalidate>
+                        <div class="prefs-option">
+                            <span class="prefs-option__label">Newsletter updates</span>
+                            <input type="checkbox" id="pref-newsletter">
+                        </div>
+                        <div class="prefs-option">
+                            <span class="prefs-option__label">Product availability alerts</span>
+                            <input type="checkbox" id="pref-alerts">
+                        </div>
+                        <div class="prefs-option">
+                            <span class="prefs-option__label">Monthly research digest</span>
+                            <input type="checkbox" id="pref-digest">
+                        </div>
+                        <label for="pref-category" class="form-note">Preferred research category</label>
+                        <select id="pref-category" class="prefs-select">
+                            <option value="general">General</option>
+                            <option value="longevity">Longevity</option>
+                            <option value="cognitive">Cognitive</option>
+                            <option value="recovery">Recovery</option>
+                            <option value="metabolic">Metabolic</option>
+                        </select>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save" id="preferences-save">Save Preferences</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="account-card anim-fade-up" data-delay="300">
+                    <div class="account-card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+                        Saved Compounds
+                    </div>
+                    <div class="account-message" id="saved-message"></div>
+                    <form id="saved-form" novalidate>
+                        <div class="saved-row">
+                            <input type="text" id="saved-name" class="form-input" placeholder="e.g., BPC-157" maxlength="80">
+                            <button type="submit" class="btn-save" id="saved-add">Add</button>
+                        </div>
+                    </form>
+                    <ul class="saved-list" id="saved-list"></ul>
+                    <p class="saved-empty" id="saved-empty">No saved compounds yet.</p>
+                </div>
+
+                <div class="account-card anim-fade-up" data-delay="340">
+                    <div class="account-card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+                        Recent Activity
+                    </div>
+                    <ul class="activity-list" id="activity-list"></ul>
+                    <p class="saved-empty" id="activity-empty">No activity yet.</p>
                 </div>
             </div>
 
