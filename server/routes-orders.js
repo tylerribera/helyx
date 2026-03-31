@@ -39,8 +39,49 @@ router.post('/create-payment', optionalAuth, async (req, res) => {
         if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
             return res.status(400).json({ error: 'Cart is empty' });
         }
-        if (paymentMethod !== 'crypto') {
-            return res.status(400).json({ error: 'Only crypto payments are currently available' });
+        if (!['crypto', 'card'].includes(paymentMethod)) {
+            return res.status(400).json({ error: 'Invalid payment method' });
+        }
+
+        // Card payments — store order but skip PayRam (processor TBD)
+        if (paymentMethod === 'card') {
+            let subtotalCard = 0;
+            for (const item of cartItems) {
+                const price = parseFloat(item.price);
+                const qty = parseInt(item.qty, 10);
+                if (isNaN(price) || isNaN(qty) || price <= 0 || qty <= 0) {
+                    return res.status(400).json({ error: 'Invalid cart item' });
+                }
+                subtotalCard += price * qty;
+            }
+            subtotalCard = Math.round(subtotalCard * 100) / 100;
+            const shipCard = subtotalCard >= 200 ? 0 : 12.99;
+            const totalCard = Math.round((subtotalCard + shipCard) * 100) / 100;
+            const userIdCard = req.user ? req.user.id : null;
+
+            const stmtCard = db.prepare(`
+                INSERT INTO orders (
+                    user_id, email, payment_method,
+                    amount_usd, shipping_cost, status, cart_items,
+                    first_name, last_name, institution,
+                    address, city, state, zip, country
+                ) VALUES (?, ?, 'card', ?, ?, 'pending', ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `);
+
+            const resultCard = stmtCard.run(
+                userIdCard, email, totalCard, shipCard,
+                JSON.stringify(cartItems),
+                firstName, lastName, institution || '',
+                address, city, state, zip, country || 'United States'
+            );
+
+            console.log(`[Order #${resultCard.lastInsertRowid}] Card order — $${totalCard}`);
+
+            return res.json({
+                orderId: resultCard.lastInsertRowid,
+                amount: totalCard,
+                paymentMethod: 'card'
+            });
         }
 
         // ── Calculate totals (server-side, authoritative) ─────
