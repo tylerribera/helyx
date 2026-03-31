@@ -26,7 +26,7 @@
     <link rel="icon" href="assets/favicon.png" type="image/png">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; font-src https://cdn.fontshare.com; img-src 'self' data:; connect-src 'self' https://api.helyx.us; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; font-src https://cdn.fontshare.com; img-src 'self' data:; connect-src 'self' https://api.helyx.us https://pay.helyx.us:8443; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://pay.helyx.us;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -119,18 +119,24 @@
 
                     <!-- Payment Method Selection -->
                     <div class="payment-methods">
-                        <div class="payment-method active" data-method="card">
-                            <div class="payment-method__icon">💳</div>
-                            Credit Card
-                        </div>
                         <div class="payment-method" data-method="crypto">
                             <div class="payment-method__icon">₿</div>
                             Crypto
                         </div>
-                        <div class="payment-method" data-method="wire">
-                            <div class="payment-method__icon">🏦</div>
-                            Wire Transfer
+                        <div class="payment-method" data-method="card" style="opacity:0.4; cursor:not-allowed;" title="Coming soon">
+                            <div class="payment-method__icon">💳</div>
+                            Card <span style="font-size:0.65rem; opacity:0.6;">(Soon)</span>
                         </div>
+                        <div class="payment-method" data-method="wire" style="opacity:0.4; cursor:not-allowed;" title="Coming soon">
+                            <div class="payment-method__icon">🏦</div>
+                            Wire <span style="font-size:0.65rem; opacity:0.6;">(Soon)</span>
+                        </div>
+                    </div>
+
+                    <!-- Crypto payment info banner -->
+                    <div id="crypto-info" class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                        <span class="research-banner__icon">🔗</span>
+                        <div>Pay securely with cryptocurrency. Supported: <strong>BTC, ETH, USDT, USDC</strong> and more across multiple networks. You'll be redirected to our secure payment page after submitting.</div>
                     </div>
 
                     <form id="checkout-form" onsubmit="handleCheckout(event)">
@@ -202,21 +208,21 @@
 
                         <div class="checkout-form__separator"></div>
 
-                        <!-- Card Info -->
-                        <div id="card-form-section">
+                        <!-- Card Info (hidden — coming soon) -->
+                        <div id="card-form-section" style="display:none;">
                             <h3 style="font-family:var(--font-display); font-size:1.125rem; margin-bottom:20px;">Card Details</h3>
                             <div class="form-group">
                                 <label for="card-number">Card Number</label>
-                                <input type="text" id="card-number" placeholder="4242 4242 4242 4242" maxlength="19" required>
+                                <input type="text" id="card-number" placeholder="4242 4242 4242 4242" maxlength="19">
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="card-exp">Expiration</label>
-                                    <input type="text" id="card-exp" placeholder="MM / YY" maxlength="7" required>
+                                    <input type="text" id="card-exp" placeholder="MM / YY" maxlength="7">
                                 </div>
                                 <div class="form-group">
                                     <label for="card-cvc">CVC</label>
-                                    <input type="text" id="card-cvc" placeholder="123" maxlength="4" required>
+                                    <input type="text" id="card-cvc" placeholder="123" maxlength="4">
                                 </div>
                             </div>
                         </div>
@@ -230,7 +236,7 @@
                         </div>
 
                         <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
-                            Complete Order
+                            Pay with Crypto
                         </button>
 
                         <div class="checkout-form__secure">
@@ -265,6 +271,12 @@
     <script src="js/global.js"></script>
     <script>
         // ── Checkout Page Logic ──────────────────────────────────
+        const ORDER_API = window.location.hostname === 'localhost'
+            ? window.location.origin + '/api/orders'
+            : 'https://api.helyx.us/api/orders';
+
+        let selectedPaymentMethod = 'crypto';
+
         function renderCart() {
             const container = document.getElementById('cart-items');
             const summary = document.getElementById('cart-summary');
@@ -303,8 +315,7 @@
                         <button class="cart-item__qty-btn cart-qty-inc">+</button>
                     </div>
                     <button class="cart-item__remove cart-remove-btn" title="Remove">×</button>`;
-
-                // Attach event listeners instead of inline onclick
+                
                 row.querySelector('.cart-qty-dec').addEventListener('click', () => updateQty(item.name, item.qty - 1));
                 row.querySelector('.cart-qty-inc').addEventListener('click', () => updateQty(item.name, item.qty + 1));
                 row.querySelector('.cart-remove-btn').addEventListener('click', () => removeItem(item.name));
@@ -334,26 +345,34 @@
             renderCart();
         }
 
-        // Payment method toggle
+        // Payment method toggle (only crypto is active)
         document.querySelectorAll('.payment-method').forEach(method => {
             method.addEventListener('click', () => {
+                if (method.dataset.method !== 'crypto') return;
                 document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
                 method.classList.add('active');
+                selectedPaymentMethod = method.dataset.method;
+
                 const cardSection = document.getElementById('card-form-section');
+                const cryptoInfo = document.getElementById('crypto-info');
                 if (method.dataset.method === 'card') {
                     cardSection.style.display = '';
+                    cryptoInfo.style.display = 'none';
                 } else {
                     cardSection.style.display = 'none';
+                    cryptoInfo.style.display = '';
                 }
             });
         });
+        // Auto-activate crypto tab
+        document.querySelector('.payment-method[data-method="crypto"]').classList.add('active');
 
         // Research agreement enables submit
         document.getElementById('research-agreement').addEventListener('change', function() {
             document.getElementById('submit-btn').disabled = !this.checked;
         });
 
-        // Card number formatting
+        // Card number formatting (kept for future use)
         document.getElementById('card-number').addEventListener('input', function() {
             let v = this.value.replace(/\s/g, '').replace(/\D/g, '');
             this.value = v.replace(/(.{4})/g, '$1 ').trim();
@@ -366,39 +385,196 @@
             this.value = v;
         });
 
-        // Handle checkout
-        function handleCheckout(e) {
+        // ── Handle Checkout — Real PayRam Integration ────────────
+        async function handleCheckout(e) {
             e.preventDefault();
+
+            if (!Cart.items.length) return;
+
             const btn = document.getElementById('submit-btn');
-            btn.textContent = 'Processing...';
+            const originalText = btn.textContent;
+            btn.textContent = 'Creating Payment...';
             btn.disabled = true;
             btn.style.opacity = '0.7';
 
-            setTimeout(() => {
-                btn.textContent = '✓ Order Confirmed!';
-                btn.style.background = 'var(--accent-green)';
-                btn.style.opacity = '1';
-                
-                // Clear cart
+            try {
+                const orderData = {
+                    email: document.getElementById('email').value.trim(),
+                    firstName: document.getElementById('first-name').value.trim(),
+                    lastName: document.getElementById('last-name').value.trim(),
+                    institution: document.getElementById('institution').value.trim(),
+                    address: document.getElementById('address').value.trim(),
+                    city: document.getElementById('city').value.trim(),
+                    state: document.getElementById('state').value,
+                    zip: document.getElementById('zip').value.trim(),
+                    country: document.getElementById('country').value,
+                    cartItems: Cart.items.map(i => ({ name: i.name, price: i.price, qty: i.qty })),
+                    paymentMethod: 'crypto'
+                };
+
+                const token = localStorage.getItem('helyx_auth_token');
+                const headers = { 'Content-Type': 'application/json' };
+                if (token) headers['Authorization'] = `Bearer ${token}`;
+
+                const res = await fetch(`${ORDER_API}/create-payment`, {
+                    method: 'POST',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify(orderData)
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Failed to create payment');
+                }
+
+                // Store reference for status polling when user returns
+                localStorage.setItem('helyx_pending_order', JSON.stringify({
+                    referenceId: data.referenceId,
+                    orderId: data.orderId,
+                    amount: data.amount,
+                    createdAt: new Date().toISOString()
+                }));
+
+                // Clear cart before redirect
                 Cart.items = [];
                 Cart.save();
                 Cart.updateUI();
 
+                btn.textContent = 'Redirecting to Payment...';
+                btn.style.background = 'var(--accent-primary)';
+
+                // Redirect to PayRam payment page
                 setTimeout(() => {
-                    renderCart();
-                    btn.textContent = 'Complete Order';
-                    btn.style.background = '';
-                    btn.disabled = true;
-                }, 3000);
-            }, 2000);
+                    window.location.href = data.paymentUrl;
+                }, 500);
+
+            } catch (err) {
+                console.error('Checkout error:', err);
+                btn.textContent = originalText;
+                btn.disabled = !document.getElementById('research-agreement').checked;
+                btn.style.opacity = '1';
+                
+                const errDiv = document.createElement('div');
+                errDiv.className = 'research-banner';
+                errDiv.style.cssText = 'margin-top:16px; border-color:rgba(255,100,100,0.3); background:rgba(255,50,50,0.05);';
+                errDiv.innerHTML = `<span class="research-banner__icon">⚠️</span><div style="color:#ff6b6b;"><strong>Payment Error:</strong> ${sanitize(err.message)}</div>`;
+                
+                const prevErr = document.getElementById('checkout-error');
+                if (prevErr) prevErr.remove();
+                errDiv.id = 'checkout-error';
+                btn.parentNode.insertBefore(errDiv, btn.nextSibling.nextSibling);
+            }
+        }
+
+        // ── Check for returning from payment ─────────────────────
+        function checkPendingOrder() {
+            const pending = localStorage.getItem('helyx_pending_order');
+            if (!pending) return;
+
+            try {
+                const order = JSON.parse(pending);
+                const age = Date.now() - new Date(order.createdAt).getTime();
+                if (age > 2 * 60 * 60 * 1000) {
+                    localStorage.removeItem('helyx_pending_order');
+                    return;
+                }
+                pollOrderStatus(order.referenceId, order.orderId, order.amount);
+            } catch {
+                localStorage.removeItem('helyx_pending_order');
+            }
+        }
+
+        async function pollOrderStatus(referenceId, orderId, amount) {
+            const container = document.getElementById('cart-items');
+            const summary = document.getElementById('cart-summary');
+            const form = document.querySelector('.checkout-form');
+
+            container.innerHTML = `
+                <div class="checkout-cart__empty" style="text-align:center;">
+                    <div class="checkout-cart__empty-icon" style="font-size:2.5rem;">⏳</div>
+                    <p style="font-size:1.1rem; margin-bottom:8px;"><strong>Checking payment status...</strong></p>
+                    <p style="color:var(--text-tertiary); font-size:0.85rem;">Order #${orderId} — $${parseFloat(amount).toFixed(2)}</p>
+                    <p id="poll-status" style="color:var(--text-secondary); font-size:0.85rem; margin-top:12px;">Contacting payment server...</p>
+                </div>`;
+            summary.style.display = 'none';
+            if (form) form.style.display = 'none';
+
+            let attempts = 0;
+            const maxAttempts = 20;
+
+            const check = async () => {
+                try {
+                    const res = await fetch(`${ORDER_API}/${referenceId}/status`);
+                    const data = await res.json();
+
+                    if (data.status === 'paid') {
+                        localStorage.removeItem('helyx_pending_order');
+                        container.innerHTML = `
+                            <div class="checkout-cart__empty" style="text-align:center;">
+                                <div class="checkout-cart__empty-icon" style="font-size:3rem;">✅</div>
+                                <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px; color:var(--accent-green);">Payment Confirmed!</h3>
+                                <p style="margin-bottom:8px;">Order #${orderId} — <strong>$${parseFloat(amount).toFixed(2)}</strong></p>
+                                ${data.currency ? `<p style="color:var(--text-tertiary); font-size:0.8rem;">Paid via ${data.currency}${data.network ? ' on ' + data.network : ''}</p>` : ''}
+                                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:16px;">A confirmation email will be sent shortly. Thank you for your research order!</p>
+                                <a href="products.html" class="btn btn--primary btn--md" style="margin-top:20px;">Continue Browsing</a>
+                            </div>`;
+                        return;
+                    }
+
+                    if (data.status === 'expired' || data.status === 'failed') {
+                        localStorage.removeItem('helyx_pending_order');
+                        container.innerHTML = `
+                            <div class="checkout-cart__empty" style="text-align:center;">
+                                <div class="checkout-cart__empty-icon" style="font-size:3rem;">❌</div>
+                                <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px; color:#ff6b6b;">Payment ${data.status === 'expired' ? 'Expired' : 'Failed'}</h3>
+                                <p style="color:var(--text-secondary); font-size:0.875rem;">Your payment session has ${data.status}. Please try again.</p>
+                                <a href="products.html" class="btn btn--primary btn--md" style="margin-top:20px;">Return to Products</a>
+                            </div>`;
+                        if (form) form.style.display = '';
+                        return;
+                    }
+
+                    attempts++;
+                    const statusEl = document.getElementById('poll-status');
+                    if (statusEl) {
+                        statusEl.textContent = `Status: ${data.status || 'pending'} — checking again in 5s... (${attempts}/${maxAttempts})`;
+                    }
+
+                    if (attempts < maxAttempts) {
+                        setTimeout(check, 5000);
+                    } else {
+                        if (statusEl) {
+                            statusEl.innerHTML = `Payment is still processing. You can <a href="checkout.html" style="color:var(--accent-primary);">refresh this page</a> to check again, or it will be confirmed via email.`;
+                        }
+                    }
+                } catch (err) {
+                    console.error('Poll error:', err);
+                    attempts++;
+                    if (attempts < maxAttempts) {
+                        setTimeout(check, 5000);
+                    }
+                }
+            };
+
+            setTimeout(check, 1500);
         }
 
         // Listen for cart updates
         window.addEventListener('cart-updated', renderCart);
 
         // Init
-        document.addEventListener('DOMContentLoaded', renderCart);
+        document.addEventListener('DOMContentLoaded', () => {
+            const pending = localStorage.getItem('helyx_pending_order');
+            if (pending) {
+                checkPendingOrder();
+            } else {
+                renderCart();
+            }
+        });
     </script>
+
     <script src="js/auth.js"></script>
 </body>
 </html>

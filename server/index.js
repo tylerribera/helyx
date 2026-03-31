@@ -13,6 +13,8 @@ const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
 const authRoutes = require('./routes-auth');
+const orderRoutes = require('./routes-orders');
+const { webhookRouter } = require('./routes-orders');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -61,6 +63,8 @@ app.use(express.static(path.join(__dirname, '..'), {
 
 // ── API Routes ────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/webhooks', webhookRouter);
 
 // ── Health Check ──────────────────────────────────────────────
 app.get('/api/health', (req, res) => {

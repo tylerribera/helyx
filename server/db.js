@@ -71,11 +71,41 @@ db.exec(`
         created_at      TEXT    NOT NULL DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS orders (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id         INTEGER REFERENCES users(id) ON DELETE SET NULL,
+        email           TEXT    NOT NULL COLLATE NOCASE,
+        reference_id    TEXT    UNIQUE,
+        payment_method  TEXT    NOT NULL DEFAULT 'crypto',
+        amount_usd      REAL    NOT NULL,
+        shipping_cost   REAL    NOT NULL DEFAULT 0,
+        status          TEXT    NOT NULL DEFAULT 'pending',
+        cart_items      TEXT    NOT NULL,
+        first_name      TEXT    NOT NULL DEFAULT '',
+        last_name       TEXT    NOT NULL DEFAULT '',
+        institution     TEXT    NOT NULL DEFAULT '',
+        address         TEXT    NOT NULL DEFAULT '',
+        city            TEXT    NOT NULL DEFAULT '',
+        state           TEXT    NOT NULL DEFAULT '',
+        zip             TEXT    NOT NULL DEFAULT '',
+        country         TEXT    NOT NULL DEFAULT 'United States',
+        payment_url     TEXT,
+        paid_at         TEXT,
+        tx_hash         TEXT,
+        currency        TEXT,
+        network         TEXT,
+        created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+        updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
+    );
+
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token);
     CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token);
     CREATE INDEX IF NOT EXISTS idx_saved_compounds_user ON saved_compounds(user_id);
     CREATE INDEX IF NOT EXISTS idx_activity_user_created ON account_activity(user_id, created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_orders_reference_id ON orders(reference_id);
+    CREATE INDEX IF NOT EXISTS idx_orders_email ON orders(email);
+    CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 `);
 
 module.exports = db;
