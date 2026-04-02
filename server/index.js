@@ -20,6 +20,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:8080';
 
+// Trust Cloudflare proxy (for rate limiting & IP detection)
+app.set('trust proxy', 1);
+
 // ── Security ──────────────────────────────────────────────────
 app.use(helmet({
     contentSecurityPolicy: false // handled by HTML meta tags

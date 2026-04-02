@@ -117,26 +117,10 @@
                 <div class="checkout-form anim-fade-up" data-delay="200">
                     <h2 class="checkout-form__title">Payment Details</h2>
 
-                    <!-- Payment Method Selection -->
-                    <div class="payment-methods">
-                        <div class="payment-method active" data-method="card">
-                            <div class="payment-method__icon">💳</div>
-                            Credit Card
-                        </div>
-                        <div class="payment-method" data-method="crypto">
-                            <div class="payment-method__icon">₿</div>
-                            Crypto
-                        </div>
-                        <div class="payment-method" data-method="wire" style="opacity:0.4; cursor:not-allowed;" title="Coming soon">
-                            <div class="payment-method__icon">🏦</div>
-                            Wire <span style="font-size:0.65rem; opacity:0.6;">(Soon)</span>
-                        </div>
-                    </div>
-
-                    <!-- Crypto payment info banner -->
-                    <div id="crypto-info" class="research-banner" style="margin-bottom:20px; font-size:0.85rem; display:none;">
-                        <span class="research-banner__icon">🔗</span>
-                        <div>Pay securely with cryptocurrency. Supported: <strong>BTC, ETH, USDT, USDC</strong> and more across multiple networks. You'll be redirected to our secure payment page after submitting.</div>
+                    <!-- Payment Info -->
+                    <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                        <span class="research-banner__icon">&#x1F512;</span>
+                        <div>After submitting your shipping details, you'll be redirected to our <strong>secure payment page</strong> to complete your order. We accept <strong>crypto (BTC, ETH, USDT, USDC)</strong> and <strong>credit/debit cards</strong> across multiple networks.</div>
                     </div>
 
                     <form id="checkout-form" onsubmit="handleCheckout(event)">
@@ -206,26 +190,7 @@
                             </div>
                         </div>
 
-                        <div class="checkout-form__separator"></div>
 
-                        <!-- Card Info -->
-                        <div id="card-form-section">
-                            <h3 style="font-family:var(--font-display); font-size:1.125rem; margin-bottom:20px;">Card Details</h3>
-                            <div class="form-group">
-                                <label for="card-number">Card Number</label>
-                                <input type="text" id="card-number" placeholder="4242 4242 4242 4242" maxlength="19" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="card-exp">Expiration</label>
-                                    <input type="text" id="card-exp" placeholder="MM / YY" maxlength="7" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="card-cvc">CVC</label>
-                                    <input type="text" id="card-cvc" placeholder="123" maxlength="4" required>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Research Agreement -->
                         <div style="margin-top:20px;">
@@ -236,7 +201,7 @@
                         </div>
 
                         <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
-                            Complete Order
+                            Proceed to Payment
                         </button>
 
                         <div class="checkout-form__secure">
@@ -274,8 +239,6 @@
         const ORDER_API = window.location.hostname === 'localhost'
             ? window.location.origin + '/api/orders'
             : 'https://api.helyx.us/api/orders';
-
-        let selectedPaymentMethod = 'card';
 
         function renderCart() {
             const container = document.getElementById('cart-items');
@@ -345,52 +308,12 @@
             renderCart();
         }
 
-        // Payment method toggle
-        document.querySelectorAll('.payment-method').forEach(method => {
-            method.addEventListener('click', () => {
-                if (method.dataset.method === 'wire') return;
-                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-                method.classList.add('active');
-                selectedPaymentMethod = method.dataset.method;
-
-                const cardSection = document.getElementById('card-form-section');
-                const cryptoInfo = document.getElementById('crypto-info');
-                const submitBtn = document.getElementById('submit-btn');
-                const cardInputs = cardSection.querySelectorAll('input');
-                if (method.dataset.method === 'card') {
-                    cardSection.style.display = '';
-                    cryptoInfo.style.display = 'none';
-                    cardInputs.forEach(i => i.required = true);
-                    if (document.getElementById('research-agreement').checked) submitBtn.textContent = 'Complete Order';
-                } else {
-                    cardSection.style.display = 'none';
-                    cryptoInfo.style.display = '';
-                    cardInputs.forEach(i => i.required = false);
-                    if (document.getElementById('research-agreement').checked) submitBtn.textContent = 'Pay with Crypto';
-                }
-            });
-        });
-        
-
         // Research agreement enables submit
         document.getElementById('research-agreement').addEventListener('change', function() {
             document.getElementById('submit-btn').disabled = !this.checked;
         });
 
-        // Card number formatting (kept for future use)
-        document.getElementById('card-number').addEventListener('input', function() {
-            let v = this.value.replace(/\s/g, '').replace(/\D/g, '');
-            this.value = v.replace(/(.{4})/g, '$1 ').trim();
-        });
-
-        // Expiry formatting
-        document.getElementById('card-exp').addEventListener('input', function() {
-            let v = this.value.replace(/\D/g, '');
-            if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2,4);
-            this.value = v;
-        });
-
-        // ── Handle Checkout — Real PayRam Integration ────────────
+        // ── Handle Checkout — All payments via PayRam ────────────
         async function handleCheckout(e) {
             e.preventDefault();
 
@@ -400,27 +323,6 @@
             const originalText = btn.textContent;
             btn.disabled = true;
             btn.style.opacity = '0.7';
-
-            if (selectedPaymentMethod === 'card') {
-                btn.textContent = 'Processing...';
-                // Card payment placeholder — Stripe/processor integration coming soon
-                setTimeout(() => {
-                    btn.textContent = '✓ Order Confirmed!';
-                    btn.style.background = 'var(--accent-green)';
-                    btn.style.opacity = '1';
-                    Cart.items = [];
-                    Cart.save();
-                    Cart.updateUI();
-                    setTimeout(() => {
-                        renderCart();
-                        btn.textContent = 'Complete Order';
-                        btn.style.background = '';
-                        btn.disabled = true;
-                    }, 3000);
-                }, 2000);
-                return;
-            }
-
             btn.textContent = 'Creating Payment...';
 
             try {
@@ -434,8 +336,7 @@
                     state: document.getElementById('state').value,
                     zip: document.getElementById('zip').value.trim(),
                     country: document.getElementById('country').value,
-                    cartItems: Cart.items.map(i => ({ name: i.name, price: i.price, qty: i.qty })),
-                    paymentMethod: selectedPaymentMethod
+                    cartItems: Cart.items.map(i => ({ name: i.name, price: i.price, qty: i.qty }))
                 };
 
                 const token = localStorage.getItem('helyx_auth_token');
