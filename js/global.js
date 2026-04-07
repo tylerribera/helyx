@@ -207,6 +207,7 @@ function initAgeGate() {
         gate.querySelectorAll('[data-doc]').forEach(link => {
             link.addEventListener('click', e => {
                 e.preventDefault();
+                e.stopPropagation();
                 const doc = docs[link.dataset.doc];
                 if (!doc) return;
                 docTitle.textContent = doc.title;
