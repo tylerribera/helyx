@@ -26,7 +26,7 @@
     <link rel="icon" href="assets/favicon.png" type="image/png">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; font-src https://cdn.fontshare.com; img-src 'self' data:; connect-src 'self' https://api.helyx.us https://pay.helyx.us:8443; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://pay.helyx.us;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://secure.nmi.com https://secure.networkmerchants.com https://js.collect.js https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com; font-src https://cdn.fontshare.com https://fonts.gstatic.com; img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://api.helyx.us https://pay.helyx.us:8443 https://secure.nmi.com https://secure.networkmerchants.com https://maps.googleapis.com https://places.googleapis.com; frame-src https://secure.nmi.com https://secure.networkmerchants.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://pay.helyx.us;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -40,9 +40,7 @@
             <h2 class="age-gate__title">Age & Use Verification Required</h2>
             <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
             <div class="age-gate__checkboxes">
-                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older.</label>
-                <label class="age-gate__label"><input type="checkbox" id="age-check-2"><span class="age-gate__checkmark"></span>All products are for laboratory use only, <strong>not for human or animal consumption</strong>.</label>
-                <label class="age-gate__label"><input type="checkbox" id="age-check-3"><span class="age-gate__checkmark"></span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
             </div>
             <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
             <button class="age-gate__exit" id="age-gate-exit">Exit</button>
@@ -117,10 +115,84 @@
                 <div class="checkout-form anim-fade-up" data-delay="200">
                     <h2 class="checkout-form__title">Payment Details</h2>
 
-                    <!-- Payment Info -->
-                    <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
-                        <span class="research-banner__icon">&#x1F512;</span>
-                        <div>After submitting your shipping details, you'll be redirected to our <strong>secure payment page</strong> to complete your order. We accept <strong>crypto (BTC, ETH, USDT, USDC)</strong> and <strong>credit/debit cards</strong> across multiple networks.</div>
+                    <!-- Payment Method Tabs -->
+                    <div class="payment-tabs" id="payment-tabs">
+                        <button class="payment-tab payment-tab--active" data-method="card" id="tab-card">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Card
+                        </button>
+                        <button class="payment-tab" data-method="apple-pay" id="tab-apple-pay" style="display:none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                            Apple Pay
+                        </button>
+                        <button class="payment-tab" data-method="google-pay" id="tab-google-pay" style="display:none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                            Google Pay
+                        </button>
+                        <button class="payment-tab" data-method="crypto" id="tab-crypto">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5m0 0h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5m0-8v8m0-8V6m0 10v2m3-14v2m0 10v2"/></svg>
+                            Crypto
+                        </button>
+                    </div>
+
+                    <!-- Card Payment Panel (NMI Collect.js) -->
+                    <div class="payment-panel payment-panel--active" id="panel-card">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">&#x1F512;</span>
+                            <div>Enter your card details below. Payment is processed securely via our PCI-compliant gateway. <strong>Your card info never touches our servers.</strong></div>
+                        </div>
+                        <!-- Collect.js renders secure iframes into these containers -->
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <div id="ccnumber" class="collect-js-field"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiration</label>
+                                <div id="ccexp" class="collect-js-field"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <div id="cvv" class="collect-js-field"></div>
+                            </div>
+                        </div>
+                        <div id="card-errors" class="payment-error" style="display:none;"></div>
+                    </div>
+
+                    <!-- Apple Pay Panel -->
+                    <div class="payment-panel" id="panel-apple-pay">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">🍎</span>
+                            <div>Complete your purchase instantly with <strong>Apple Pay</strong>. Your card details stay secure on your device.</div>
+                        </div>
+                        <div id="apple-pay-button-container" class="wallet-button-container">
+                            <button id="apple-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                                Pay with Apple Pay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Google Pay Panel -->
+                    <div class="payment-panel" id="panel-google-pay">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">🔵</span>
+                            <div>Complete your purchase instantly with <strong>Google Pay</strong>. Fast, secure checkout.</div>
+                        </div>
+                        <div id="google-pay-button-container" class="wallet-button-container">
+                            <button id="google-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                                Pay with Google Pay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Crypto Payment Panel (existing PayRam flow) -->
+                    <div class="payment-panel" id="panel-crypto">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">&#x1F512;</span>
+                            <div>After submitting your shipping details, you'll be redirected to our <strong>secure payment page</strong> to complete your order. We accept <strong>crypto (BTC, ETH, USDT, USDC)</strong> across multiple networks.</div>
+                        </div>
                     </div>
 
                     <form id="checkout-form" onsubmit="handleCheckout(event)">
@@ -148,9 +220,14 @@
                             <label for="institution">Institution / Lab Name</label>
                             <input type="text" id="institution" placeholder="University Research Lab">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="position:relative;">
                             <label for="address">Address</label>
-                            <input type="text" id="address" placeholder="123 Research Blvd" required>
+                            <input type="text" id="address" placeholder="Start typing your address..." required autocomplete="off">
+                            <div id="address-autocomplete-list" class="address-autocomplete-list"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address2">Apt / Suite / Unit <span style="color:var(--text-tertiary); font-weight:400;">(optional)</span></label>
+                            <input type="text" id="address2" placeholder="Apt 4B, Suite 200, etc.">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -201,7 +278,7 @@
                         </div>
 
                         <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
-                            Proceed to Payment
+                            Pay Now
                         </button>
 
                         <div class="checkout-form__secure">
@@ -239,6 +316,145 @@
         const ORDER_API = window.location.hostname === 'localhost'
             ? window.location.origin + '/api/orders'
             : 'https://api.helyx.us/api/orders';
+
+        const NMI_API = window.location.hostname === 'localhost'
+            ? window.location.origin + '/api/nmi'
+            : 'https://api.helyx.us/api/nmi';
+
+        // ── Payment method state ─────────────────────────────────
+        let activePaymentMethod = 'card';   // 'card' | 'apple-pay' | 'google-pay' | 'crypto'
+        let collectJsLoaded = false;
+        let nmiPaymentToken = null;
+        let nmiConfig = null;
+
+        // ── Load NMI Collect.js (tokenization) ───────────────────
+        async function initNMI() {
+            try {
+                const res = await fetch(`${NMI_API}/config`);
+                if (!res.ok) {
+                    console.log('[NMI] Gateway not configured yet — card payments disabled');
+                    // Hide card tab, default to crypto
+                    document.getElementById('tab-card').style.display = 'none';
+                    document.getElementById('tab-apple-pay').style.display = 'none';
+                    document.getElementById('tab-google-pay').style.display = 'none';
+                    switchPaymentMethod('crypto');
+                    return;
+                }
+                nmiConfig = await res.json();
+
+                // Load Collect.js script dynamically
+                const script = document.createElement('script');
+                script.src = 'https://secure.nmi.com/token/Collect.js';
+                script.dataset.tokenizationKey = nmiConfig.tokenizationKey;
+                script.dataset.variant = 'inline';
+
+                // Configure which fields to render
+                script.dataset.fieldCcnumberSelector = '#ccnumber';
+                script.dataset.fieldCcexpSelector = '#ccexp';
+                script.dataset.fieldCvvSelector = '#cvv';
+
+                // Styling for the iframes
+                script.dataset.customCss = JSON.stringify({
+                    'background-color': 'rgba(255,255,255,0.03)',
+                    'border': '1px solid rgba(255,255,255,0.08)',
+                    'border-radius': '10px',
+                    'padding': '14px 16px',
+                    'font-size': '0.9375rem',
+                    'color': '#e8e8e8',
+                    'font-family': 'Non Natural Grotesk, sans-serif',
+                    'height': '44px',
+                    'box-sizing': 'border-box'
+                });
+
+                script.dataset.focusCss = JSON.stringify({
+                    'border-color': 'rgba(45,212,191,0.4)',
+                    'outline': 'none'
+                });
+
+                script.dataset.invalidCss = JSON.stringify({
+                    'border-color': 'rgba(255,100,100,0.5)'
+                });
+
+                script.dataset.placeholderCss = JSON.stringify({
+                    'color': 'rgba(255,255,255,0.2)'
+                });
+
+                // Callback when token is generated
+                script.dataset.callback = 'collectJsCallback';
+
+                script.onload = () => {
+                    collectJsLoaded = true;
+                    console.log('[NMI] Collect.js loaded');
+                };
+                script.onerror = () => {
+                    console.error('[NMI] Failed to load Collect.js');
+                    document.getElementById('tab-card').style.display = 'none';
+                    switchPaymentMethod('crypto');
+                };
+
+                document.head.appendChild(script);
+
+                // Show Apple Pay tab if supported & enabled
+                if (nmiConfig.applePay && window.ApplePaySession && ApplePaySession.canMakePayments()) {
+                    document.getElementById('tab-apple-pay').style.display = '';
+                }
+                // Show Google Pay tab if enabled
+                if (nmiConfig.googlePay) {
+                    document.getElementById('tab-google-pay').style.display = '';
+                }
+
+            } catch (err) {
+                console.log('[NMI] Could not load config:', err.message);
+                // Fall back to crypto-only
+                document.getElementById('tab-card').style.display = 'none';
+                switchPaymentMethod('crypto');
+            }
+        }
+
+        // Collect.js callback — receives the payment token
+        function collectJsCallback(response) {
+            if (response.token) {
+                nmiPaymentToken = response.token;
+                console.log('[NMI] Token received');
+                // Clear any card errors
+                const errEl = document.getElementById('card-errors');
+                errEl.style.display = 'none';
+                errEl.textContent = '';
+            }
+        }
+
+        // ── Payment method tab switching ─────────────────────────
+        function switchPaymentMethod(method) {
+            activePaymentMethod = method;
+            nmiPaymentToken = null;
+
+            // Update tabs
+            document.querySelectorAll('.payment-tab').forEach(tab => {
+                tab.classList.toggle('payment-tab--active', tab.dataset.method === method);
+            });
+
+            // Update panels
+            document.querySelectorAll('.payment-panel').forEach(panel => {
+                panel.classList.toggle('payment-panel--active', panel.id === `panel-${method}`);
+            });
+
+            // Update submit button text
+            const btn = document.getElementById('submit-btn');
+            if (method === 'crypto') {
+                btn.textContent = 'Proceed to Crypto Payment';
+            } else if (method === 'apple-pay') {
+                btn.textContent = 'Confirm & Pay with Apple Pay';
+            } else if (method === 'google-pay') {
+                btn.textContent = 'Confirm & Pay with Google Pay';
+            } else {
+                btn.textContent = 'Pay Now';
+            }
+        }
+
+        // Tab click handlers
+        document.querySelectorAll('.payment-tab').forEach(tab => {
+            tab.addEventListener('click', () => switchPaymentMethod(tab.dataset.method));
+        });
 
         function renderCart() {
             const container = document.getElementById('cart-items');
@@ -313,12 +529,213 @@
             document.getElementById('submit-btn').disabled = !this.checked;
         });
 
-        // ── Handle Checkout — All payments via PayRam ────────────
+        // ── Gather shipping data ─────────────────────────────────
+        function getOrderData() {
+            return {
+                email: document.getElementById('email').value.trim(),
+                firstName: document.getElementById('first-name').value.trim(),
+                lastName: document.getElementById('last-name').value.trim(),
+                institution: document.getElementById('institution').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                address2: document.getElementById('address2').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                state: document.getElementById('state').value,
+                zip: document.getElementById('zip').value.trim(),
+                country: document.getElementById('country').value,
+                cartItems: Cart.items.map(i => ({ name: i.name, price: i.price, qty: i.qty }))
+            };
+        }
+
+        function getAuthHeaders() {
+            const token = localStorage.getItem('helyx_auth_token');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) headers['Authorization'] = `Bearer ${token}`;
+            return headers;
+        }
+
+        // ── Clear previous errors ────────────────────────────────
+        function clearError() {
+            const prev = document.getElementById('checkout-error');
+            if (prev) prev.remove();
+        }
+
+        function showError(message) {
+            clearError();
+            const btn = document.getElementById('submit-btn');
+            const errDiv = document.createElement('div');
+            errDiv.className = 'research-banner';
+            errDiv.style.cssText = 'margin-top:16px; border-color:rgba(255,100,100,0.3); background:rgba(255,50,50,0.05);';
+            errDiv.innerHTML = `<span class="research-banner__icon">⚠️</span><div style="color:#ff6b6b;"><strong>Payment Error:</strong> ${sanitize(message)}</div>`;
+            errDiv.id = 'checkout-error';
+            btn.parentNode.insertBefore(errDiv, btn.nextSibling.nextSibling);
+        }
+
+        // ── Handle Checkout ──────────────────────────────────────
         async function handleCheckout(e) {
             e.preventDefault();
-
             if (!Cart.items.length) return;
 
+            clearError();
+
+            if (activePaymentMethod === 'crypto') {
+                await handleCryptoPayment();
+            } else if (activePaymentMethod === 'card') {
+                await handleCardPayment();
+            } else if (activePaymentMethod === 'apple-pay' || activePaymentMethod === 'google-pay') {
+                await handleWalletPayment(activePaymentMethod);
+            }
+        }
+
+        // ── Card payment via NMI Collect.js ──────────────────────
+        async function handleCardPayment() {
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.textContent;
+
+            // Trigger Collect.js tokenization
+            if (!collectJsLoaded) {
+                showError('Card payment is loading. Please wait a moment and try again.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.textContent = 'Processing Card...';
+
+            // Trigger Collect.js to tokenize — it calls collectJsCallback
+            // We need to dispatch the submit through Collect.js
+            // Collect.js intercepts form submit and tokenizes before our handler fires
+            // But since we use an async flow, we request the token first:
+            try {
+                // If Collect.js has already tokenized (user filled fields), use it
+                // Otherwise, we need to trigger tokenization via CollectJS.startPaymentRequest
+                if (typeof CollectJS !== 'undefined') {
+                    // Reset token
+                    nmiPaymentToken = null;
+
+                    // Trigger tokenization
+                    CollectJS.startPaymentRequest();
+
+                    // Wait for the token callback (up to 10 seconds)
+                    const token = await waitForToken(10000);
+                    if (!token) {
+                        btn.textContent = originalText;
+                        btn.disabled = !document.getElementById('research-agreement').checked;
+                        btn.style.opacity = '1';
+                        showError('Please enter valid card details.');
+                        return;
+                    }
+
+                    btn.textContent = 'Charging Card...';
+
+                    // Send token + order data to our server
+                    const orderData = getOrderData();
+                    const res = await fetch(`${NMI_API}/charge`, {
+                        method: 'POST',
+                        headers: getAuthHeaders(),
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            paymentToken: token,
+                            ...orderData
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        throw new Error(data.error || 'Card payment failed');
+                    }
+
+                    // ✅ Payment approved!
+                    Cart.items = [];
+                    Cart.save();
+                    Cart.updateUI();
+
+                    showPaymentSuccess(data.orderId, data.amount, 'Credit/Debit Card', data.transactionId);
+
+                } else {
+                    throw new Error('Card payment system not loaded. Please refresh and try again.');
+                }
+
+            } catch (err) {
+                console.error('Card payment error:', err);
+                btn.textContent = originalText;
+                btn.disabled = !document.getElementById('research-agreement').checked;
+                btn.style.opacity = '1';
+                showError(err.message);
+            }
+        }
+
+        // Wait for Collect.js token callback
+        function waitForToken(timeout) {
+            return new Promise(resolve => {
+                const start = Date.now();
+                const interval = setInterval(() => {
+                    if (nmiPaymentToken) {
+                        clearInterval(interval);
+                        resolve(nmiPaymentToken);
+                    } else if (Date.now() - start > timeout) {
+                        clearInterval(interval);
+                        resolve(null);
+                    }
+                }, 100);
+            });
+        }
+
+        // ── Wallet payment (Apple Pay / Google Pay) ──────────────
+        async function handleWalletPayment(method) {
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.textContent = `Processing ${method === 'apple-pay' ? 'Apple Pay' : 'Google Pay'}...`;
+
+            try {
+                // For wallet payments, Collect.js handles the wallet flow
+                // and returns a token the same way
+                if (typeof CollectJS !== 'undefined') {
+                    nmiPaymentToken = null;
+                    CollectJS.startPaymentRequest();
+
+                    const token = await waitForToken(30000); // wallets may take longer (biometric)
+                    if (!token) {
+                        throw new Error('Wallet payment was cancelled or timed out.');
+                    }
+
+                    btn.textContent = 'Completing Payment...';
+
+                    const orderData = getOrderData();
+                    const res = await fetch(`${NMI_API}/charge`, {
+                        method: 'POST',
+                        headers: getAuthHeaders(),
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            paymentToken: token,
+                            ...orderData
+                        })
+                    });
+
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Payment failed');
+
+                    Cart.items = [];
+                    Cart.save();
+                    Cart.updateUI();
+
+                    showPaymentSuccess(data.orderId, data.amount, method === 'apple-pay' ? 'Apple Pay' : 'Google Pay', data.transactionId);
+                } else {
+                    throw new Error('Payment system not loaded. Please refresh the page.');
+                }
+            } catch (err) {
+                console.error('Wallet payment error:', err);
+                btn.textContent = originalText;
+                btn.disabled = !document.getElementById('research-agreement').checked;
+                btn.style.opacity = '1';
+                showError(err.message);
+            }
+        }
+
+        // ── Crypto payment via PayRam (existing flow) ────────────
+        async function handleCryptoPayment() {
             const btn = document.getElementById('submit-btn');
             const originalText = btn.textContent;
             btn.disabled = true;
@@ -326,26 +743,10 @@
             btn.textContent = 'Creating Payment...';
 
             try {
-                const orderData = {
-                    email: document.getElementById('email').value.trim(),
-                    firstName: document.getElementById('first-name').value.trim(),
-                    lastName: document.getElementById('last-name').value.trim(),
-                    institution: document.getElementById('institution').value.trim(),
-                    address: document.getElementById('address').value.trim(),
-                    city: document.getElementById('city').value.trim(),
-                    state: document.getElementById('state').value,
-                    zip: document.getElementById('zip').value.trim(),
-                    country: document.getElementById('country').value,
-                    cartItems: Cart.items.map(i => ({ name: i.name, price: i.price, qty: i.qty }))
-                };
-
-                const token = localStorage.getItem('helyx_auth_token');
-                const headers = { 'Content-Type': 'application/json' };
-                if (token) headers['Authorization'] = `Bearer ${token}`;
-
+                const orderData = getOrderData();
                 const res = await fetch(`${ORDER_API}/create-payment`, {
                     method: 'POST',
-                    headers,
+                    headers: getAuthHeaders(),
                     credentials: 'include',
                     body: JSON.stringify(orderData)
                 });
@@ -382,20 +783,31 @@
                 btn.textContent = originalText;
                 btn.disabled = !document.getElementById('research-agreement').checked;
                 btn.style.opacity = '1';
-                
-                const errDiv = document.createElement('div');
-                errDiv.className = 'research-banner';
-                errDiv.style.cssText = 'margin-top:16px; border-color:rgba(255,100,100,0.3); background:rgba(255,50,50,0.05);';
-                errDiv.innerHTML = `<span class="research-banner__icon">⚠️</span><div style="color:#ff6b6b;"><strong>Payment Error:</strong> ${sanitize(err.message)}</div>`;
-                
-                const prevErr = document.getElementById('checkout-error');
-                if (prevErr) prevErr.remove();
-                errDiv.id = 'checkout-error';
-                btn.parentNode.insertBefore(errDiv, btn.nextSibling.nextSibling);
+                showError(err.message);
             }
         }
 
-        // ── Check for returning from payment ─────────────────────
+        // ── Show inline success (for card/wallet — no redirect) ──
+        function showPaymentSuccess(orderId, amount, method, transactionId) {
+            const container = document.getElementById('cart-items');
+            const summary = document.getElementById('cart-summary');
+            const form = document.querySelector('.checkout-form');
+
+            container.innerHTML = `
+                <div class="checkout-cart__empty" style="text-align:center;">
+                    <div class="checkout-cart__empty-icon" style="font-size:3rem;">✅</div>
+                    <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px; color:var(--accent-green);">Payment Confirmed!</h3>
+                    <p style="margin-bottom:8px;">Order #${orderId} — <strong>$${parseFloat(amount).toFixed(2)}</strong></p>
+                    <p style="color:var(--text-tertiary); font-size:0.8rem;">Paid via ${sanitize(method)}</p>
+                    ${transactionId ? `<p style="color:var(--text-tertiary); font-size:0.75rem; margin-top:4px;">Transaction: ${sanitize(transactionId)}</p>` : ''}
+                    <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:16px;">A confirmation email will be sent shortly. Thank you for your research order!</p>
+                    <a href="products.html" class="btn btn--primary btn--md" style="margin-top:20px;">Continue Browsing</a>
+                </div>`;
+            summary.style.display = 'none';
+            if (form) form.style.display = 'none';
+        }
+
+        // ── Check for returning from crypto payment ──────────────
         function checkPendingOrder() {
             const pending = localStorage.getItem('helyx_pending_order');
             if (!pending) return;
@@ -438,15 +850,7 @@
 
                     if (data.status === 'paid') {
                         localStorage.removeItem('helyx_pending_order');
-                        container.innerHTML = `
-                            <div class="checkout-cart__empty" style="text-align:center;">
-                                <div class="checkout-cart__empty-icon" style="font-size:3rem;">✅</div>
-                                <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px; color:var(--accent-green);">Payment Confirmed!</h3>
-                                <p style="margin-bottom:8px;">Order #${orderId} — <strong>$${parseFloat(amount).toFixed(2)}</strong></p>
-                                ${data.currency ? `<p style="color:var(--text-tertiary); font-size:0.8rem;">Paid via ${data.currency}${data.network ? ' on ' + data.network : ''}</p>` : ''}
-                                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:16px;">A confirmation email will be sent shortly. Thank you for your research order!</p>
-                                <a href="products.html" class="btn btn--primary btn--md" style="margin-top:20px;">Continue Browsing</a>
-                            </div>`;
+                        showPaymentSuccess(orderId, amount, data.currency ? `${data.currency}${data.network ? ' on ' + data.network : ''}` : 'Crypto', data.tx_hash);
                         return;
                     }
 
@@ -491,6 +895,159 @@
         // Listen for cart updates
         window.addEventListener('cart-updated', renderCart);
 
+        // ── Address Autocomplete (Google Places) ────────────
+        let addressAutocomplete = null;
+
+        function initAddressAutocomplete() {
+            const input = document.getElementById('address');
+            const listEl = document.getElementById('address-autocomplete-list');
+            if (!input || !listEl) return;
+
+            // Check if Google Maps API is loaded
+            if (!window.google || !google.maps || !google.maps.places) {
+                console.log('[Address] Google Places API not loaded — autocomplete disabled');
+                input.placeholder = '123 Research Blvd';
+                return;
+            }
+
+            const autocompleteService = new google.maps.places.AutocompleteService();
+            const placesService = new google.maps.places.PlacesService(document.createElement('div'));
+            let debounceTimer = null;
+            let activeIndex = -1;
+            let currentPredictions = [];
+
+            input.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                const query = input.value.trim();
+                if (query.length < 3) {
+                    listEl.innerHTML = '';
+                    listEl.style.display = 'none';
+                    currentPredictions = [];
+                    return;
+                }
+                debounceTimer = setTimeout(() => {
+                    autocompleteService.getPlacePredictions({
+                        input: query,
+                        componentRestrictions: { country: 'us' },
+                        types: ['address']
+                    }, (predictions, status) => {
+                        if (status !== google.maps.places.PlacesServiceStatus.OK || !predictions) {
+                            listEl.innerHTML = '';
+                            listEl.style.display = 'none';
+                            currentPredictions = [];
+                            return;
+                        }
+                        currentPredictions = predictions;
+                        activeIndex = -1;
+                        renderSuggestions(predictions);
+                    });
+                }, 250);
+            });
+
+            function renderSuggestions(predictions) {
+                listEl.innerHTML = '';
+                if (!predictions.length) {
+                    listEl.style.display = 'none';
+                    return;
+                }
+                listEl.style.display = 'block';
+                predictions.forEach((p, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'address-autocomplete-item';
+                    // Bold the main text, dim the secondary
+                    item.innerHTML = `<strong>${sanitize(p.structured_formatting.main_text)}</strong> <span style="color:var(--text-tertiary);">${sanitize(p.structured_formatting.secondary_text || '')}</span>`;
+                    item.addEventListener('mousedown', (e) => {
+                        e.preventDefault(); // Prevent blur from hiding the list
+                        selectPrediction(p);
+                    });
+                    listEl.appendChild(item);
+                });
+            }
+
+            function selectPrediction(prediction) {
+                placesService.getDetails({
+                    placeId: prediction.place_id,
+                    fields: ['address_components', 'formatted_address']
+                }, (place, status) => {
+                    if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
+
+                    let streetNumber = '';
+                    let route = '';
+                    let city = '';
+                    let state = '';
+                    let zip = '';
+
+                    for (const comp of place.address_components) {
+                        const types = comp.types;
+                        if (types.includes('street_number')) streetNumber = comp.long_name;
+                        else if (types.includes('route')) route = comp.long_name;
+                        else if (types.includes('locality')) city = comp.long_name;
+                        else if (types.includes('sublocality_level_1') && !city) city = comp.long_name;
+                        else if (types.includes('administrative_area_level_1')) state = comp.long_name;
+                        else if (types.includes('postal_code')) zip = comp.long_name;
+                    }
+
+                    // Fill fields
+                    input.value = streetNumber ? `${streetNumber} ${route}` : route;
+                    document.getElementById('city').value = city;
+                    document.getElementById('zip').value = zip;
+
+                    // Match state dropdown
+                    const stateSelect = document.getElementById('state');
+                    for (const opt of stateSelect.options) {
+                        if (opt.value === state || opt.text === state) {
+                            stateSelect.value = opt.value;
+                            break;
+                        }
+                    }
+
+                    listEl.innerHTML = '';
+                    listEl.style.display = 'none';
+                    currentPredictions = [];
+
+                    // Focus the next empty field
+                    const address2 = document.getElementById('address2');
+                    if (address2) address2.focus();
+                });
+            }
+
+            // Keyboard navigation
+            input.addEventListener('keydown', (e) => {
+                const items = listEl.querySelectorAll('.address-autocomplete-item');
+                if (!items.length) return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeIndex = Math.min(activeIndex + 1, items.length - 1);
+                    updateActive(items);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeIndex = Math.max(activeIndex - 1, 0);
+                    updateActive(items);
+                } else if (e.key === 'Enter' && activeIndex >= 0) {
+                    e.preventDefault();
+                    selectPrediction(currentPredictions[activeIndex]);
+                } else if (e.key === 'Escape') {
+                    listEl.innerHTML = '';
+                    listEl.style.display = 'none';
+                }
+            });
+
+            function updateActive(items) {
+                items.forEach((el, i) => {
+                    el.classList.toggle('address-autocomplete-item--active', i === activeIndex);
+                });
+            }
+
+            // Hide on blur
+            input.addEventListener('blur', () => {
+                setTimeout(() => {
+                    listEl.innerHTML = '';
+                    listEl.style.display = 'none';
+                }, 200);
+            });
+        }
+
         // Init
         document.addEventListener('DOMContentLoaded', () => {
             const pending = localStorage.getItem('helyx_pending_order');
@@ -498,10 +1055,14 @@
                 checkPendingOrder();
             } else {
                 renderCart();
+                initNMI(); // Load card payment system
+                initAddressAutocomplete(); // Address lookup
             }
         });
     </script>
 
     <script src="js/auth.js"></script>
+    <!-- Google Places API for address autocomplete -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASvAXwdWr_DkMFZz5PZFsZRNELyJGubw8&libraries=places" async defer></script>
 </body>
 </html>
