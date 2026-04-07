@@ -103,19 +103,20 @@ const _docData = {
     }
 };
 
-function openDocPopup(type) {
-    const doc = _docData[type];
+window.openDocPopup = function(type) {
+    var doc = _docData[type];
     if (!doc) return;
-    const popup = document.getElementById('doc-popup');
+    var popup = document.getElementById('doc-popup');
+    if (!popup) return;
     document.getElementById('doc-popup-title').textContent = doc.title;
     document.getElementById('doc-popup-body').innerHTML = doc.html;
-    popup.classList.add('active');
-}
+    popup.style.display = 'flex';
+};
 
-function closeDocPopup() {
-    const popup = document.getElementById('doc-popup');
-    if (popup) popup.classList.remove('active');
-}
+window.closeDocPopup = function() {
+    var popup = document.getElementById('doc-popup');
+    if (popup) popup.style.display = 'none';
+};
 
 // ── Age Gate ──────────────────────────────────────────────────
 function initAgeGate() {
@@ -317,4 +318,20 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initCounters();
     initCursorGlow();
+
+    // Wire doc-popup buttons via JS listeners (backup for onclick)
+    document.querySelectorAll('.age-gate__inline-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var type = this.getAttribute('data-doc');
+            if (type) window.openDocPopup(type);
+        });
+    });
+
+    // Close popup listeners
+    var backdrop = document.querySelector('.doc-popup__backdrop');
+    if (backdrop) backdrop.addEventListener('click', function() { window.closeDocPopup(); });
+    var closeBtn = document.querySelector('.doc-popup__close');
+    if (closeBtn) closeBtn.addEventListener('click', function() { window.closeDocPopup(); });
 });

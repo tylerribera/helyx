@@ -81,7 +81,7 @@
                 <li>I am <strong>21 years of age or older</strong></li>
                 <li>All products on this site are intended <strong>solely for laboratory and scientific research purposes</strong></li>
                 <li>Products are <strong>not for human or animal consumption</strong>, not for resale, and not intended to diagnose, treat, cure, or prevent any disease</li>
-                <li>I agree to the <button type="button" class="age-gate__inline-btn" onclick="openDocPopup('tos')">Terms of Service</button> and <button type="button" class="age-gate__inline-btn" onclick="openDocPopup('privacy')">Privacy Policy</button></li>
+                <li>I agree to the <button type="button" class="age-gate__inline-btn" data-doc="tos">Terms of Service</button> and <button type="button" class="age-gate__inline-btn" data-doc="privacy">Privacy Policy</button></li>
             </ul>
             <div class="age-gate__checkboxes">
                 <label class="age-gate__label">
@@ -97,11 +97,11 @@
 
     <!-- TOS / Privacy Popup -->
     <div id="doc-popup" class="doc-popup">
-        <div class="doc-popup__backdrop" onclick="closeDocPopup()"></div>
+        <div class="doc-popup__backdrop" ></div>
         <div class="doc-popup__window">
             <div class="doc-popup__header">
                 <span class="doc-popup__title" id="doc-popup-title"></span>
-                <button class="doc-popup__close" onclick="closeDocPopup()">&times;</button>
+                <button class="doc-popup__close" >&times;</button>
             </div>
             <div class="doc-popup__body" id="doc-popup-body"></div>
         </div>
