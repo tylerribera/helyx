@@ -68,26 +68,21 @@
 </head>
 <body>
     <!-- Age Gate -->
+    <!-- Age Verification Modal -->
     <div id="age-gate" class="age-gate">
         <div class="age-gate__backdrop"></div>
         <div class="age-gate__modal">
-            <div class="age-gate__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img"></div>
+            <div class="age-gate__logo">
+                <img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img">
+            </div>
             <h2 class="age-gate__title">Age & Use Verification Required</h2>
             <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering this site, you confirm <strong>all</strong> of the following:</p>
             <ul class="age-gate__requirements">
                 <li>I am <strong>21 years of age or older</strong></li>
                 <li>All products on this site are intended <strong>solely for laboratory and scientific research purposes</strong></li>
                 <li>Products are <strong>not for human or animal consumption</strong>, not for resale, and not intended to diagnose, treat, cure, or prevent any disease</li>
-                <li>I agree to the <a href="#" class="age-gate__doc-link" data-doc="tos">Terms of Service</a> and <a href="#" class="age-gate__doc-link" data-doc="privacy">Privacy Policy</a></li>
+                <li>I agree to the <a href="javascript:void(0)" onclick="openDocPopup('tos')">Terms of Service</a> and <a href="javascript:void(0)" onclick="openDocPopup('privacy')">Privacy Policy</a></li>
             </ul>
-            <!-- Document viewer overlay -->
-            <div class="age-gate__doc-viewer" id="age-gate-doc-viewer">
-                <div class="age-gate__doc-header">
-                    <span class="age-gate__doc-title" id="age-gate-doc-title"></span>
-                    <button class="age-gate__doc-close" id="age-gate-doc-close">&times;</button>
-                </div>
-                <div class="age-gate__doc-body" id="age-gate-doc-body"></div>
-            </div>
             <div class="age-gate__checkboxes">
                 <label class="age-gate__label">
                     <input type="checkbox" id="age-check-1">
@@ -100,79 +95,18 @@
         </div>
     </div>
 
-    <!-- Nav -->
-    <nav class="nav" id="nav">
-        <div class="nav__inner">
-            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img"></a>
-            <div class="nav__links" id="nav-links">
-                <a href="index.html" class="nav__link">Home</a>
-                <a href="products.html" class="nav__link">Peptides</a>
-                <a href="learn.html" class="nav__link nav__link--active">Learn</a>
-                <a href="about.html" class="nav__link">About</a>
-                <a href="lab.html" class="nav__link">Our Lab</a>
-                <a href="blog.html" class="nav__link">Blog</a>
+    <!-- TOS / Privacy Popup -->
+    <div id="doc-popup" class="doc-popup">
+        <div class="doc-popup__backdrop" onclick="closeDocPopup()"></div>
+        <div class="doc-popup__window">
+            <div class="doc-popup__header">
+                <span class="doc-popup__title" id="doc-popup-title"></span>
+                <button class="doc-popup__close" onclick="closeDocPopup()">&times;</button>
             </div>
-            <div class="nav__actions">
-                <a href="checkout.html" class="nav__cart" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
-                <a href="login.html" class="nav__link nav__link--auth" id="nav-auth-link">Sign In</a>
-                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
+            <div class="doc-popup__body" id="doc-popup-body"></div>
         </div>
-    </nav>
+    </div>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <span class="page-header__tag anim-fade-up">Peptide Science 101</span>
-            <h1 class="page-header__title anim-fade-up" data-delay="100">
-                The Beginner's Guide to <span class="text-gradient">Peptide Research</span>
-            </h1>
-            <p class="page-header__desc anim-fade-up" data-delay="200">
-                Everything you need to know about peptides — what they are, how they function in biological systems, and why they've become one of the most studied compound classes in modern science.
-            </p>
-        </div>
-    </section>
-
-    <!-- Intro -->
-    <section class="about-section">
-        <div class="container">
-            <div class="learn-intro anim-fade-up">
-                <p>Peptides are among the most fundamental molecules in biology. They regulate everything from immune defense to cellular repair, yet most people have never heard of them. This guide breaks down peptide science into clear, accessible concepts — no lab coat required.</p>
-            </div>
-            <div class="learn-topics anim-fade-up" data-delay="200">
-                <div class="learn-topic">
-                    <div class="learn-topic__num">01</div>
-                    <h4>What Are Peptides?</h4>
-                    <p>Short amino acid chains that serve as biological messengers throughout the body.</p>
-                </div>
-                <div class="learn-topic">
-                    <div class="learn-topic__num">02</div>
-                    <h4>How They Work</h4>
-                    <p>Peptides bind to specific receptors on cell surfaces, triggering targeted biological responses.</p>
-                </div>
-                <div class="learn-topic">
-                    <div class="learn-topic__num">03</div>
-                    <h4>Why They Matter</h4>
-                    <p>Research has identified over 7,000 naturally occurring peptides, each with distinct biological roles.</p>
-                </div>
-                <div class="learn-topic">
-                    <div class="learn-topic__num">04</div>
-                    <h4>Key Research Areas</h4>
-                    <p>From immune modulation to neuroprotection, peptides are studied across dozens of disciplines.</p>
-                </div>
-                <div class="learn-topic">
-                    <div class="learn-topic__num">05</div>
-                    <h4>How They're Made</h4>
-                    <p>Solid-phase synthesis allows researchers to produce ultra-pure peptides in controlled environments.</p>
-                </div>
-                <div class="learn-topic">
-                    <div class="learn-topic__num">06</div>
-                    <h4>Quality & Purity</h4>
-                    <p>HPLC verification and mass spectrometry ensure each batch meets ≥99% purity standards.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Deep Dive Sections -->
     <section class="about-section" style="padding-top: 0;">
