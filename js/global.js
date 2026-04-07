@@ -97,11 +97,12 @@ function initAgeGate() {
     });
 
     // ── Doc popup (TOS / Privacy) ──
-    const docOverlay = document.getElementById('doc-popup-overlay');
-    if (docOverlay) {
-        const docTitle = docOverlay.querySelector('.doc-popup__title');
-        const docBody  = docOverlay.querySelector('.doc-popup__body');
-        const docClose = docOverlay.querySelector('.doc-popup__close');
+    const docView = gate.querySelector('.age-gate__doc-view');
+    if (docView) {
+        const modal    = gate.querySelector('.age-gate__modal');
+        const docTitle = docView.querySelector('.age-gate__doc-title');
+        const docBody  = docView.querySelector('.age-gate__doc-body');
+        const docBack  = docView.querySelector('.age-gate__doc-back');
 
         const docs = {
             tos: {
@@ -212,15 +213,12 @@ function initAgeGate() {
                 if (!doc) return;
                 docTitle.textContent = doc.title;
                 docBody.innerHTML = doc.body;
-                docOverlay.classList.add('visible');
+                modal.classList.add('showing-doc');
                 docBody.scrollTop = 0;
             });
         });
 
-        docClose.addEventListener('click', () => docOverlay.classList.remove('visible'));
-        docOverlay.addEventListener('click', e => {
-            if (e.target === docOverlay) docOverlay.classList.remove('visible');
-        });
+        docBack.addEventListener('click', () => modal.classList.remove('showing-doc'));
     }
 }
 

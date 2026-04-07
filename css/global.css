@@ -418,102 +418,91 @@ input, textarea, select {
     color: var(--accent-rose);
 }
 
-/* Doc popup overlay (TOS / Privacy inside age gate) */
-.doc-popup-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 10001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-    padding: 20px;
+/* Doc view inside age gate modal */
+.age-gate__doc-view {
+    display: none;
+    text-align: left;
 }
 
-.doc-popup-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
+.age-gate__modal.showing-doc .age-gate__main-view {
+    display: none;
 }
 
-.doc-popup {
-    background: var(--bg-card, #16162a);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius-lg, 12px);
-    max-width: 520px;
-    width: 100%;
-    max-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+.age-gate__modal.showing-doc .age-gate__doc-view {
+    display: block;
 }
 
-.doc-popup__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    flex-shrink: 0;
-}
-
-.doc-popup__title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-}
-
-.doc-popup__close {
+.age-gate__doc-back {
     background: none;
     border: none;
-    color: var(--text-tertiary);
-    font-size: 1.5rem;
+    color: var(--accent-primary);
+    font-size: 0.875rem;
     cursor: pointer;
     padding: 0;
-    line-height: 1;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     transition: color 0.2s;
 }
 
-.doc-popup__close:hover {
+.age-gate__doc-back:hover {
     color: #fff;
 }
 
-.doc-popup__body {
-    padding: 24px;
+.age-gate__doc-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+}
+
+.age-gate__doc-body {
+    max-height: 340px;
     overflow-y: auto;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     line-height: 1.7;
     color: var(--text-secondary);
+    padding-right: 8px;
     -webkit-overflow-scrolling: touch;
 }
 
-.doc-popup__body h3 {
+.age-gate__doc-body h3 {
     color: var(--text-primary, #fff);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    margin: 20px 0 8px;
+    margin: 16px 0 6px;
 }
 
-.doc-popup__body h3:first-child {
+.age-gate__doc-body h3:first-child {
     margin-top: 0;
 }
 
-.doc-popup__body p {
-    margin: 0 0 12px;
+.age-gate__doc-body p {
+    margin: 0 0 10px;
 }
 
-.doc-popup__body ul {
-    margin: 0 0 12px;
-    padding-left: 20px;
+.age-gate__doc-body ul {
+    margin: 0 0 10px;
+    padding-left: 18px;
 }
 
-.doc-popup__body li {
-    margin-bottom: 4px;
+.age-gate__doc-body li {
+    margin-bottom: 3px;
+}
+
+.age-gate__doc-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.age-gate__doc-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.age-gate__doc-body::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
 }
 
 /* ── Footer ────────────────────────────────────────────────── */

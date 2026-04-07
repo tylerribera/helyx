@@ -39,26 +39,23 @@
             <div class="age-gate__logo">
                 <img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img">
             </div>
-            <h2 class="age-gate__title">Age & Use Verification Required</h2>
-            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
-            <div class="age-gate__checkboxes">
-                <label class="age-gate__label">
-                    <input type="checkbox" id="age-check-1">
-                    <span class="age-gate__checkmark"></span>
-                    I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#" data-doc="tos">Terms of Service</a> and <a href="#" data-doc="privacy">Privacy Policy</a>.
-                </label>
-            </div>
-            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
-            <button class="age-gate__exit" id="age-gate-exit">Exit</button>
-        </div>
-        <!-- Doc Popup -->
-        <div id="doc-popup-overlay" class="doc-popup-overlay">
-            <div class="doc-popup">
-                <div class="doc-popup__header">
-                    <span class="doc-popup__title"></span>
-                    <button class="doc-popup__close">&times;</button>
+            <div class="age-gate__main-view">
+                <h2 class="age-gate__title">Age & Use Verification Required</h2>
+                <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
+                <div class="age-gate__checkboxes">
+                    <label class="age-gate__label">
+                        <input type="checkbox" id="age-check-1">
+                        <span class="age-gate__checkmark"></span>
+                        I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#" data-doc="tos">Terms of Service</a> and <a href="#" data-doc="privacy">Privacy Policy</a>.
+                    </label>
                 </div>
-                <div class="doc-popup__body"></div>
+                <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
+                <button class="age-gate__exit" id="age-gate-exit">Exit</button>
+            </div>
+            <div class="age-gate__doc-view">
+                <button class="age-gate__doc-back">&larr; Back</button>
+                <h3 class="age-gate__doc-title"></h3>
+                <div class="age-gate__doc-body"></div>
             </div>
         </div>
     </div>
