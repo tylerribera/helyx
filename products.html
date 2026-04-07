@@ -38,9 +38,19 @@
         <div class="age-gate__modal">
             <div class="age-gate__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img"></div>
             <h2 class="age-gate__title">Age & Use Verification Required</h2>
-            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering this site, you confirm <strong>all</strong> of the following:</p>
+            <ul class="age-gate__requirements">
+                <li>I am <strong>21 years of age or older</strong></li>
+                <li>All products on this site are intended <strong>solely for laboratory and scientific research purposes</strong></li>
+                <li>Products are <strong>not for human or animal consumption</strong>, not for resale, and not intended to diagnose, treat, cure, or prevent any disease</li>
+                <li>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></li>
+            </ul>
             <div class="age-gate__checkboxes">
-                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
+                <label class="age-gate__label">
+                    <input type="checkbox" id="age-check-1">
+                    <span class="age-gate__checkmark"></span>
+                    I confirm all of the above statements are true
+                </label>
             </div>
             <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
             <button class="age-gate__exit" id="age-gate-exit">Exit</button>

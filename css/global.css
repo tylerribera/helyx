@@ -330,8 +330,41 @@ input, textarea, select {
 .age-gate__text {
     font-size: 0.9375rem;
     color: var(--text-secondary);
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     line-height: 1.6;
+}
+
+.age-gate__requirements {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    text-align: left;
+}
+
+.age-gate__requirements li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.age-gate__requirements li:last-child {
+    margin-bottom: 0;
+}
+
+.age-gate__requirements li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.age-gate__requirements li a {
+    color: var(--accent-primary);
+    text-decoration: underline;
 }
 
 .age-gate__checkboxes {
