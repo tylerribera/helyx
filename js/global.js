@@ -3,38 +3,16 @@
    Shared functionality: nav, cart, animations, age gate
    ═══════════════════════════════════════════════════════════════ */
 
-// ── HTTPS Enforcement ────────────────────────────────────────
-if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-    location.replace('https://' + location.host + location.pathname + location.search + location.hash);
-}
-
-// ── Input Sanitization ───────────────────────────────────────
-function sanitize(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
 // ── Cart State ────────────────────────────────────────────────
 const Cart = {
-    items: (() => {
-        try {
-            const data = JSON.parse(localStorage.getItem('helyx_cart') || '[]');
-            return Array.isArray(data) ? data.filter(i => i.name && typeof i.price === 'number' && typeof i.qty === 'number') : [];
-        } catch { return []; }
-    })(),
+    items: JSON.parse(localStorage.getItem('helyx_cart') || '[]'),
 
     add(name, price) {
-        // Sanitize inputs
-        name = String(name).replace(/[<>"'&]/g, '');
-        price = parseFloat(price);
-        if (!name || isNaN(price) || price <= 0) return;
-
         const existing = this.items.find(i => i.name === name);
         if (existing) {
             existing.qty += 1;
         } else {
-            this.items.push({ name, price, qty: 1 });
+            this.items.push({ name, price: parseFloat(price), qty: 1 });
         }
         this.save();
         this.updateUI();
@@ -91,33 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Cart.updateUI();
 });
 
-// ── Doc Popup (TOS / Privacy) ─────────────────────────────────
-const _docData = {
-    tos: {
-        title: 'Terms of Service',
-        html: '<h3>1. Eligibility</h3><p>You must be at least <strong>21 years of age</strong> to access this Site or purchase any products.</p><h3>2. Products &amp; Intended Use</h3><p>All products are <strong>synthetic research peptides for laboratory and in-vitro use only</strong>.</p><ul><li>NOT for human or animal consumption</li><li>NOT dietary supplements, food, drugs, or medicines</li><li>NOT intended to diagnose, treat, cure, or prevent any disease</li><li>NOT evaluated or approved by the FDA</li><li>NOT for resale to the general public</li></ul><h3>3. Account Registration</h3><p>You are responsible for maintaining the confidentiality of your login credentials and for all activity under your account.</p><h3>4. Orders &amp; Pricing</h3><p>All prices are in USD and subject to change. We reserve the right to refuse or cancel any order at our sole discretion.</p><h3>5. Payment</h3><p>Payments are processed through secure third-party processors. Helyx does not store your full credit card information.</p><h3>6. Shipping &amp; Delivery</h3><p>We ship within the United States. Shipping times are estimates only. Risk of loss passes to you upon delivery to the carrier.</p><h3>7. Returns &amp; Refunds</h3><p><strong>All sales are final.</strong> Refunds may be issued at our discretion for damaged, incorrect, or impure products. Contact support@helyx.us within 7 days of delivery.</p><h3>8. Disclaimer of Warranties</h3><p>The Site and all products are provided "AS IS" without warranties of any kind.</p><h3>9. Limitation of Liability</h3><p>Helyx shall not be liable for any indirect, incidental, special, or consequential damages. Total liability shall not exceed the amount paid for the product.</p><h3>10. Governing Law</h3><p>Governed by the laws of the State of California. Disputes resolved in San Diego County courts.</p><p style="margin-top:16px;"><a href="terms.html" target="_blank" style="color:var(--accent-primary);">Read full Terms of Service →</a></p>'
-    },
-    privacy: {
-        title: 'Privacy Policy',
-        html: '<h3>1. Information We Collect</h3><p><strong>You provide:</strong> name, email, shipping address, institution name, account credentials, order details.</p><p><strong>Payment:</strong> processed by secure third-party processors — we never store your full card number.</p><p><strong>Automatic:</strong> browser type, IP address, pages visited, referral source.</p><h3>2. Cookies &amp; Tracking</h3><p>We use cookies to keep you signed in, remember your cart, analyze traffic, and serve ads via Meta Pixel. You can control cookies in your browser settings.</p><h3>3. How We Use Your Information</h3><ul><li>Process and fulfill orders</li><li>Manage your account</li><li>Send order updates and shipping notifications</li><li>Improve the Site &amp; prevent fraud</li><li>Comply with legal obligations</li></ul><h3>4. How We Share Your Information</h3><p>We do <strong>not sell your data</strong>. We share only with payment processors, shipping carriers, email providers, and analytics tools — or when required by law.</p><h3>5. Data Security</h3><p>SSL/TLS encryption, bcrypt password hashing, PCI-compliant payment tokenization, and access controls.</p><h3>6. Your Rights</h3><ul><li>Access, correct, or delete your personal data</li><li>Opt out of marketing emails anytime</li><li>Control cookies via browser settings</li></ul><p>California residents have additional rights under the CCPA.</p><h3>7. Data Retention &amp; Children</h3><p>We retain data as needed for your account and legal obligations. Not intended for anyone under 21. Contact: support@helyx.us</p><p style="margin-top:16px;"><a href="privacy.html" target="_blank" style="color:var(--accent-primary);">Read full Privacy Policy →</a></p>'
-    }
-};
-
-window.openDocPopup = function(type) {
-    var doc = _docData[type];
-    if (!doc) return;
-    var popup = document.getElementById('doc-popup');
-    if (!popup) return;
-    document.getElementById('doc-popup-title').textContent = doc.title;
-    document.getElementById('doc-popup-body').innerHTML = doc.html;
-    popup.style.display = 'flex';
-};
-
-window.closeDocPopup = function() {
-    var popup = document.getElementById('doc-popup');
-    if (popup) popup.style.display = 'none';
-};
-
 // ── Age Gate ──────────────────────────────────────────────────
 function initAgeGate() {
     const gate = document.getElementById('age-gate');
@@ -145,11 +96,129 @@ function initAgeGate() {
         setTimeout(() => gate.classList.add('hidden'), 500);
     });
 
-    // Exit button (redirects away)
-    const exitBtn = document.getElementById('age-gate-exit');
-    if (exitBtn) {
-        exitBtn.addEventListener('click', () => {
-            window.location.href = 'https://google.com';
+    // ── Doc popup (TOS / Privacy) ──
+    const docOverlay = document.getElementById('doc-popup-overlay');
+    if (docOverlay) {
+        const docTitle = docOverlay.querySelector('.doc-popup__title');
+        const docBody  = docOverlay.querySelector('.doc-popup__body');
+        const docClose = docOverlay.querySelector('.doc-popup__close');
+
+        const docs = {
+            tos: {
+                title: 'Terms of Service',
+                body: `
+<p><strong>Last Updated:</strong> April 6, 2026</p>
+
+<h3>1. Acceptance of Terms</h3>
+<p>By accessing or using the Helyx website ("helyx.us") and purchasing any products, you agree to be bound by these Terms of Service. If you do not agree, do not use this site.</p>
+
+<h3>2. Eligibility</h3>
+<p>You must be at least 21 years of age to use this website or purchase products. By placing an order, you represent and warrant that you meet this age requirement.</p>
+
+<h3>3. Product Use Disclaimer</h3>
+<p>All products sold by Helyx are intended <strong>strictly for in-vitro laboratory research purposes only</strong>. Products are <strong>not for human or animal consumption</strong>, not for therapeutic use, and not intended to diagnose, treat, cure, or prevent any disease or condition. By purchasing, you confirm that you will use products solely for legitimate scientific research.</p>
+
+<h3>4. No Medical Claims</h3>
+<p>Helyx makes no medical or health claims regarding any product. Nothing on this website should be interpreted as medical advice. Consult a qualified professional for any health-related decisions.</p>
+
+<h3>5. Purchasing & Payment</h3>
+<p>All prices are listed in USD. We reserve the right to modify prices at any time without notice. Payment must be completed at the time of purchase. Orders are subject to acceptance and availability.</p>
+
+<h3>6. Shipping & Delivery</h3>
+<p>We ship to addresses within the United States. Shipping times are estimates and not guaranteed. Helyx is not responsible for delays caused by carriers, customs, or events beyond our control.</p>
+
+<h3>7. Returns & Refunds</h3>
+<p>Due to the nature of our products, all sales are final. We do not accept returns. If you receive a damaged or incorrect item, contact us within 7 days of delivery at <strong>support@helyx.us</strong> for resolution.</p>
+
+<h3>8. Intellectual Property</h3>
+<p>All content on this website — including text, images, logos, and design — is the property of Helyx and protected by copyright law. You may not reproduce, distribute, or create derivative works without our written permission.</p>
+
+<h3>9. Limitation of Liability</h3>
+<p>Helyx shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the website or products. Our total liability shall not exceed the amount you paid for the product in question.</p>
+
+<h3>10. Indemnification</h3>
+<p>You agree to indemnify and hold harmless Helyx, its owners, employees, and affiliates from any claims, damages, or expenses arising from your misuse of products or violation of these terms.</p>
+
+<h3>11. Governing Law</h3>
+<p>These Terms are governed by the laws of the State of California. Any disputes shall be resolved in the courts of San Diego County, California.</p>
+
+<h3>12. Changes to Terms</h3>
+<p>We may update these Terms at any time. Continued use of the site after changes constitutes acceptance of the new terms.</p>
+
+<h3>13. Contact</h3>
+<p>For questions regarding these Terms, contact us at <strong>support@helyx.us</strong>.</p>
+`
+            },
+            privacy: {
+                title: 'Privacy Policy',
+                body: `
+<p><strong>Last Updated:</strong> April 6, 2026</p>
+
+<h3>1. Information We Collect</h3>
+<p>We collect information you provide directly when placing an order: name, email address, shipping address, and payment information. We also collect basic analytics data (pages visited, browser type) to improve our site.</p>
+
+<h3>2. How We Use Your Information</h3>
+<ul>
+<li>Process and fulfill your orders</li>
+<li>Send order confirmations and shipping updates</li>
+<li>Respond to customer support inquiries</li>
+<li>Improve our website and services</li>
+<li>Comply with legal obligations</li>
+</ul>
+
+<h3>3. Payment Security</h3>
+<p>Payment processing is handled by PCI-compliant third-party processors. Helyx does not store your full credit card number, CVV, or other sensitive payment details on our servers.</p>
+
+<h3>4. Information Sharing</h3>
+<p>We do not sell, trade, or rent your personal information to third parties. We may share information only with:</p>
+<ul>
+<li>Payment processors (to complete transactions)</li>
+<li>Shipping carriers (to deliver orders)</li>
+<li>Law enforcement (if required by law)</li>
+</ul>
+
+<h3>5. Cookies</h3>
+<p>We use essential cookies to maintain your session (cart, age verification). We may use analytics cookies to understand site usage. You can disable cookies in your browser settings, but some features may not work properly.</p>
+
+<h3>6. Data Retention</h3>
+<p>We retain order information for as long as necessary to fulfill our legal and business obligations. You may request deletion of your personal data by contacting us at <strong>support@helyx.us</strong>.</p>
+
+<h3>7. Your Rights</h3>
+<p>Depending on your jurisdiction, you may have the right to access, correct, or delete your personal information. California residents have additional rights under the CCPA. Contact us to exercise these rights.</p>
+
+<h3>8. Third-Party Links</h3>
+<p>Our site may contain links to third-party websites. We are not responsible for their privacy practices. We encourage you to review their policies.</p>
+
+<h3>9. Children's Privacy</h3>
+<p>Our website is not intended for individuals under 21. We do not knowingly collect information from minors.</p>
+
+<h3>10. Security</h3>
+<p>We implement reasonable security measures to protect your information, including SSL encryption, secure servers, and access controls. However, no method of transmission over the internet is 100% secure.</p>
+
+<h3>11. Changes to This Policy</h3>
+<p>We may update this Privacy Policy at any time. Changes will be posted on this page with an updated date.</p>
+
+<h3>12. Contact</h3>
+<p>For privacy-related inquiries, contact us at <strong>support@helyx.us</strong>.</p>
+`
+            }
+        };
+
+        gate.querySelectorAll('[data-doc]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const doc = docs[link.dataset.doc];
+                if (!doc) return;
+                docTitle.textContent = doc.title;
+                docBody.innerHTML = doc.body;
+                docOverlay.classList.add('visible');
+                docBody.scrollTop = 0;
+            });
+        });
+
+        docClose.addEventListener('click', () => docOverlay.classList.remove('visible'));
+        docOverlay.addEventListener('click', e => {
+            if (e.target === docOverlay) docOverlay.classList.remove('visible');
         });
     }
 }
@@ -240,9 +309,7 @@ function initAddToCartButtons() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (!href || href === '#' || !/^#[\w-]+$/.test(href)) return;
-            const target = document.querySelector(href);
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -318,20 +385,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initCounters();
     initCursorGlow();
-
-    // Wire doc-popup buttons via JS listeners (backup for onclick)
-    document.querySelectorAll('.age-gate__inline-btn').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var type = this.getAttribute('data-doc');
-            if (type) window.openDocPopup(type);
-        });
-    });
-
-    // Close popup listeners
-    var backdrop = document.querySelector('.doc-popup__backdrop');
-    if (backdrop) backdrop.addEventListener('click', function() { window.closeDocPopup(); });
-    var closeBtn = document.querySelector('.doc-popup__close');
-    if (closeBtn) closeBtn.addEventListener('click', function() { window.closeDocPopup(); });
 });

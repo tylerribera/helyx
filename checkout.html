@@ -33,45 +33,264 @@
 </head>
 <body>
     <!-- Age Gate -->
-    <!-- Age Verification Modal -->
     <div id="age-gate" class="age-gate">
         <div class="age-gate__backdrop"></div>
         <div class="age-gate__modal">
-            <div class="age-gate__logo">
-                <img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img">
-            </div>
+            <div class="age-gate__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img"></div>
             <h2 class="age-gate__title">Age & Use Verification Required</h2>
-            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering this site, you confirm <strong>all</strong> of the following:</p>
-            <ul class="age-gate__requirements">
-                <li>I am <strong>21 years of age or older</strong></li>
-                <li>All products on this site are intended <strong>solely for laboratory and scientific research purposes</strong></li>
-                <li>Products are <strong>not for human or animal consumption</strong>, not for resale, and not intended to diagnose, treat, cure, or prevent any disease</li>
-                <li>I agree to the <button type="button" class="age-gate__inline-btn" data-doc="tos">Terms of Service</button> and <button type="button" class="age-gate__inline-btn" data-doc="privacy">Privacy Policy</button></li>
-            </ul>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
             <div class="age-gate__checkboxes">
-                <label class="age-gate__label">
-                    <input type="checkbox" id="age-check-1">
-                    <span class="age-gate__checkmark"></span>
-                    I confirm all of the above statements are true
-                </label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#" data-doc="tos">Terms of Service</a> and <a href="#" data-doc="privacy">Privacy Policy</a>.</label>
             </div>
             <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
             <button class="age-gate__exit" id="age-gate-exit">Exit</button>
         </div>
+        <div id="doc-popup-overlay" class="doc-popup-overlay"><div class="doc-popup"><div class="doc-popup__header"><span class="doc-popup__title"></span><button class="doc-popup__close">&times;</button></div><div class="doc-popup__body"></div></div></div>
     </div>
 
-    <!-- TOS / Privacy Popup -->
-    <div id="doc-popup" class="doc-popup">
-        <div class="doc-popup__backdrop" ></div>
-        <div class="doc-popup__window">
-            <div class="doc-popup__header">
-                <span class="doc-popup__title" id="doc-popup-title"></span>
-                <button class="doc-popup__close" >&times;</button>
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="learn.html" class="nav__link">Learn</a>
+                <a href="about.html" class="nav__link">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
             </div>
-            <div class="doc-popup__body" id="doc-popup-body"></div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart nav__link--active" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
+                <a href="login.html" class="nav__link nav__link--auth" id="nav-auth-link">Sign In</a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
         </div>
-    </div>
+    </nav>
 
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Secure Checkout</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                Your <span class="text-gradient">Cart</span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- Research Disclaimer -->
+    <section class="container" style="margin-bottom: 32px;">
+        <div class="research-banner anim-fade-up">
+            <span class="research-banner__icon">⚠️</span>
+            <div><strong>Research Use Agreement:</strong> By completing this purchase, you confirm that all products are intended for legitimate laboratory research purposes only. These products are <strong>not for human or animal consumption</strong> and are not intended to diagnose, treat, cure, or prevent any disease.</div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Cart Items -->
+                <div class="checkout-cart anim-fade-up" data-delay="0">
+                    <h2 class="checkout-cart__title">Order Summary</h2>
+                    <div id="cart-items">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="cart-summary" class="cart-summary" style="display:none;">
+                        <div class="cart-summary__row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="cart-summary__row">
+                            <span>Shipping</span>
+                            <span id="shipping">Calculated at next step</span>
+                        </div>
+                        <div class="cart-summary__row cart-summary__row--total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="checkout-form anim-fade-up" data-delay="200">
+                    <h2 class="checkout-form__title">Payment Details</h2>
+
+                    <!-- Payment Method Tabs -->
+                    <div class="payment-tabs" id="payment-tabs">
+                        <button class="payment-tab payment-tab--active" data-method="card" id="tab-card">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Card
+                        </button>
+                        <button class="payment-tab" data-method="apple-pay" id="tab-apple-pay" style="display:none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                            Apple Pay
+                        </button>
+                        <button class="payment-tab" data-method="google-pay" id="tab-google-pay" style="display:none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                            Google Pay
+                        </button>
+                        <button class="payment-tab" data-method="crypto" id="tab-crypto">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5m0 0h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5m0-8v8m0-8V6m0 10v2m3-14v2m0 10v2"/></svg>
+                            Crypto
+                        </button>
+                    </div>
+
+                    <!-- Card Payment Panel (NMI Collect.js) -->
+                    <div class="payment-panel payment-panel--active" id="panel-card">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">&#x1F512;</span>
+                            <div>Enter your card details below. Payment is processed securely via our PCI-compliant gateway. <strong>Your card info never touches our servers.</strong></div>
+                        </div>
+                        <!-- Collect.js renders secure iframes into these containers -->
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <div id="ccnumber" class="collect-js-field"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiration</label>
+                                <div id="ccexp" class="collect-js-field"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <div id="cvv" class="collect-js-field"></div>
+                            </div>
+                        </div>
+                        <div id="card-errors" class="payment-error" style="display:none;"></div>
+                    </div>
+
+                    <!-- Apple Pay Panel -->
+                    <div class="payment-panel" id="panel-apple-pay">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">🍎</span>
+                            <div>Complete your purchase instantly with <strong>Apple Pay</strong>. Your card details stay secure on your device.</div>
+                        </div>
+                        <div id="apple-pay-button-container" class="wallet-button-container">
+                            <button id="apple-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                                Pay with Apple Pay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Google Pay Panel -->
+                    <div class="payment-panel" id="panel-google-pay">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">🔵</span>
+                            <div>Complete your purchase instantly with <strong>Google Pay</strong>. Fast, secure checkout.</div>
+                        </div>
+                        <div id="google-pay-button-container" class="wallet-button-container">
+                            <button id="google-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                                Pay with Google Pay
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Crypto Payment Panel (existing PayRam flow) -->
+                    <div class="payment-panel" id="panel-crypto">
+                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                            <span class="research-banner__icon">&#x1F512;</span>
+                            <div>After submitting your shipping details, you'll be redirected to our <strong>secure payment page</strong> to complete your order. We accept <strong>crypto (BTC, ETH, USDT, USDC)</strong> across multiple networks.</div>
+                        </div>
+                    </div>
+
+                    <form id="checkout-form" onsubmit="handleCheckout(event)">
+                        <!-- Contact -->
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="researcher@institution.edu" required>
+                        </div>
+
+                        <div class="checkout-form__separator"></div>
+
+                        <!-- Shipping Info -->
+                        <h3 style="font-family:var(--font-display); font-size:1.125rem; margin-bottom:20px;">Shipping Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="institution">Institution / Lab Name</label>
+                            <input type="text" id="institution" placeholder="University Research Lab">
+                        </div>
+                        <div class="form-group" style="position:relative;">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" placeholder="Start typing your address..." required autocomplete="off">
+                            <div id="address-autocomplete-list" class="address-autocomplete-list"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address2">Apt / Suite / Unit <span style="color:var(--text-tertiary); font-weight:400;">(optional)</span></label>
+                            <input type="text" id="address2" placeholder="Apt 4B, Suite 200, etc.">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" placeholder="San Diego" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" required>
+                                    <option value="">Select State</option>
+                                    <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                                    <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                                    <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                                    <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                                    <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                                    <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                                    <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                                    <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                                    <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                                    <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                                    <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                                    <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                                    <option>Wisconsin</option><option>Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" placeholder="92101" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country">
+                                    <option>United States</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Research Agreement -->
+                        <div style="margin-top:20px;">
+                            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:0.8125rem; color:var(--text-secondary); line-height:1.5;">
+                                <input type="checkbox" id="research-agreement" required style="margin-top:3px; accent-color:var(--accent-primary);">
+                                I confirm that all products are being purchased for <strong>legitimate laboratory research purposes only</strong> and will not be used for human or animal consumption. I accept the Terms of Service.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
+                            Pay Now
+                        </button>
+
+                        <div class="checkout-form__secure">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                            Secured with 256-bit SSL encryption
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -83,7 +302,7 @@
                 </div>
                 <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a></div>
                 <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="learn.html" class="footer__link">Learn</a><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a></div>
-                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="terms.html" class="footer__link">Terms</a><a href="privacy.html" class="footer__link">Privacy</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Terms</a></div>
             </div>
             <div class="footer__bottom">
                 <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong></div>

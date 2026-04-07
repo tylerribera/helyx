@@ -33,45 +33,76 @@
 </head>
 <body>
     <!-- Age Gate -->
-    <!-- Age Verification Modal -->
     <div id="age-gate" class="age-gate">
         <div class="age-gate__backdrop"></div>
         <div class="age-gate__modal">
-            <div class="age-gate__logo">
-                <img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img">
-            </div>
+            <div class="age-gate__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img"></div>
             <h2 class="age-gate__title">Age & Use Verification Required</h2>
-            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering this site, you confirm <strong>all</strong> of the following:</p>
-            <ul class="age-gate__requirements">
-                <li>I am <strong>21 years of age or older</strong></li>
-                <li>All products on this site are intended <strong>solely for laboratory and scientific research purposes</strong></li>
-                <li>Products are <strong>not for human or animal consumption</strong>, not for resale, and not intended to diagnose, treat, cure, or prevent any disease</li>
-                <li>I agree to the <button type="button" class="age-gate__inline-btn" data-doc="tos">Terms of Service</button> and <button type="button" class="age-gate__inline-btn" data-doc="privacy">Privacy Policy</button></li>
-            </ul>
+            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
             <div class="age-gate__checkboxes">
-                <label class="age-gate__label">
-                    <input type="checkbox" id="age-check-1">
-                    <span class="age-gate__checkmark"></span>
-                    I confirm all of the above statements are true
-                </label>
+                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the <a href="#" data-doc="tos">Terms of Service</a> and <a href="#" data-doc="privacy">Privacy Policy</a>.</label>
             </div>
             <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
             <button class="age-gate__exit" id="age-gate-exit">Exit</button>
         </div>
+        <div id="doc-popup-overlay" class="doc-popup-overlay"><div class="doc-popup"><div class="doc-popup__header"><span class="doc-popup__title"></span><button class="doc-popup__close">&times;</button></div><div class="doc-popup__body"></div></div></div>
     </div>
 
-    <!-- TOS / Privacy Popup -->
-    <div id="doc-popup" class="doc-popup">
-        <div class="doc-popup__backdrop" ></div>
-        <div class="doc-popup__window">
-            <div class="doc-popup__header">
-                <span class="doc-popup__title" id="doc-popup-title"></span>
-                <button class="doc-popup__close" >&times;</button>
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img"></a>
+            <div class="nav__links" id="nav-links">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="products.html" class="nav__link">Peptides</a>
+                <a href="learn.html" class="nav__link">Learn</a>
+                <a href="about.html" class="nav__link nav__link--active">About</a>
+                <a href="lab.html" class="nav__link">Our Lab</a>
+                <a href="blog.html" class="nav__link">Blog</a>
             </div>
-            <div class="doc-popup__body" id="doc-popup-body"></div>
+            <div class="nav__actions">
+                <a href="checkout.html" class="nav__cart" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
+                <a href="login.html" class="nav__link nav__link--auth" id="nav-auth-link">Sign In</a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
         </div>
-    </div>
+    </nav>
 
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-header__tag anim-fade-up">Understanding Peptides</span>
+            <h1 class="page-header__title anim-fade-up" data-delay="100">
+                What Are <span class="text-gradient">Peptides?</span>
+            </h1>
+            <p class="page-header__desc anim-fade-up" data-delay="200">
+                A comprehensive guide to peptide science — what they are, how they're studied, and why they represent one of the most exciting frontiers in biochemical research.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section: What Are Peptides -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content anim-slide-left">
+                    <h3>The Building Blocks of <span class="text-gradient">Biological Signaling</span></h3>
+                    <p>Peptides are short chains of amino acids — typically between 2 and 50 residues — linked by peptide bonds. They are distinguished from proteins primarily by their shorter length, though the boundary is not strictly defined.</p>
+                    <p>In biological systems, peptides serve as critical signaling molecules. They function as hormones, neurotransmitters, and growth factors, modulating nearly every physiological process from immune response to cellular repair and metabolic regulation.</p>
+                    <p>Research peptides are synthetically produced versions of these naturally occurring compounds, manufactured under controlled conditions to achieve ultra-high purity (≥99%) for use in laboratory and in-vitro studies.</p>
+                </div>
+                <div class="about-visual anim-slide-right">
+                    <div class="about-visual__card">
+                        <div class="about-visual__icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                        </div>
+                        <div class="about-visual__stat">7,000+</div>
+                        <div class="about-visual__stat-label">Naturally occurring peptides identified in the human body</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Section: Why Peptides Matter -->
     <section class="about-section">
@@ -191,7 +222,7 @@
                 </div>
                 <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a><a href="products.html" class="footer__link">NAD+</a><a href="products.html" class="footer__link">Selank</a></div>
                 <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="learn.html" class="footer__link">Learn</a><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a><a href="blog.html" class="footer__link">Blog</a></div>
-                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="terms.html" class="footer__link">Terms</a><a href="privacy.html" class="footer__link">Privacy</a></div>
+                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="#" class="footer__link">Terms</a></div>
             </div>
             <div class="footer__bottom">
                 <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong> Not evaluated by the FDA.</div>
