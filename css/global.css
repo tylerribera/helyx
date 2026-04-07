@@ -362,21 +362,26 @@ input, textarea, select {
     color: var(--text-tertiary);
     margin-bottom: 24px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
 
 .age-gate__doc-links button {
     background: none;
-    border: none;
-    color: var(--accent-primary);
-    text-decoration: underline;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #fff;
     cursor: pointer;
     font-size: 0.8125rem;
-    padding: 0;
+    padding: 8px 14px;
     font-family: inherit;
+    transition: all 0.2s;
 }
 
 .age-gate__doc-links button:hover {
-    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.3);
 }
 
 .age-gate__label input[type="checkbox"] {
