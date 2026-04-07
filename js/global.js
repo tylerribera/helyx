@@ -111,6 +111,20 @@ function initAgeGate() {
 
     checks.forEach(c => c.addEventListener('change', updateBtn));
 
+    // Preview tab switching
+    const previewTabs = gate.querySelectorAll('.age-gate__preview-tab');
+    const previewPanels = gate.querySelectorAll('.age-gate__preview-panel');
+    previewTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-target');
+            previewTabs.forEach(t => t.classList.remove('age-gate__preview-tab--active'));
+            previewPanels.forEach(p => p.classList.remove('age-gate__preview-panel--active'));
+            tab.classList.add('age-gate__preview-tab--active');
+            const panel = document.getElementById(target);
+            if (panel) panel.classList.add('age-gate__preview-panel--active');
+        });
+    });
+
     btn.addEventListener('click', () => {
         sessionStorage.setItem('helyx_age_verified', 'true');
         gate.style.opacity = '0';
