@@ -119,83 +119,24 @@
                 <div class="checkout-form anim-fade-up" data-delay="200">
                     <h2 class="checkout-form__title">Payment Details</h2>
 
-                    <!-- Payment Method Tabs -->
-                    <div class="payment-tabs" id="payment-tabs">
-                        <button class="payment-tab payment-tab--active" data-method="card" id="tab-card">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                            Card
-                        </button>
-                        <button class="payment-tab" data-method="apple-pay" id="tab-apple-pay" style="display:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                            Apple Pay
-                        </button>
-                        <button class="payment-tab" data-method="google-pay" id="tab-google-pay" style="display:none;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
-                            Google Pay
-                        </button>
-                        <button class="payment-tab" data-method="crypto" id="tab-crypto">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5c1.1 0 2 .9 2 2s-.9 2-2 2h-5m0 0h5.5c1.1 0 2 .9 2 2s-.9 2-2 2H9.5m0-8v8m0-8V6m0 10v2m3-14v2m0 10v2"/></svg>
-                            Crypto
-                        </button>
-                    </div>
-
-                    <!-- Card Payment Panel (NMI Collect.js) -->
-                    <div class="payment-panel payment-panel--active" id="panel-card">
-                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
+                    <!-- Payment Info (PayRam) -->
+                    <div class="payram-info" style="margin-bottom:24px;">
+                        <div class="research-banner" style="margin-bottom:0; font-size:0.85rem;">
                             <span class="research-banner__icon">&#x1F512;</span>
-                            <div>Enter your card details below. Payment is processed securely via our PCI-compliant gateway. <strong>Your card info never touches our servers.</strong></div>
+                            <div>After submitting your details, you'll be redirected to our <strong>secure payment portal</strong> to complete your order. We accept <strong>credit/debit cards</strong> and <strong>crypto (BTC, ETH, USDT, USDC)</strong>.</div>
                         </div>
-                        <!-- Collect.js renders secure iframes into these containers -->
-                        <div class="form-group">
-                            <label>Card Number</label>
-                            <div id="ccnumber" class="collect-js-field"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Expiration</label>
-                                <div id="ccexp" class="collect-js-field"></div>
+                        <div style="display:flex; align-items:center; gap:12px; margin-top:14px; padding:0 4px; flex-wrap:wrap;">
+                            <span style="font-size:0.75rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.05em;">Accepted:</span>
+                            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                                <span style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:4px 10px; font-size:0.8rem; color:var(--text-secondary); display:flex; align-items:center; gap:5px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                                    Visa / MC
+                                </span>
+                                <span style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:4px 10px; font-size:0.8rem; color:var(--text-secondary);">₿ BTC</span>
+                                <span style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:4px 10px; font-size:0.8rem; color:var(--text-secondary);">⟠ ETH</span>
+                                <span style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:4px 10px; font-size:0.8rem; color:var(--text-secondary);">₮ USDT</span>
+                                <span style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:4px 10px; font-size:0.8rem; color:var(--text-secondary);">$ USDC</span>
                             </div>
-                            <div class="form-group">
-                                <label>CVV</label>
-                                <div id="cvv" class="collect-js-field"></div>
-                            </div>
-                        </div>
-                        <div id="card-errors" class="payment-error" style="display:none;"></div>
-                    </div>
-
-                    <!-- Apple Pay Panel -->
-                    <div class="payment-panel" id="panel-apple-pay">
-                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
-                            <span class="research-banner__icon">🍎</span>
-                            <div>Complete your purchase instantly with <strong>Apple Pay</strong>. Your card details stay secure on your device.</div>
-                        </div>
-                        <div id="apple-pay-button-container" class="wallet-button-container">
-                            <button id="apple-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                                Pay with Apple Pay
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Google Pay Panel -->
-                    <div class="payment-panel" id="panel-google-pay">
-                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
-                            <span class="research-banner__icon">🔵</span>
-                            <div>Complete your purchase instantly with <strong>Google Pay</strong>. Fast, secure checkout.</div>
-                        </div>
-                        <div id="google-pay-button-container" class="wallet-button-container">
-                            <button id="google-pay-btn" class="btn btn--primary btn--lg" style="width:100%; background:#4285F4; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
-                                Pay with Google Pay
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Crypto Payment Panel (existing PayRam flow) -->
-                    <div class="payment-panel" id="panel-crypto">
-                        <div class="research-banner" style="margin-bottom:20px; font-size:0.85rem;">
-                            <span class="research-banner__icon">&#x1F512;</span>
-                            <div>After submitting your shipping details, you'll be redirected to our <strong>secure payment page</strong> to complete your order. We accept <strong>crypto (BTC, ETH, USDT, USDC)</strong> across multiple networks.</div>
                         </div>
                     </div>
 
@@ -282,7 +223,7 @@
                         </div>
 
                         <button type="submit" class="btn btn--primary btn--lg checkout-form__submit" id="submit-btn" disabled>
-                            Pay Now
+                            Proceed to Payment
                         </button>
 
                         <div class="checkout-form__secure">
@@ -321,144 +262,8 @@
             ? window.location.origin + '/api/orders'
             : 'https://api.helyx.us/api/orders';
 
-        const NMI_API = window.location.hostname === 'localhost'
-            ? window.location.origin + '/api/nmi'
-            : 'https://api.helyx.us/api/nmi';
-
-        // ── Payment method state ─────────────────────────────────
-        let activePaymentMethod = 'card';   // 'card' | 'apple-pay' | 'google-pay' | 'crypto'
-        let collectJsLoaded = false;
-        let nmiPaymentToken = null;
-        let nmiConfig = null;
-
-        // ── Load NMI Collect.js (tokenization) ───────────────────
-        async function initNMI() {
-            try {
-                const res = await fetch(`${NMI_API}/config`);
-                if (!res.ok) {
-                    console.log('[NMI] Gateway not configured yet — card payments disabled');
-                    // Hide card tab, default to crypto
-                    document.getElementById('tab-card').style.display = 'none';
-                    document.getElementById('tab-apple-pay').style.display = 'none';
-                    document.getElementById('tab-google-pay').style.display = 'none';
-                    switchPaymentMethod('crypto');
-                    return;
-                }
-                nmiConfig = await res.json();
-
-                // Load Collect.js script dynamically
-                const script = document.createElement('script');
-                script.src = 'https://secure.nmi.com/token/Collect.js';
-                script.dataset.tokenizationKey = nmiConfig.tokenizationKey;
-                script.dataset.variant = 'inline';
-
-                // Configure which fields to render
-                script.dataset.fieldCcnumberSelector = '#ccnumber';
-                script.dataset.fieldCcexpSelector = '#ccexp';
-                script.dataset.fieldCvvSelector = '#cvv';
-
-                // Styling for the iframes
-                script.dataset.customCss = JSON.stringify({
-                    'background-color': 'rgba(255,255,255,0.03)',
-                    'border': '1px solid rgba(255,255,255,0.08)',
-                    'border-radius': '10px',
-                    'padding': '14px 16px',
-                    'font-size': '0.9375rem',
-                    'color': '#e8e8e8',
-                    'font-family': 'Non Natural Grotesk, sans-serif',
-                    'height': '44px',
-                    'box-sizing': 'border-box'
-                });
-
-                script.dataset.focusCss = JSON.stringify({
-                    'border-color': 'rgba(45,212,191,0.4)',
-                    'outline': 'none'
-                });
-
-                script.dataset.invalidCss = JSON.stringify({
-                    'border-color': 'rgba(255,100,100,0.5)'
-                });
-
-                script.dataset.placeholderCss = JSON.stringify({
-                    'color': 'rgba(255,255,255,0.2)'
-                });
-
-                // Callback when token is generated
-                script.dataset.callback = 'collectJsCallback';
-
-                script.onload = () => {
-                    collectJsLoaded = true;
-                    console.log('[NMI] Collect.js loaded');
-                };
-                script.onerror = () => {
-                    console.error('[NMI] Failed to load Collect.js');
-                    document.getElementById('tab-card').style.display = 'none';
-                    switchPaymentMethod('crypto');
-                };
-
-                document.head.appendChild(script);
-
-                // Show Apple Pay tab if supported & enabled
-                if (nmiConfig.applePay && window.ApplePaySession && ApplePaySession.canMakePayments()) {
-                    document.getElementById('tab-apple-pay').style.display = '';
-                }
-                // Show Google Pay tab if enabled
-                if (nmiConfig.googlePay) {
-                    document.getElementById('tab-google-pay').style.display = '';
-                }
-
-            } catch (err) {
-                console.log('[NMI] Could not load config:', err.message);
-                // Fall back to crypto-only
-                document.getElementById('tab-card').style.display = 'none';
-                switchPaymentMethod('crypto');
-            }
-        }
-
-        // Collect.js callback — receives the payment token
-        function collectJsCallback(response) {
-            if (response.token) {
-                nmiPaymentToken = response.token;
-                console.log('[NMI] Token received');
-                // Clear any card errors
-                const errEl = document.getElementById('card-errors');
-                errEl.style.display = 'none';
-                errEl.textContent = '';
-            }
-        }
-
-        // ── Payment method tab switching ─────────────────────────
-        function switchPaymentMethod(method) {
-            activePaymentMethod = method;
-            nmiPaymentToken = null;
-
-            // Update tabs
-            document.querySelectorAll('.payment-tab').forEach(tab => {
-                tab.classList.toggle('payment-tab--active', tab.dataset.method === method);
-            });
-
-            // Update panels
-            document.querySelectorAll('.payment-panel').forEach(panel => {
-                panel.classList.toggle('payment-panel--active', panel.id === `panel-${method}`);
-            });
-
-            // Update submit button text
-            const btn = document.getElementById('submit-btn');
-            if (method === 'crypto') {
-                btn.textContent = 'Proceed to Crypto Payment';
-            } else if (method === 'apple-pay') {
-                btn.textContent = 'Confirm & Pay with Apple Pay';
-            } else if (method === 'google-pay') {
-                btn.textContent = 'Confirm & Pay with Google Pay';
-            } else {
-                btn.textContent = 'Pay Now';
-            }
-        }
-
-        // Tab click handlers
-        document.querySelectorAll('.payment-tab').forEach(tab => {
-            tab.addEventListener('click', () => switchPaymentMethod(tab.dataset.method));
-        });
+        // ── Payment state ────────────────────────────────────────
+        // PayRam handles all payments (crypto + card) for now
 
         function renderCart() {
             const container = document.getElementById('cart-items');
@@ -578,168 +383,12 @@
         async function handleCheckout(e) {
             e.preventDefault();
             if (!Cart.items.length) return;
-
             clearError();
-
-            if (activePaymentMethod === 'crypto') {
-                await handleCryptoPayment();
-            } else if (activePaymentMethod === 'card') {
-                await handleCardPayment();
-            } else if (activePaymentMethod === 'apple-pay' || activePaymentMethod === 'google-pay') {
-                await handleWalletPayment(activePaymentMethod);
-            }
+            await handlePayRamPayment();
         }
 
-        // ── Card payment via NMI Collect.js ──────────────────────
-        async function handleCardPayment() {
-            const btn = document.getElementById('submit-btn');
-            const originalText = btn.textContent;
-
-            // Trigger Collect.js tokenization
-            if (!collectJsLoaded) {
-                showError('Card payment is loading. Please wait a moment and try again.');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-            btn.textContent = 'Processing Card...';
-
-            // Trigger Collect.js to tokenize — it calls collectJsCallback
-            // We need to dispatch the submit through Collect.js
-            // Collect.js intercepts form submit and tokenizes before our handler fires
-            // But since we use an async flow, we request the token first:
-            try {
-                // If Collect.js has already tokenized (user filled fields), use it
-                // Otherwise, we need to trigger tokenization via CollectJS.startPaymentRequest
-                if (typeof CollectJS !== 'undefined') {
-                    // Reset token
-                    nmiPaymentToken = null;
-
-                    // Trigger tokenization
-                    CollectJS.startPaymentRequest();
-
-                    // Wait for the token callback (up to 10 seconds)
-                    const token = await waitForToken(10000);
-                    if (!token) {
-                        btn.textContent = originalText;
-                        btn.disabled = !document.getElementById('research-agreement').checked;
-                        btn.style.opacity = '1';
-                        showError('Please enter valid card details.');
-                        return;
-                    }
-
-                    btn.textContent = 'Charging Card...';
-
-                    // Send token + order data to our server
-                    const orderData = getOrderData();
-                    const res = await fetch(`${NMI_API}/charge`, {
-                        method: 'POST',
-                        headers: getAuthHeaders(),
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            paymentToken: token,
-                            ...orderData
-                        })
-                    });
-
-                    const data = await res.json();
-
-                    if (!res.ok) {
-                        throw new Error(data.error || 'Card payment failed');
-                    }
-
-                    // ✅ Payment approved!
-                    Cart.items = [];
-                    Cart.save();
-                    Cart.updateUI();
-
-                    showPaymentSuccess(data.orderId, data.amount, 'Credit/Debit Card', data.transactionId);
-
-                } else {
-                    throw new Error('Card payment system not loaded. Please refresh and try again.');
-                }
-
-            } catch (err) {
-                console.error('Card payment error:', err);
-                btn.textContent = originalText;
-                btn.disabled = !document.getElementById('research-agreement').checked;
-                btn.style.opacity = '1';
-                showError(err.message);
-            }
-        }
-
-        // Wait for Collect.js token callback
-        function waitForToken(timeout) {
-            return new Promise(resolve => {
-                const start = Date.now();
-                const interval = setInterval(() => {
-                    if (nmiPaymentToken) {
-                        clearInterval(interval);
-                        resolve(nmiPaymentToken);
-                    } else if (Date.now() - start > timeout) {
-                        clearInterval(interval);
-                        resolve(null);
-                    }
-                }, 100);
-            });
-        }
-
-        // ── Wallet payment (Apple Pay / Google Pay) ──────────────
-        async function handleWalletPayment(method) {
-            const btn = document.getElementById('submit-btn');
-            const originalText = btn.textContent;
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-            btn.textContent = `Processing ${method === 'apple-pay' ? 'Apple Pay' : 'Google Pay'}...`;
-
-            try {
-                // For wallet payments, Collect.js handles the wallet flow
-                // and returns a token the same way
-                if (typeof CollectJS !== 'undefined') {
-                    nmiPaymentToken = null;
-                    CollectJS.startPaymentRequest();
-
-                    const token = await waitForToken(30000); // wallets may take longer (biometric)
-                    if (!token) {
-                        throw new Error('Wallet payment was cancelled or timed out.');
-                    }
-
-                    btn.textContent = 'Completing Payment...';
-
-                    const orderData = getOrderData();
-                    const res = await fetch(`${NMI_API}/charge`, {
-                        method: 'POST',
-                        headers: getAuthHeaders(),
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            paymentToken: token,
-                            ...orderData
-                        })
-                    });
-
-                    const data = await res.json();
-                    if (!res.ok) throw new Error(data.error || 'Payment failed');
-
-                    Cart.items = [];
-                    Cart.save();
-                    Cart.updateUI();
-
-                    showPaymentSuccess(data.orderId, data.amount, method === 'apple-pay' ? 'Apple Pay' : 'Google Pay', data.transactionId);
-                } else {
-                    throw new Error('Payment system not loaded. Please refresh the page.');
-                }
-            } catch (err) {
-                console.error('Wallet payment error:', err);
-                btn.textContent = originalText;
-                btn.disabled = !document.getElementById('research-agreement').checked;
-                btn.style.opacity = '1';
-                showError(err.message);
-            }
-        }
-
-        // ── Crypto payment via PayRam (existing flow) ────────────
-        async function handleCryptoPayment() {
+        // ── PayRam Payment (crypto + card) ──────────────────────
+        async function handlePayRamPayment() {
             const btn = document.getElementById('submit-btn');
             const originalText = btn.textContent;
             btn.disabled = true;
@@ -774,7 +423,7 @@
                 Cart.save();
                 Cart.updateUI();
 
-                btn.textContent = 'Redirecting to Payment...';
+                btn.textContent = 'Redirecting to Secure Payment...';
                 btn.style.background = 'var(--accent-primary)';
 
                 // Redirect to PayRam payment page
@@ -1059,7 +708,6 @@
                 checkPendingOrder();
             } else {
                 renderCart();
-                initNMI(); // Load card payment system
                 initAddressAutocomplete(); // Address lookup
             }
         });
