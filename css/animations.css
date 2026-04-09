@@ -7,7 +7,7 @@
 .anim-fade-up {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
 }
 
 .anim-fade-up.visible {
@@ -18,7 +18,7 @@
 /* ── Fade In ──────────────────────────────────────────────── */
 .anim-fade-in {
     opacity: 0;
-    transition: opacity 1s var(--ease-out);
+    transition: opacity 2s var(--ease-out);
 }
 
 .anim-fade-in.visible {
@@ -29,7 +29,7 @@
 .anim-scale-up {
     opacity: 0;
     transform: scale(0.92);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
 }
 
 .anim-scale-up.visible {
@@ -41,7 +41,7 @@
 .anim-slide-left {
     opacity: 0;
     transform: translateX(-60px);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
 }
 
 .anim-slide-left.visible {
@@ -53,7 +53,7 @@
 .anim-slide-right {
     opacity: 0;
     transform: translateX(60px);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
 }
 
 .anim-slide-right.visible {
@@ -122,7 +122,7 @@
 .draw-line {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    transition: stroke-dashoffset 2s var(--ease-out);
+    transition: stroke-dashoffset 4s var(--ease-out);
 }
 
 .draw-line.visible {
@@ -133,15 +133,15 @@
 .stagger-children > * {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
 }
 
 .stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-.stagger-children.visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
-.stagger-children.visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
-.stagger-children.visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
-.stagger-children.visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
-.stagger-children.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 640ms; opacity: 1; transform: translateY(0); }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 800ms; opacity: 1; transform: translateY(0); }
 
 /* ── Prefers Reduced Motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
