@@ -11,7 +11,7 @@
     height: var(--nav-height);
     display: flex;
     align-items: center;
-    transition: all 0.4s var(--ease-out);
+    transition: all 0.8s var(--ease-out);
 }
 
 .nav--scrolled {
@@ -33,7 +33,7 @@
 
 .nav__logo-img {
     height: 36px;
-    transition: opacity 0.3s;
+    transition: opacity 0.6s;
 }
 
 .nav__logo:hover .nav__logo-img {
@@ -53,7 +53,7 @@
     letter-spacing: 0.01em;
     position: relative;
     padding: 4px 0;
-    transition: color 0.3s var(--ease-out);
+    transition: color 0.6s var(--ease-out);
 }
 
 .nav__link::after {
@@ -64,7 +64,7 @@
     width: 0;
     height: 1px;
     background: var(--text-primary);
-    transition: width 0.3s var(--ease-out);
+    transition: width 0.6s var(--ease-out);
 }
 
 .nav__link:hover,
@@ -86,7 +86,7 @@
 .nav__cart {
     position: relative;
     color: var(--text-secondary);
-    transition: color 0.3s;
+    transition: color 0.6s;
     display: flex;
     align-items: center;
 }
@@ -109,7 +109,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s var(--ease-spring);
+    transition: transform 0.6s var(--ease-spring);
 }
 
 .nav__cart-count.bump {
@@ -125,7 +125,7 @@
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-secondary);
-    transition: all 0.3s var(--ease-out);
+    transition: all 0.6s var(--ease-out);
 }
 
 .nav__link--auth:hover {
@@ -153,7 +153,7 @@
     height: 1.5px;
     background: var(--text-primary);
     border-radius: 1px;
-    transition: all 0.3s var(--ease-out);
+    transition: all 0.6s var(--ease-out);
     transform-origin: center;
 }
 
@@ -190,7 +190,7 @@
         -webkit-backdrop-filter: blur(20px);
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s var(--ease-out);
+        transition: opacity 0.8s var(--ease-out);
     }
 
     .nav__links.open {

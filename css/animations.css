@@ -105,7 +105,7 @@
 
 /* ── Hover Effects ────────────────────────────────────────── */
 .hover-lift {
-    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    transition: transform 0.8s var(--ease-out), box-shadow 0.8s var(--ease-out);
 }
 
 .hover-lift:hover {
@@ -115,7 +115,7 @@
 
 /* ── Magnetic Button Effect ───────────────────────────────── */
 .magnetic-btn {
-    transition: transform 0.3s var(--ease-out);
+    transition: transform 0.6s var(--ease-out);
 }
 
 /* ── Line Drawing ─────────────────────────────────────────── */

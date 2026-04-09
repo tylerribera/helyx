@@ -78,7 +78,7 @@
     font-weight: 500;
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
-    transition: all 0.3s var(--ease-out);
+    transition: all 0.6s var(--ease-out);
     cursor: pointer;
     background: transparent;
 }
@@ -229,7 +229,7 @@
     font-size: 0.75rem;
     font-family: inherit;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.4s;
 }
 
 .product-detail__full-specs-toggle:hover {
@@ -240,7 +240,7 @@
 .product-detail__full-specs-toggle svg {
     width: 12px;
     height: 12px;
-    transition: transform 0.3s ease;
+    transition: transform 0.6s ease;
 }
 
 .product-detail__full-specs-toggle.open svg {
@@ -250,7 +250,7 @@
 .product-detail__full-specs {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.8s ease;
     margin-bottom: 0;
 }
 
@@ -419,7 +419,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 32px;
-    transition: all 0.4s var(--ease-out);
+    transition: all 0.8s var(--ease-out);
 }
 
 .peptide-info-card:hover {
@@ -547,7 +547,7 @@
     border-radius: var(--radius-lg);
     padding: 36px 28px;
     text-align: center;
-    transition: all 0.4s var(--ease-out);
+    transition: all 0.8s var(--ease-out);
 }
 
 .lab-quality-card:hover {
@@ -640,7 +640,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.4s var(--ease-out);
+    transition: all 0.8s var(--ease-out);
     cursor: pointer;
 }
 
@@ -716,7 +716,7 @@
     font-weight: 500;
     line-height: 1.3;
     margin-bottom: 12px;
-    transition: color 0.3s;
+    transition: color 0.6s;
 }
 
 .blog-card:hover .blog-card__title {
@@ -737,7 +737,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: gap 0.3s var(--ease-out);
+    transition: gap 0.6s var(--ease-out);
 }
 
 .blog-card:hover .blog-card__read-more {
@@ -837,7 +837,7 @@
     justify-content: center;
     color: var(--text-secondary);
     font-size: 1rem;
-    transition: all 0.2s;
+    transition: all 0.4s;
     cursor: pointer;
     background: transparent;
 }
@@ -855,7 +855,7 @@
 
 .cart-item__remove {
     color: var(--text-muted);
-    transition: color 0.2s;
+    transition: color 0.4s;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -925,7 +925,7 @@
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     font-size: 0.9375rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.6s;
     outline: none;
 }
 
@@ -966,7 +966,7 @@
     border-radius: var(--radius-sm);
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.6s;
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -1115,7 +1115,7 @@
     font-family: var(--font-display);
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.4s ease;
     flex: 1;
     justify-content: center;
     min-width: 0;
@@ -1149,7 +1149,7 @@
 
 .payment-panel--active {
     display: block;
-    animation: panelFadeIn 0.25s ease;
+    animation: panelFadeIn 0.5s ease;
 }
 
 @keyframes panelFadeIn {
@@ -1163,7 +1163,7 @@
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     min-height: 44px;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.4s ease;
     overflow: hidden;
 }
 
@@ -1202,7 +1202,7 @@
     font-family: var(--font-display);
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.4s ease;
 }
 
 .wallet-button-container button:hover {
@@ -1250,7 +1250,7 @@
     font-size: 0.9rem;
     color: var(--color-text, #e0e0e0);
     cursor: pointer;
-    transition: background .15s ease, color .15s ease;
+    transition: background .30s ease, color .30s ease;
     border-bottom: 1px solid rgba(255, 255, 255, .05);
 }
 
