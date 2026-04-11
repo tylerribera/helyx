@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 140px var(--container-padding) 0;
+    padding-bottom: 0;
     max-width: var(--container-max);
     margin: 0 auto;
     overflow: visible;
@@ -215,7 +216,8 @@
     gap: 1px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     margin-top: auto;
-    padding-bottom: 0;
+    padding-top: 16px;
+    padding-bottom: 24px;
     position: relative;
     z-index: 4;
 }
@@ -727,10 +729,11 @@
 
     .hero__strip {
         grid-template-columns: repeat(2, 1fr);
+        margin-top: 60px;
     }
 
     .hero__strip-item {
-        padding: 24px 0;
+        padding: 16px 0;
     }
 
     .trust-bar__grid {
