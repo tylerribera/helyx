@@ -119,11 +119,20 @@
     max-width: none;
     height: auto;
     display: block;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
     filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.5))
            drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
     animation: hero-float 6s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero__product-slide.active {
+    opacity: 1;
 }
 
 /* Bottom fade */
