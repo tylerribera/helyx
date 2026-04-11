@@ -43,19 +43,18 @@ function animateValue(el) {
     requestAnimationFrame(tick);
 }
 
-// ── Hero vial crossfade carousel ──────────────────────────────
+// ── Hero Vial Carousel (z-index swap, no opacity) ────────────
 function initHeroCarousel() {
-    const slides = document.querySelectorAll('.hero__product-slide');
+    const slides = document.querySelectorAll('.hero__carousel-slide');
     if (slides.length < 2) return;
 
     let current = 0;
-    const interval = 1500; // 1.5 seconds per slide
 
     setInterval(() => {
-        slides[current].classList.remove('active');
+        slides[current].classList.remove('hero__carousel-slide--active');
         current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, interval);
+        slides[current].classList.add('hero__carousel-slide--active');
+    }, 3000);
 }
 
 // ── Init ──────────────────────────────────────────────────────
