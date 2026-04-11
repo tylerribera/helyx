@@ -658,10 +658,10 @@
 
     .hero__product {
         position: absolute;
-        right: -15%;
+        right: -35%;
         top: 0;
         bottom: 0;
-        width: 65%;
+        width: 100%;
         height: auto;
         opacity: 1;
         z-index: 1;
@@ -713,8 +713,8 @@
     }
 
     .hero__product {
-        right: -25%;
-        width: 75%;
+        right: -50%;
+        width: 120%;
         height: auto;
         bottom: 0;
         opacity: 1;
