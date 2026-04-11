@@ -97,22 +97,21 @@
 /* ── Hero Product Image (Apple-style) ──────────────────────── */
 .hero__product {
     position: absolute;
-    right: -2vw;
-    top: 50%;
-    transform: translateY(-50%);
-    width: clamp(380px, 48vw, 640px);
-    height: 80vh;
-    max-height: 700px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50vw;
     overflow: hidden;
     z-index: 1;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     pointer-events: none;
 }
 
 .hero__product-img {
-    width: 100%;
+    width: 90%;
+    max-width: 700px;
     height: auto;
     display: block;
     position: relative;
@@ -128,7 +127,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 80px;
+    height: 120px;
     background: linear-gradient(to bottom, transparent, var(--bg-primary, #000));
     z-index: 3;
     pointer-events: none;
