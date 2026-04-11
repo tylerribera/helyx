@@ -97,10 +97,10 @@
 /* ── Hero Product Image (Apple-style) ──────────────────────── */
 .hero__product {
     position: absolute;
-    right: 0;
+    right: -8vw;
     top: 0;
     bottom: 0;
-    width: 50vw;
+    width: 58vw;
     overflow: hidden;
     z-index: 1;
     display: flex;
@@ -110,8 +110,8 @@
 }
 
 .hero__product-img {
-    width: 90%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 850px;
     height: auto;
     display: block;
     position: relative;
@@ -121,14 +121,28 @@
     animation: hero-float 6s ease-in-out infinite;
 }
 
+/* Bottom fade */
 .hero__product::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 120px;
+    height: 200px;
     background: linear-gradient(to bottom, transparent, var(--bg-primary, #000));
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Left edge fade */
+.hero__product::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    background: linear-gradient(to right, var(--bg-primary, #000), transparent);
     z-index: 3;
     pointer-events: none;
 }
