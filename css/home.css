@@ -97,13 +97,16 @@
 /* ── Hero Product Image (Apple-style) ──────────────────────── */
 .hero__product {
     position: absolute;
-    right: 0;
+    right: -2vw;
     top: 50%;
-    transform: translateY(-55%);
-    width: clamp(280px, 38vw, 480px);
+    transform: translateY(-50%);
+    width: clamp(380px, 48vw, 640px);
+    height: 80vh;
+    max-height: 700px;
+    overflow: hidden;
     z-index: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     pointer-events: none;
 }
@@ -117,34 +120,34 @@
     filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.5))
            drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
     animation: hero-float 6s ease-in-out infinite;
-    border-radius: 0;
+}
+
+.hero__product::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--bg-primary, #000));
+    z-index: 3;
+    pointer-events: none;
 }
 
 .hero__product-glow {
     position: absolute;
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 60%;
+    top: 20%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
-    filter: blur(60px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 70%);
+    filter: blur(80px);
     z-index: 0;
     animation: hero-glow-pulse 6s ease-in-out infinite;
 }
 
 .hero__product-reflection {
-    position: absolute;
-    bottom: -40%;
-    left: 5%;
-    right: 5%;
-    height: 60%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-    transform: scaleY(-1) perspective(400px) rotateX(15deg);
-    filter: blur(8px);
-    opacity: 0.4;
-    z-index: 1;
-    pointer-events: none;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 60%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 60%);
+    display: none;
 }
 
 @keyframes hero-float {
@@ -606,12 +609,10 @@
         right: auto;
         top: auto;
         transform: none;
-        width: min(60%, 340px);
+        width: min(70%, 380px);
+        height: auto;
+        max-height: 400px;
         margin: 40px auto 0;
-    }
-
-    .hero__product-reflection {
-        display: none;
     }
 
     .hero__strip {
@@ -654,8 +655,8 @@
     }
 
     .hero__product {
-        width: min(65%, 300px);
-        margin: 32px auto 0;
+        width: min(60%, 300px);
+        max-height: 350px;
     }
 
     .hero__product-glow {
