@@ -601,17 +601,23 @@
 
     .hero__content {
         max-width: 100%;
+        position: relative;
+        z-index: 2;
     }
 
     .hero__product {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: min(70%, 380px);
-        height: auto;
-        max-height: 400px;
-        margin: 40px auto 0;
+        position: absolute;
+        right: -10%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70vw;
+        height: 80vh;
+        opacity: 0.2;
+        z-index: 0;
+    }
+
+    .hero__product::after {
+        height: 100px;
     }
 
     .hero__strip {
@@ -654,12 +660,14 @@
     }
 
     .hero__product {
-        width: min(60%, 300px);
-        max-height: 350px;
+        right: -20%;
+        width: 90vw;
+        height: 70vh;
+        opacity: 0.15;
     }
 
     .hero__product-glow {
-        filter: blur(40px);
+        display: none;
     }
 
     .hero__strip {
