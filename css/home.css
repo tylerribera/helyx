@@ -649,24 +649,21 @@
     }
 
     .hero__content {
-        max-width: 100%;
+        max-width: 60%;
         position: relative;
         z-index: 2;
     }
 
     .hero__product {
         position: absolute;
-        right: -10%;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 70vw;
-        height: 80vh;
-        opacity: 0.2;
-        z-index: 0;
-    }
-
-    .hero__product::after {
-        height: 100px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 55%;
+        height: auto;
+        opacity: 1;
+        z-index: 1;
+        transform: none;
     }
 
     .hero__strip {
@@ -708,11 +705,17 @@
         font-size: clamp(2rem, 8vw, 3rem);
     }
 
+    .hero__content {
+        max-width: 55%;
+    }
+
     .hero__product {
-        right: -20%;
-        width: 90vw;
-        height: 70vh;
-        opacity: 0.15;
+        right: 0;
+        width: 55%;
+        height: auto;
+        bottom: 0;
+        opacity: 1;
+        transform: none;
     }
 
     .hero__product-glow {
