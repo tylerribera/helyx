@@ -43,7 +43,7 @@ function animateValue(el) {
     requestAnimationFrame(tick);
 }
 
-// ── Hero Vial Carousel (crossfade on label text) ─────────────
+// ── Hero Vial Carousel (label crossfade) ─────────────────────
 function initHeroCarousel() {
     const slides = document.querySelectorAll('.hero__carousel-slide');
     if (slides.length < 2) return;
@@ -53,10 +53,20 @@ function initHeroCarousel() {
     setInterval(() => {
         const prev = current;
         current = (current + 1) % slides.length;
+
+        // New slide on top
         slides[current].classList.add('hero__carousel-slide--active');
+        slides[current].style.opacity = '1';
+
+        // Old slide fades out to reveal new one
+        slides[prev].classList.remove('hero__carousel-slide--active');
+        slides[prev].classList.add('hero__carousel-slide--fading-out');
+
+        // Clean up after animation
         setTimeout(() => {
-            slides[prev].classList.remove('hero__carousel-slide--active');
-        }, 1000);
+            slides[prev].classList.remove('hero__carousel-slide--fading-out');
+            slides[prev].style.opacity = '1';
+        }, 600);
     }, 3000);
 }
 
