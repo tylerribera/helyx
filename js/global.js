@@ -244,9 +244,12 @@ function initNav() {
 
     // Mobile toggle
     if (toggle && links) {
-        toggle.addEventListener('click', () => {
-            toggle.classList.toggle('active');
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = toggle.classList.toggle('active');
             links.classList.toggle('open');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         // Close on link click
@@ -254,6 +257,7 @@ function initNav() {
             link.addEventListener('click', () => {
                 toggle.classList.remove('active');
                 links.classList.remove('open');
+                document.body.style.overflow = '';
             });
         });
     }
