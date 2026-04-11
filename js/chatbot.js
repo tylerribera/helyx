@@ -45,19 +45,18 @@
             storage: '-20°C, desiccated',
             mw: '729.83 g/mol',
         },
-        'nad+': {
-            name: 'NAD+',
-            size: '500mg',
-            price: '$129.99',
-            category: 'Longevity',
-            purity: '≥99%',
+        cerebrolysin: {
+            name: 'Cerebrolysin',
+            size: '10mg',
+            price: '$79.99',
+            category: 'Neuropeptide',
+            purity: '≥98%',
             form: 'Lyophilized Powder',
-            desc: 'Nicotinamide adenine dinucleotide researched for its role in cellular energy metabolism, sirtuin activation, and DNA repair pathways.',
+            desc: 'Neuropeptide preparation derived from porcine brain proteins, researched for neurotrophic factor modulation, synaptic plasticity, and neuroprotection in neurodegeneration models.',
             storage: '-20°C, desiccated',
-            cas: '53-84-9',
-            mw: '663.43 g/mol',
+            cas: '12656-61-0',
+            mw: '<10 kDa peptide fragments',
         },
-        nad: null, // alias
         selank: {
             name: 'Selank',
             size: '10mg',
@@ -83,7 +82,6 @@
             mw: '813.93 g/mol',
         },
     };
-    PRODUCTS.nad = PRODUCTS['nad+']; // alias
 
     // ── BLOCKED topics (human consumption / dosage) ──────────
     const BLOCKED_PATTERNS = [
@@ -145,7 +143,7 @@
                 .join('\n');
             return {
                 text: `Here's our current catalog:\n\n${list}\n\nAll products are <strong>≥98% purity</strong>, lyophilized powder, for research use only.\n\n<a href="products.html">Browse full catalog →</a>`,
-                quickReplies: ['Tell me about Dihexa', 'Tell me about NAD+', 'Shipping info'],
+                quickReplies: ['Tell me about Dihexa', 'Tell me about Cerebrolysin', 'Shipping info'],
             };
         }
 
@@ -186,7 +184,7 @@
         // 9) Purity / quality / CoA
         if (/\b(purity|pure|quality|coa|certificate|analysis|hplc|mass spec|testing|tested|third.?party|lab.?tested)\b/i.test(q)) {
             return {
-                text: `<strong>Quality & Purity:</strong>\n\n• All peptides are <strong>≥98% purity</strong> (HPLC-verified)\n• NAD+ is <strong>≥99% purity</strong>\n• Every batch comes with a <strong>Certificate of Analysis (CoA)</strong>\n• Testing includes HPLC purity analysis and mass spectrometry (MS) identity confirmation\n• Manufactured under strict quality control protocols\n\n<a href="lab.html">Learn more about our lab →</a>`,
+                text: `<strong>Quality & Purity:</strong>\n\n• All peptides are <strong>≥98% purity</strong> (HPLC-verified)\n• Cerebrolysin is <strong>≥98% purity</strong>\n• Every batch comes with a <strong>Certificate of Analysis (CoA)</strong>\n• Testing includes HPLC purity analysis and mass spectrometry (MS) identity confirmation\n• Manufactured under strict quality control protocols\n\n<a href="lab.html">Learn more about our lab →</a>`,
                 quickReplies: ['Product catalog', 'Storage info'],
             };
         }
