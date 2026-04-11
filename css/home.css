@@ -216,6 +216,8 @@
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     margin-top: auto;
     padding-bottom: 0;
+    position: relative;
+    z-index: 4;
 }
 
 .hero__strip-item {
@@ -649,17 +651,17 @@
     }
 
     .hero__content {
-        max-width: 60%;
+        max-width: 55%;
         position: relative;
-        z-index: 2;
+        z-index: 4;
     }
 
     .hero__product {
         position: absolute;
-        right: 0;
+        right: -15%;
         top: 0;
         bottom: 0;
-        width: 55%;
+        width: 65%;
         height: auto;
         opacity: 1;
         z-index: 1;
@@ -706,12 +708,13 @@
     }
 
     .hero__content {
-        max-width: 55%;
+        max-width: 50%;
+        z-index: 4;
     }
 
     .hero__product {
-        right: 0;
-        width: 55%;
+        right: -25%;
+        width: 75%;
         height: auto;
         bottom: 0;
         opacity: 1;
