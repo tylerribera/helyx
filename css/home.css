@@ -93,43 +93,66 @@
     transform: translateX(4px);
 }
 
-/* ── Side Element ───────────────────────────────────────────── */
-.hero__side {
+/* ── Hero Product Image (Apple-style) ──────────────────────── */
+.hero__product {
     position: absolute;
-    right: var(--container-padding);
+    right: clamp(2rem, 6vw, 8rem);
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    width: clamp(320px, 32vw, 520px);
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hero__monogram {
-    font-family: var(--font-display);
-    font-size: clamp(6rem, 12vw, 14rem);
-    font-weight: 300;
-    line-height: 1;
-    color: rgba(255, 255, 255, 0.03);
-    letter-spacing: -0.05em;
-    user-select: none;
+.hero__product-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.5))
+           drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+    animation: hero-float 6s ease-in-out infinite;
+    border-radius: 4px;
+}
+
+.hero__product-glow {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+    filter: blur(60px);
+    z-index: 0;
+    animation: hero-glow-pulse 6s ease-in-out infinite;
+}
+
+.hero__product-reflection {
+    position: absolute;
+    bottom: -40%;
+    left: 5%;
+    right: 5%;
+    height: 60%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+    transform: scaleY(-1) perspective(400px) rotateX(15deg);
+    filter: blur(8px);
+    opacity: 0.4;
+    z-index: 1;
     pointer-events: none;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 60%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 60%);
 }
 
-.hero__side-line {
-    width: 1px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.08);
+@keyframes hero-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
 }
 
-.hero__side-text {
-    writing-mode: vertical-rl;
-    font-size: 0.625rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.15);
-    font-weight: 400;
+@keyframes hero-glow-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
 }
 
 /* ── Data Strip ─────────────────────────────────────────────── */
@@ -572,7 +595,16 @@
         font-size: clamp(2.5rem, 6vw, 4.5rem);
     }
 
-    .hero__side {
+    .hero__product {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: min(70%, 360px);
+        margin: 48px auto 0;
+    }
+
+    .hero__product-reflection {
         display: none;
     }
 
@@ -613,6 +645,15 @@
 
     .hero__title {
         font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .hero__product {
+        width: min(65%, 300px);
+        margin: 32px auto 0;
+    }
+
+    .hero__product-glow {
+        filter: blur(40px);
     }
 
     .hero__strip {
