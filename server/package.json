@@ -1,7 +1,7 @@
 {
   "name": "helyx-server",
-  "version": "1.0.0",
-  "description": "Helyx backend API — authentication, accounts, orders",
+  "version": "2.0.0",
+  "description": "Helyx — backend for the wellness journal app (accounts, waitlist, password reset)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,7 +12,6 @@
     "better-sqlite3": "^11.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",

@@ -1,67 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1488293825962687');
-    fbq('track', 'PageView');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helyx — Premium Research Peptides</title>
-    <meta name="description" content="Helyx delivers ultra-pure research peptides backed by rigorous third-party testing and full transparency. Dihexa, DSIP, PE-22-28, Cerebrolysin, Selank, Semax and more.">
-    <link href="https://api.fontshare.com/v2/css?f[]=non-natural-grotesk@300,400,500,600,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css?v=1775891677">
+    <title>Helyx — The journal for protocols that actually work</title>
+    <meta name="description" content="Helyx is a quiet, clinical journal for tracking peptides, supplements, sleep, and recovery. Log your protocol. See what's working. Generate a clinical report.">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/chatbot.css">
-    <link rel="stylesheet" href="css/home.css?v=1775891677">
-    <link rel="stylesheet" href="css/nav.css?v=1775891677">
-    <link rel="stylesheet" href="css/animations.css?v=1775891677">
     <link rel="icon" href="assets/favicon.png" type="image/png">
 
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; font-src https://cdn.fontshare.com; img-src 'self' data:; connect-src 'self' https://api.helyx.us; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.helyx.us; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
-    <!-- Age Verification Modal -->
-    <div id="age-gate" class="age-gate">
-        <div class="age-gate__backdrop"></div>
-        <div class="age-gate__modal">
-            <div class="age-gate__logo">
-                <img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img">
-            </div>
-            <div class="age-gate__main-view">
-                <h2 class="age-gate__title">Age & Use Verification Required</h2>
-                <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>. By entering, you confirm the following:</p>
-                <div class="age-gate__checkboxes">
-                    <label class="age-gate__label">
-                        <input type="checkbox" id="age-check-1">
-                        <span class="age-gate__checkmark"></span>
-                        I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the Terms of Service and Privacy Policy.
-                    </label>
-                </div>
-                <p class="age-gate__doc-links"><button type="button" data-doc="tos">📄 Terms of Service</button><button type="button" data-doc="privacy">🔒 Privacy Policy</button></p>
-                <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
-                <button class="age-gate__exit" id="age-gate-exit">Exit</button>
-            </div>
-            <div class="age-gate__doc-view">
-                <button class="age-gate__doc-back">&larr; Back</button>
-                <h3 class="age-gate__doc-title"></h3>
-                <div class="age-gate__doc-body"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav__inner">
@@ -69,19 +25,14 @@
                 <img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img">
             </a>
             <div class="nav__links" id="nav-links">
-                <a href="index.html" class="nav__link nav__link--active">Home</a>
-                <a href="products.html" class="nav__link">Peptides</a>
-                <a href="learn.html" class="nav__link">Learn</a>
+                <a href="#features" class="nav__link">Features</a>
+                <a href="#how-it-works" class="nav__link">How it works</a>
+                <a href="#report" class="nav__link">Clinical Report</a>
                 <a href="about.html" class="nav__link">About</a>
-                <a href="lab.html" class="nav__link">Our Lab</a>
-                <a href="blog.html" class="nav__link">Blog</a>
             </div>
             <div class="nav__actions">
-                <a href="checkout.html" class="nav__cart" id="cart-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                    <span class="nav__cart-count" id="cart-count">0</span>
-                </a>
-                <a href="login.html" class="nav__link nav__link--auth" id="nav-auth-link">Sign In</a>
+                <a href="login.html" class="nav__link nav__link--auth">Sign in</a>
+                <a href="#get-the-app" class="btn btn--primary nav__cta">Get the app</a>
                 <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu">
                     <span></span><span></span><span></span>
                 </button>
@@ -89,392 +40,240 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-wrap">
-    <section class="hero" id="hero">
+    <!-- Hero -->
+    <section class="hero">
         <div class="hero__content">
             <div class="hero__eyebrow anim-fade-up" data-delay="0">
                 <span class="hero__eyebrow-line"></span>
-                <span>Research-Grade Peptides</span>
+                <span>helyx — wellness journal</span>
             </div>
             <h1 class="hero__title anim-fade-up" data-delay="100">
-                Precision<br>at the<br>molecular<br>level.
+                The journal for protocols<br>that actually work.
             </h1>
-            <div class="hero__rule anim-fade-up" data-delay="200"></div>
-            <p class="hero__subtitle anim-fade-up" data-delay="250">
-                Third-party verified compounds. Full COA on every batch.<br>
-                Built for researchers who don't compromise.
+            <p class="hero__subtitle anim-fade-up" data-delay="200">
+                Log peptides, supplements, sleep, and recovery. Track how you actually feel. Generate a clinical report you can share with your doctor.
             </p>
-            <a href="products.html" class="hero__link anim-fade-up" data-delay="300">
-                View catalog
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-            </a>
+            <div class="hero__actions anim-fade-up" data-delay="300">
+                <a href="#get-the-app" class="btn btn--primary">Get the app</a>
+                <a href="#how-it-works" class="btn btn--secondary">See how it works</a>
+            </div>
+            <p class="hero__foot anim-fade-up" data-delay="400">Private by default. Your data never leaves your device without your say-so.</p>
         </div>
-        <div class="hero__strip anim-fade-up" data-delay="500">
-            <div class="hero__strip-item">
-                <span class="hero__strip-value">99.1%+</span>
-                <span class="hero__strip-label">Purity</span>
-            </div>
-            <div class="hero__strip-item">
-                <span class="hero__strip-value">HPLC</span>
-                <span class="hero__strip-label">Verified</span>
-            </div>
-            <div class="hero__strip-item">
-                <span class="hero__strip-value">2026</span>
-                <span class="hero__strip-label">Launching</span>
-            </div>
-            <div class="hero__strip-item">
-                <span class="hero__strip-value">COA</span>
-                <span class="hero__strip-label">Every batch</span>
-            </div>
-        </div>
-    </section>
-    <div class="hero__product anim-fade-up" data-delay="250">
-        <div class="hero__product-glow"></div>
-        <div class="hero__product-carousel" id="hero-carousel">
-            <img src="assets/hero/dihexa.jpg" alt="Helyx Dihexa vial" class="hero__product-img hero__carousel-slide hero__carousel-slide--active" loading="eager">
-            <img src="assets/hero/dsip.jpg" alt="Helyx DSIP vial" class="hero__product-img hero__carousel-slide" loading="eager">
-            <img src="assets/hero/pe-22-28.jpg" alt="Helyx PE-22-28 vial" class="hero__product-img hero__carousel-slide" loading="eager">
-            <img src="assets/hero/semax.jpg" alt="Helyx Semax vial" class="hero__product-img hero__carousel-slide" loading="eager">
-            <img src="assets/hero/cerebrolysin.jpg" alt="Helyx Cerebrolysin vial" class="hero__product-img hero__carousel-slide" loading="eager">
-            <img src="assets/hero/epitalon.jpg" alt="Helyx Epitalon vial" class="hero__product-img hero__carousel-slide" loading="eager">
-        </div>
-    </div>
-    </div><!-- /hero-wrap -->
-
-    <!-- Trust Bar -->
-    <section class="trust-bar" id="trust-bar">
-        <div class="container">
-            <div class="trust-bar__grid">
-                <div class="trust-bar__item anim-fade-up" data-delay="0">
-                    <div class="trust-bar__icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="hero__device anim-fade-up" data-delay="250" aria-hidden="true">
+            <div class="device-frame">
+                <div class="device-frame__notch"></div>
+                <div class="device-frame__screen">
+                    <div class="device-screen__time">9:41</div>
+                    <div class="device-screen__title">Today</div>
+                    <div class="device-screen__date">Monday, May 11</div>
+                    <div class="device-screen__list">
+                        <div class="device-row"><span class="device-row__dot"></span><span class="device-row__label">Peptide — 250 mcg</span><span class="device-row__done">✓</span></div>
+                        <div class="device-row"><span class="device-row__dot"></span><span class="device-row__label">Magnesium glycinate</span><span class="device-row__done">✓</span></div>
+                        <div class="device-row"><span class="device-row__dot"></span><span class="device-row__label">Sleep — 7h 42m</span><span class="device-row__done">✓</span></div>
+                        <div class="device-row"><span class="device-row__dot device-row__dot--empty"></span><span class="device-row__label">Evening check-in</span><span class="device-row__done device-row__done--pending">–</span></div>
                     </div>
-                    <div class="trust-bar__text">
-                        <strong>99%+ Purity</strong>
-                        <span>Every batch verified</span>
-                    </div>
-                </div>
-                <div class="trust-bar__item anim-fade-up" data-delay="100">
-                    <div class="trust-bar__icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    </div>
-                    <div class="trust-bar__text">
-                        <strong>COA Included</strong>
-                        <span>Full lab reports</span>
-                    </div>
-                </div>
-                <div class="trust-bar__item anim-fade-up" data-delay="200">
-                    <div class="trust-bar__icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5a2 2 0 01-2 2h-1"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                    </div>
-                    <div class="trust-bar__text">
-                        <strong>Fast Shipping</strong>
-                        <span>Ships within 24h</span>
-                    </div>
-                </div>
-                <div class="trust-bar__item anim-fade-up" data-delay="300">
-                    <div class="trust-bar__icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                    </div>
-                    <div class="trust-bar__text">
-                        <strong>Secure Checkout</strong>
-                        <span>SSL encrypted</span>
+                    <div class="device-screen__metric">
+                        <div class="device-metric__label">Energy this week</div>
+                        <div class="device-metric__bar">
+                            <span style="height:40%"></span>
+                            <span style="height:55%"></span>
+                            <span style="height:62%"></span>
+                            <span style="height:58%"></span>
+                            <span style="height:71%"></span>
+                            <span style="height:80%"></span>
+                            <span style="height:84%"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission" id="mission">
-        <div class="container">
-            <div class="mission__grid">
-                <div class="mission__left">
-                    <span class="section-tag anim-fade-up">Our Mission</span>
-                    <h2 class="section-title anim-fade-up" data-delay="100">
-                        Advancing research through<br>
-                        <span class="text-gradient">uncompromising quality</span>
-                    </h2>
+    <!-- What it does -->
+    <section class="features" id="features">
+        <div class="section__head">
+            <div class="section__eyebrow"><span class="section__eyebrow-line"></span><span>what it does</span></div>
+            <h2 class="section__title">Everything you actually take.<br>In one quiet place.</h2>
+        </div>
+        <div class="features__grid">
+            <article class="feature-card anim-fade-up" data-delay="0">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
                 </div>
-                <div class="mission__right anim-fade-up" data-delay="200">
-                    <p class="mission__text">
-                        Helyx exists to provide the scientific community with research peptides of the highest caliber. Every compound we offer is synthesized under strict GMP-adjacent protocols, tested by independent third-party laboratories, and accompanied by comprehensive Certificates of Analysis.
-                    </p>
-                    <p class="mission__text">
-                        We believe transparency isn't optional — it's foundational. From raw material sourcing to final quality control, we document and share every step of our process.
-                    </p>
-                    <a href="about.html" class="link-arrow">
-                        Learn more about our approach
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
+                <h3 class="feature-card__title">Peptides</h3>
+                <p class="feature-card__text">Log doses, timing, and cycles. Notes per compound. See the timeline at a glance.</p>
+            </article>
+            <article class="feature-card anim-fade-up" data-delay="100">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3 class="feature-card__title">Supplements</h3>
+                <p class="feature-card__text">Stack management, reminders, refill alerts. Group by goal — sleep, energy, recovery.</p>
+            </article>
+            <article class="feature-card anim-fade-up" data-delay="200">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Sleep & Recovery</h3>
+                <p class="feature-card__text">Pulls from Apple Health or logs manually. Sleep duration, HRV, resting heart rate.</p>
+            </article>
+            <article class="feature-card anim-fade-up" data-delay="300">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-4"/><polyline points="9 11 12 8 15 11"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                </div>
+                <h3 class="feature-card__title">Daily check-ins</h3>
+                <p class="feature-card__text">A 30-second mood, energy, focus, and sleep-quality rating. Patterns surface on their own.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section__head">
+            <div class="section__eyebrow"><span class="section__eyebrow-line"></span><span>how it works</span></div>
+            <h2 class="section__title">Three steps.<br>That's the entire app.</h2>
+        </div>
+        <div class="steps">
+            <article class="step anim-fade-up" data-delay="0">
+                <div class="step__num">01</div>
+                <h3 class="step__title">Log what you take</h3>
+                <p class="step__text">Add a peptide, supplement, or any compound. Set dose, schedule, and notes. The app reminds you when it's time.</p>
+                <div class="step__visual" aria-hidden="true">
+                    <div class="mini-frame">
+                        <div class="mini-row mini-row--head">New entry</div>
+                        <div class="mini-row"><span>Compound</span><span class="mini-row__val">Magnesium glycinate</span></div>
+                        <div class="mini-row"><span>Dose</span><span class="mini-row__val">400 mg</span></div>
+                        <div class="mini-row"><span>Schedule</span><span class="mini-row__val">Nightly · 10pm</span></div>
+                        <div class="mini-btn">Save</div>
+                    </div>
+                </div>
+            </article>
+            <article class="step anim-fade-up" data-delay="100">
+                <div class="step__num">02</div>
+                <h3 class="step__title">Check in each day</h3>
+                <p class="step__text">A short evening prompt: how was your energy, focus, mood, sleep? Done in under thirty seconds. The data builds itself.</p>
+                <div class="step__visual" aria-hidden="true">
+                    <div class="mini-frame">
+                        <div class="mini-row mini-row--head">Evening check-in</div>
+                        <div class="mini-scale"><span>Energy</span><div class="mini-scale__track"><span style="left:72%"></span></div></div>
+                        <div class="mini-scale"><span>Focus</span><div class="mini-scale__track"><span style="left:64%"></span></div></div>
+                        <div class="mini-scale"><span>Mood</span><div class="mini-scale__track"><span style="left:80%"></span></div></div>
+                        <div class="mini-scale"><span>Sleep</span><div class="mini-scale__track"><span style="left:88%"></span></div></div>
+                    </div>
+                </div>
+            </article>
+            <article class="step anim-fade-up" data-delay="200">
+                <div class="step__num">03</div>
+                <h3 class="step__title">See what's working</h3>
+                <p class="step__text">Trends, correlations, and weekly summaries. Notice when sleep improved. Spot the supplement that didn't move anything.</p>
+                <div class="step__visual" aria-hidden="true">
+                    <div class="mini-frame">
+                        <div class="mini-row mini-row--head">This month</div>
+                        <div class="mini-stat"><span>Avg sleep</span><strong>7h 38m</strong><em>+12%</em></div>
+                        <div class="mini-stat"><span>Avg energy</span><strong>7.2 / 10</strong><em>+8%</em></div>
+                        <div class="mini-stat"><span>Adherence</span><strong>94%</strong><em>steady</em></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Clinical Report (Premium) -->
+    <section class="report" id="report">
+        <div class="report__inner">
+            <div class="report__copy">
+                <div class="section__eyebrow"><span class="section__eyebrow-line"></span><span>premium</span></div>
+                <h2 class="section__title section__title--left">A clinical report<br>you can hand to your doctor.</h2>
+                <p class="report__lede">Helyx Premium generates a clean, printable PDF of your protocol, daily measurements, sleep data, and weekly trends. Built to be readable by a clinician in under two minutes.</p>
+                <ul class="report__list">
+                    <li><span class="report__bullet"></span>Full compound timeline with doses, cycles, and notes</li>
+                    <li><span class="report__bullet"></span>Daily check-in averages, weekly trends, and adherence</li>
+                    <li><span class="report__bullet"></span>Optional Apple Health overlay — sleep, HRV, resting heart rate</li>
+                    <li><span class="report__bullet"></span>Plain-language summary written for a clinician</li>
+                </ul>
+                <div class="report__actions">
+                    <a href="#get-the-app" class="btn btn--primary">Get the app</a>
+                    <a href="about.html" class="btn btn--secondary">About Helyx</a>
+                </div>
+                <p class="report__foot">Premium is $4.99/month. Free tier covers logging, reminders, and weekly summaries.</p>
+            </div>
+            <div class="report__visual" aria-hidden="true">
+                <div class="report-doc">
+                    <div class="report-doc__head">
+                        <div class="report-doc__mark">HELYX</div>
+                        <div class="report-doc__meta">Clinical Report · May 2026</div>
+                    </div>
+                    <div class="report-doc__row"><span>Patient</span><span>—</span></div>
+                    <div class="report-doc__row"><span>Window</span><span>30 days</span></div>
+                    <div class="report-doc__section">Active protocol</div>
+                    <div class="report-doc__line"><span>Peptide A</span><span>250 mcg · MWF</span></div>
+                    <div class="report-doc__line"><span>Magnesium glycinate</span><span>400 mg · nightly</span></div>
+                    <div class="report-doc__line"><span>Vitamin D3 + K2</span><span>5000 IU · daily</span></div>
+                    <div class="report-doc__section">Trends</div>
+                    <div class="report-doc__bars">
+                        <span style="height:42%"></span>
+                        <span style="height:58%"></span>
+                        <span style="height:51%"></span>
+                        <span style="height:66%"></span>
+                        <span style="height:74%"></span>
+                        <span style="height:69%"></span>
+                        <span style="height:81%"></span>
+                        <span style="height:78%"></span>
+                    </div>
+                    <div class="report-doc__row"><span>Avg sleep</span><span>7h 38m</span></div>
+                    <div class="report-doc__row"><span>Avg energy</span><span>7.2 / 10</span></div>
+                    <div class="report-doc__row"><span>Adherence</span><span>94%</span></div>
+                    <div class="report-doc__foot">Generated by Helyx · helyx.us</div>
                 </div>
             </div>
         </div>
     </section>
 
-        <!-- Featured Products -->
-    <section class="featured" id="featured">
-        <div class="container">
-            <div class="featured__header">
-                <div>
-                    <span class="section-tag anim-fade-up">Research Compounds</span>
-                    <h2 class="section-title anim-fade-up" data-delay="100">Featured Peptides</h2>
-                </div>
-                <a href="products.html" class="link-arrow anim-fade-up" data-delay="200">View all <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-            </div>
-            <div class="featured__grid">
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="0">
-                    <div class="product-card__image">
-                        <img src="assets/products/dihexa.jpg" alt="Dihexa 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">Dihexa</h3>
-                        <p class="product-card__desc">Angiotensin IV analog for HGF signaling &amp; synaptic connectivity research.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$64.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="Dihexa 10mg" data-price="64.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="100">
-                    <div class="product-card__image">
-                        <img src="assets/products/dsip.jpg" alt="DSIP 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">DSIP</h3>
-                        <p class="product-card__desc">Delta sleep-inducing peptide for sleep architecture &amp; neuroendocrine studies.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$54.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="DSIP 10mg" data-price="54.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="200">
-                    <div class="product-card__image">
-                        <img src="assets/products/pe-22-28.jpg" alt="PE-22-28 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">PE-22-28</h3>
-                        <p class="product-card__desc">Proenkephalin fragment for neuroprotection &amp; BDNF modulation research.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$59.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="PE-22-28 10mg" data-price="59.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="300">
-                    <div class="product-card__image">
-                        <img src="assets/products/cerebrolysin.jpg" alt="Cerebrolysin 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">Cerebrolysin</h3>
-                        <p class="product-card__desc">Neuropeptide complex researched for neurotrophic factor modulation &amp; synaptic plasticity.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$79.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="Cerebrolysin 10mg" data-price="79.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="400">
-                    <div class="product-card__image">
-                        <img src="assets/products/selank.jpg" alt="Selank 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">Selank</h3>
-                        <p class="product-card__desc">Tuftsin analog for anxiolytic activity, cognition &amp; immune regulation research.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$49.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="Selank 10mg" data-price="49.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="products.html" class="product-card anim-fade-up" data-delay="500">
-                    <div class="product-card__image">
-                        <img src="assets/products/semax.jpg" alt="Semax 10mg" class="product-card__img" loading="lazy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__cat">Neuropeptide</span>
-                        <h3 class="product-card__name">Semax</h3>
-                        <p class="product-card__desc">ACTH(4-7) analog for nootropic effects, neuroprotection &amp; BDNF upregulation.</p>
-                        <div class="product-card__footer">
-                            <span class="product-card__price">$49.99</span>
-                            <button class="btn btn--primary btn--sm add-to-cart" data-name="Semax 10mg" data-price="49.99" onclick="event.preventDefault();event.stopPropagation();">Add to Cart</button>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Helyx Section -->
-    <section class="why" id="why">
-        <div class="container">
-            <div class="why__header">
-                <span class="section-tag anim-fade-up">Why Helyx</span>
-                <h2 class="section-title anim-fade-up" data-delay="100">
-                    Setting the standard in<br>
-                    <span class="text-gradient">research peptide quality</span>
-                </h2>
-            </div>
-            <div class="why__grid">
-                <div class="why__card anim-fade-up" data-delay="0">
-                    <div class="why__card-num">01</div>
-                    <h3 class="why__card-title">Third-Party Lab Verified</h3>
-                    <p class="why__card-text">Every single batch undergoes independent HPLC and mass spectrometry testing. We publish full COAs — not summaries, not excerpts — the complete reports.</p>
-                </div>
-                <div class="why__card anim-fade-up" data-delay="100">
-                    <div class="why__card-num">02</div>
-                    <h3 class="why__card-title">Radical Transparency</h3>
-                    <p class="why__card-text">Our dedicated Lab page shows you exactly where and how our peptides are synthesized, tested, and stored. No black boxes. No vague claims.</p>
-                </div>
-                <div class="why__card anim-fade-up" data-delay="200">
-                    <div class="why__card-num">03</div>
-                    <h3 class="why__card-title">Research-Only Focus</h3>
-                    <p class="why__card-text">We exclusively supply peptides for legitimate laboratory research. Our compounds are not intended for human or animal use — and we enforce this strictly.</p>
-                </div>
-                <div class="why__card anim-fade-up" data-delay="300">
-                    <div class="why__card-num">04</div>
-                    <h3 class="why__card-title">Expert Formulation</h3>
-                    <p class="why__card-text">Our team includes biochemists and peptide scientists who oversee compound selection, purity standards, and storage protocols to ensure peak stability.</p>
-                </div>
-                <div class="why__card anim-fade-up" data-delay="400">
-                    <div class="why__card-num">05</div>
-                    <h3 class="why__card-title">Climate-Controlled Fulfillment</h3>
-                    <p class="why__card-text">All peptides are stored and shipped under controlled conditions to preserve molecular integrity from our facility to your laboratory.</p>
-                </div>
-                <div class="why__card anim-fade-up" data-delay="500">
-                    <div class="why__card-num">06</div>
-                    <h3 class="why__card-title">Responsive Research Support</h3>
-                    <p class="why__card-text">Our science team is available to answer questions about compound specifications, handling protocols, and storage — Monday through Friday.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats" id="stats">
-        <div class="container">
-            <div class="stats__grid">
-                <div class="stats__item anim-fade-up" data-delay="0">
-                    <div class="stats__number" data-target="99">0</div>
-                    <div class="stats__suffix">%+</div>
-                    <div class="stats__label">Purity Guaranteed</div>
-                </div>
-                <div class="stats__item anim-fade-up" data-delay="100">
-                    <div class="stats__number" data-target="5000">0</div>
-                    <div class="stats__suffix">+</div>
-                    <div class="stats__label">Orders Fulfilled</div>
-                </div>
-                <div class="stats__item anim-fade-up" data-delay="200">
-                    <div class="stats__number" data-target="24">0</div>
-                    <div class="stats__suffix">h</div>
-                    <div class="stats__label">Avg. Ship Time</div>
-                </div>
-                <div class="stats__item anim-fade-up" data-delay="300">
-                    <div class="stats__number" data-target="15">0</div>
-                    <div class="stats__suffix">+</div>
-                    <div class="stats__label">Compounds Planned</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="cta">
-        <div class="container">
-            <div class="cta-section__inner anim-fade-up">
-                <div class="cta-section__content">
-                    <h2 class="cta-section__title">Ready to advance your research?</h2>
-                    <p class="cta-section__text">Explore our full catalog of research-grade peptides, each backed by comprehensive third-party testing and documentation.</p>
-                    <div class="cta-section__actions">
-                        <a href="login.html" class="btn btn--primary btn--lg">Get Notified</a>
-                        <a href="lab.html" class="btn btn--ghost btn--lg">Tour Our Lab</a>
-                    </div>
-                </div>
-                <div class="cta-section__visual">
-                    <div class="cta-section__molecule">
-                        <svg viewBox="0 0 200 200" class="molecule-svg">
-                            <circle cx="100" cy="40" r="8" fill="#b0b0b0" opacity="0.8"/>
-                            <circle cx="50" cy="90" r="6" fill="#a0a0a0" opacity="0.8"/>
-                            <circle cx="150" cy="90" r="6" fill="#888888" opacity="0.8"/>
-                            <circle cx="70" cy="150" r="7" fill="#b0b0b0" opacity="0.8"/>
-                            <circle cx="130" cy="150" r="7" fill="#cccccc" opacity="0.8"/>
-                            <circle cx="100" cy="100" r="10" fill="#b0b0b0" opacity="0.9"/>
-                            <line x1="100" y1="40" x2="50" y2="90" stroke="#b0b0b0" stroke-width="1" opacity="0.4"/>
-                            <line x1="100" y1="40" x2="150" y2="90" stroke="#888888" stroke-width="1" opacity="0.4"/>
-                            <line x1="50" y1="90" x2="100" y2="100" stroke="#a0a0a0" stroke-width="1" opacity="0.4"/>
-                            <line x1="150" y1="90" x2="100" y2="100" stroke="#888888" stroke-width="1" opacity="0.4"/>
-                            <line x1="100" y1="100" x2="70" y2="150" stroke="#b0b0b0" stroke-width="1" opacity="0.4"/>
-                            <line x1="100" y1="100" x2="130" y2="150" stroke="#cccccc" stroke-width="1" opacity="0.4"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+    <!-- Get the app -->
+    <section class="get-app" id="get-the-app">
+        <div class="get-app__inner">
+            <h2 class="get-app__title">Start the journal.</h2>
+            <p class="get-app__text">Helyx is in private beta. Leave your email and we'll send you a TestFlight invite as we open it up.</p>
+            <form class="get-app__form" id="waitlist-form" novalidate>
+                <input type="email" name="email" class="get-app__input" placeholder="you@domain.com" required>
+                <button type="submit" class="btn btn--primary">Request invite</button>
+            </form>
+            <p class="get-app__foot" id="waitlist-status">iOS first. Android in 2026.</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <img src="assets/helyx-logo.png" alt="Helyx" class="footer__logo">
-                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only. We prioritize transparent COAs, consistent quality, and responsive support.</p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Twitter/X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                        <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
-                        <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-                    </div>
-                </div>
-                <div class="footer__col">
-                    <h4 class="footer__col-title">Products</h4>
-                    <a href="products.html" class="footer__link">Peptides</a>
-                    <a href="login.html" class="footer__link">Get Notified</a>
-                </div>
-                <div class="footer__col">
-                    <h4 class="footer__col-title">Company</h4>
-                    <a href="learn.html" class="footer__link">Learn</a>
-                    <a href="about.html" class="footer__link">About Peptides</a>
-                    <a href="lab.html" class="footer__link">Our Lab</a>
-                    <a href="blog.html" class="footer__link">Blog</a>
-                    <a href="checkout.html" class="footer__link">Cart</a>
-                </div>
-                <div class="footer__col">
-                    <h4 class="footer__col-title">Support</h4>
-                    <a href="#" class="footer__link">Contact Us</a>
-                    <a href="#" class="footer__link">Shipping Policy</a>
-                    <a href="#" class="footer__link">Refund Policy</a>
-                    <a href="#" class="footer__link">Terms & Conditions</a>
-                    <a href="#" class="footer__link">Privacy Policy</a>
-                </div>
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="assets/helyx-logo.png" alt="Helyx" class="footer__logo">
+                <p class="footer__tag">A quiet journal for the protocol you're already running.</p>
             </div>
-            <div class="footer__bottom">
-                <div class="footer__disclaimer">
-                    <strong>Disclaimer:</strong> All products on this website are intended for laboratory research and in-vitro use only. These products are not medicines, supplements, or food items and are <strong>not intended for human or animal consumption</strong>. None of the products or statements on this website have been evaluated by the U.S. Food and Drug Administration (FDA). Our products are not intended to diagnose, treat, cure, or prevent any disease. By purchasing, you agree to use these products solely for legitimate research purposes in accordance with all applicable laws and regulations.
-                </div>
-                <div class="footer__copy">
-                    © 2026 Helyx LLC. All Rights Reserved.
-                </div>
+            <div class="footer__links">
+                <a href="about.html">About</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#report">Clinical Report</a>
+                <a href="login.html">Sign in</a>
             </div>
+            <div class="footer__legal">
+                <a href="learn.html">Privacy</a>
+                <a href="learn.html#terms">Terms</a>
+                <a href="learn.html#disclaimer">Medical disclaimer</a>
+                <a href="mailto:hello@helyx.us">hello@helyx.us</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© 2026 Helyx.</span>
+            <span>Not medical advice. Talk to a clinician before starting any protocol.</span>
         </div>
     </footer>
 
-    <script src="js/global.js?v=1775891677"></script>
+    <!-- Chatbot -->
+    <div id="chatbot-root"></div>
+
+    <script src="js/global.js"></script>
+    <script src="js/home.js"></script>
     <script src="js/chatbot.js"></script>
-    <script src="js/home.js?v=1775891677"></script>
-    <script src="js/auth.js"></script>
 </body>
 </html>

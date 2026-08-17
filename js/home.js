@@ -1,77 +1,36 @@
 /* ═══════════════════════════════════════════════════════════════
-   HELYX — Home Page JavaScript
+   HELYX — Home JS
+   Waitlist form submit.
    ═══════════════════════════════════════════════════════════════ */
 
-// ── Counter animation for data strip values ───────────────────
-function initStripCounters() {
-    const values = document.querySelectorAll('.hero__strip-value');
-    if (!values.length) return;
+(function initWaitlist() {
+    const form = document.getElementById('waitlist-form');
+    const status = document.getElementById('waitlist-status');
+    if (!form || !status) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateValue(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = form.querySelector('input[name="email"]');
+        const email = (input.value || '').trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            status.textContent = 'Please enter a valid email.';
+            return;
+        }
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
 
-    values.forEach(v => observer.observe(v));
-}
-
-function animateValue(el) {
-    const text = el.textContent;
-    const match = text.match(/([\d.]+)/);
-    if (!match) return;
-
-    const target = parseFloat(match[1]);
-    const prefix = text.slice(0, text.indexOf(match[1]));
-    const suffix = text.slice(text.indexOf(match[1]) + match[1].length);
-    const decimals = match[1].includes('.') ? match[1].split('.')[1].length : 0;
-    const duration = 1200;
-    const start = performance.now();
-
-    function tick(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = (target * eased).toFixed(decimals);
-        el.textContent = prefix + current + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
-    }
-
-    requestAnimationFrame(tick);
-}
-
-// ── Hero Vial Carousel (label crossfade) ─────────────────────
-function initHeroCarousel() {
-    const slides = document.querySelectorAll('.hero__carousel-slide');
-    if (slides.length < 2) return;
-
-    let current = 0;
-
-    setInterval(() => {
-        const prev = current;
-        current = (current + 1) % slides.length;
-
-        // New slide on top
-        slides[current].classList.add('hero__carousel-slide--active');
-        slides[current].style.opacity = '1';
-
-        // Old slide fades out to reveal new one
-        slides[prev].classList.remove('hero__carousel-slide--active');
-        slides[prev].classList.add('hero__carousel-slide--fading-out');
-
-        // Clean up after animation
-        setTimeout(() => {
-            slides[prev].classList.remove('hero__carousel-slide--fading-out');
-            slides[prev].style.opacity = '1';
-        }, 600);
-    }, 3000);
-}
-
-// ── Init ──────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    initStripCounters();
-    initHeroCarousel();
-});
+        try {
+            await fetch('/api/waitlist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            }).catch(() => {});
+        } finally {
+            form.reset();
+            btn.disabled = false;
+            btn.textContent = 'Request invite';
+            status.textContent = "You're on the list. We'll be in touch.";
+        }
+    });
+})();

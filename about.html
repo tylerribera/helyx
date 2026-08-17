@@ -1,242 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1488293825962687');
-    fbq('track', 'PageView');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Peptides — Helyx</title>
-    <meta name="description" content="Learn what peptides are, how they function, and why they matter to modern research. Helyx provides a comprehensive guide to peptide science.">
-    <link href="https://api.fontshare.com/v2/css?f[]=non-natural-grotesk@300,400,500,600,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css?v=1775891677">
-    <link rel="stylesheet" href="css/chatbot.css">
+    <title>About — Helyx</title>
+    <meta name="description" content="Helyx is a wellness journal for people running real protocols. Built for clarity, not noise.">
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <link rel="icon" href="assets/favicon.png" type="image/png">
 
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; font-src https://cdn.fontshare.com; img-src 'self' data:; connect-src 'self' https://api.helyx.us; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.helyx.us; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 </head>
 <body>
-    <!-- Age Gate -->
-    <div id="age-gate" class="age-gate">
-        <div class="age-gate__backdrop"></div>
-        <div class="age-gate__modal">
-            <div class="age-gate__main-view">
-            <div class="age-gate__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="age-gate__logo-img"></div>
-            <h2 class="age-gate__title">Age & Use Verification Required</h2>
-            <p class="age-gate__text">This website contains products intended <strong>strictly for laboratory research use only</strong>.</p>
-            <div class="age-gate__checkboxes">
-                <label class="age-gate__label"><input type="checkbox" id="age-check-1"><span class="age-gate__checkmark"></span>I confirm I am 21 years of age or older, all products are for laboratory research only and are <strong>not for human or animal consumption</strong>, and I agree to the Terms of Service and Privacy Policy.</label>
-            </div>
-            <p class="age-gate__doc-links"><button type="button" data-doc="tos">📄 Terms of Service</button><button type="button" data-doc="privacy">🔒 Privacy Policy</button></p>
-            <button id="age-gate-enter" class="age-gate__btn" disabled>I Agree & Enter</button>
-            <button class="age-gate__exit" id="age-gate-exit">Exit</button>
-            </div>
-            <div class="age-gate__doc-view"><button class="age-gate__doc-back">&larr; Back</button><h3 class="age-gate__doc-title"></h3><div class="age-gate__doc-body"></div></div>
-        </div>
-    </div>
-
-    <!-- Nav -->
     <nav class="nav" id="nav">
         <div class="nav__inner">
-            <a href="index.html" class="nav__logo"><img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img"></a>
+            <a href="index.html" class="nav__logo">
+                <img src="assets/helyx-logo.png" alt="Helyx" class="nav__logo-img">
+            </a>
             <div class="nav__links" id="nav-links">
-                <a href="index.html" class="nav__link">Home</a>
-                <a href="products.html" class="nav__link">Peptides</a>
-                <a href="learn.html" class="nav__link">Learn</a>
+                <a href="index.html#features" class="nav__link">Features</a>
+                <a href="index.html#how-it-works" class="nav__link">How it works</a>
+                <a href="index.html#report" class="nav__link">Clinical Report</a>
                 <a href="about.html" class="nav__link nav__link--active">About</a>
-                <a href="lab.html" class="nav__link">Our Lab</a>
-                <a href="blog.html" class="nav__link">Blog</a>
             </div>
             <div class="nav__actions">
-                <a href="checkout.html" class="nav__cart" id="cart-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-count" id="cart-count">0</span></a>
-                <a href="login.html" class="nav__link nav__link--auth" id="nav-auth-link">Sign In</a>
-                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+                <a href="login.html" class="nav__link nav__link--auth">Sign in</a>
+                <a href="index.html#get-the-app" class="btn btn--primary nav__cta">Get the app</a>
+                <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <span class="page-header__tag anim-fade-up">Understanding Peptides</span>
-            <h1 class="page-header__title anim-fade-up" data-delay="100">
-                What Are <span class="text-gradient">Peptides?</span>
-            </h1>
-            <p class="page-header__desc anim-fade-up" data-delay="200">
-                A comprehensive guide to peptide science — what they are, how they're studied, and why they represent one of the most exciting frontiers in biochemical research.
-            </p>
+    <header class="page-head">
+        <div class="page-head__inner">
+            <div class="section__eyebrow"><span class="section__eyebrow-line"></span><span>about</span></div>
+            <h1 class="page-head__title">A quiet journal<br>for the protocol you're already running.</h1>
+            <p class="page-head__lede">Helyx exists because the people taking peptides, stacking supplements, tracking sleep, and tuning recovery don't have a clean place to write any of it down. Notes apps are too messy. Spreadsheets stop being fun after a week. Medical apps weren't built for this.</p>
         </div>
-    </section>
+    </header>
 
-    <!-- Section: What Are Peptides -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content anim-slide-left">
-                    <h3>The Building Blocks of <span class="text-gradient">Biological Signaling</span></h3>
-                    <p>Peptides are short chains of amino acids — typically between 2 and 50 residues — linked by peptide bonds. They are distinguished from proteins primarily by their shorter length, though the boundary is not strictly defined.</p>
-                    <p>In biological systems, peptides serve as critical signaling molecules. They function as hormones, neurotransmitters, and growth factors, modulating nearly every physiological process from immune response to cellular repair and metabolic regulation.</p>
-                    <p>Research peptides are synthetically produced versions of these naturally occurring compounds, manufactured under controlled conditions to achieve ultra-high purity (≥99%) for use in laboratory and in-vitro studies.</p>
-                </div>
-                <div class="about-visual anim-slide-right">
-                    <div class="about-visual__card">
-                        <div class="about-visual__icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-                        </div>
-                        <div class="about-visual__stat">7,000+</div>
-                        <div class="about-visual__stat-label">Naturally occurring peptides identified in the human body</div>
-                    </div>
-                </div>
+    <section class="about-block">
+        <div class="about-block__inner">
+            <div class="about-block__col">
+                <h2 class="about-block__title">What Helyx is</h2>
+                <p>A logbook. You write down what you took, when you took it, and how you felt. Helyx organizes the timeline, surfaces patterns, and — if you upgrade to Premium — generates a clinical report you can hand to a doctor.</p>
+                <p>That's the entire product. No social feed. No store. No supplements to sell you. No affiliate links.</p>
+            </div>
+            <div class="about-block__col">
+                <h2 class="about-block__title">What Helyx is not</h2>
+                <p>Not a medical device. Not a diagnostic tool. Not a replacement for a doctor. We don't give protocol advice and we don't recommend compounds.</p>
+                <p>If you're running a protocol, Helyx helps you see it clearly. The decisions are yours.</p>
             </div>
         </div>
     </section>
 
-    <!-- Section: Why Peptides Matter -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid about-grid--reverse">
-                <div class="about-content anim-slide-right">
-                    <h3>Why Peptides Matter in <span class="text-gradient">Modern Research</span></h3>
-                    <p>Peptides occupy a unique space in biochemical research. Unlike small molecules, peptides can interact with targets using large, specific binding surfaces. Unlike full proteins, they are easier and less expensive to synthesize, modify, and study.</p>
-                    <p>This makes them invaluable tools for researchers investigating receptor-ligand interactions, cell signaling cascades, immune modulation, neuroprotection, and metabolic pathways. The pharmaceutical industry has recognized this potential — over 80 peptide-based therapeutics have been approved globally, with hundreds more in clinical trials.</p>
-                    <p>At Helyx, we supply the research community with the same caliber of compounds used in institutional research settings.</p>
-                </div>
-                <div class="about-visual anim-slide-left">
-                    <div class="about-visual__card">
-                        <div class="about-visual__icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                        </div>
-                        <div class="about-visual__stat">80+</div>
-                        <div class="about-visual__stat-label">Peptide-based therapeutics approved globally as of 2025</div>
-                    </div>
-                </div>
+    <section class="about-block about-block--alt">
+        <div class="about-block__inner about-block__inner--single">
+            <h2 class="about-block__title">How we think about your data</h2>
+            <p>Your log lives on your device first. Sync is optional, encrypted, and tied to your account — not to an advertising profile. We don't sell data. We don't have ads. The free tier and Premium tier both follow the same rule.</p>
+            <p>You can export your full history as JSON or PDF at any time. You can delete your account from inside the app and your server-side data goes with it.</p>
+        </div>
+    </section>
+
+    <section class="about-block">
+        <div class="about-block__inner about-block__inner--single">
+            <h2 class="about-block__title">Who we are</h2>
+            <p>A small team that got tired of using the Notes app for this. Helyx is independent, self-funded, and not in a hurry. We ship slowly and we don't add features that don't earn their place.</p>
+            <p>Questions, ideas, complaints — <a href="mailto:hello@helyx.us">hello@helyx.us</a>.</p>
+        </div>
+    </section>
+
+    <section class="cta-strip">
+        <div class="cta-strip__inner">
+            <h2 class="cta-strip__title">Start the journal.</h2>
+            <div class="cta-strip__actions">
+                <a href="index.html#get-the-app" class="btn btn--primary">Get the app</a>
+                <a href="index.html#how-it-works" class="btn btn--secondary">See how it works</a>
             </div>
         </div>
     </section>
 
-    <!-- Section: How Are They Made -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content anim-slide-left">
-                    <h3>How Research Peptides Are <span class="text-gradient">Synthesized</span></h3>
-                    <p>Modern research peptides are produced via solid-phase peptide synthesis (SPPS), a method pioneered by Nobel laureate Bruce Merrifield. This technique allows for precise, stepwise assembly of amino acid sequences on a solid resin support.</p>
-                    <p>After synthesis, crude peptides undergo purification via high-performance liquid chromatography (HPLC) to achieve ≥99% purity. Identity is confirmed through mass spectrometry (MS), and each batch receives a Certificate of Analysis documenting purity, identity, and appearance.</p>
-                    <p>At Helyx, every batch is independently tested by third-party laboratories. We never self-certify — full COAs from accredited labs are available for every product we sell.</p>
-                </div>
-                <div class="about-visual anim-slide-right">
-                    <div class="about-visual__card">
-                        <div class="about-visual__icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6M12 3v7M7.5 10h9l1.5 11H6L7.5 10z"/></svg>
-                        </div>
-                        <div class="about-visual__stat">99%+</div>
-                        <div class="about-visual__stat-label">Minimum purity standard across all Helyx peptides via HPLC</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Peptides Section -->
-    <section class="about-section" style="background: var(--bg-secondary);">
-        <div class="container">
-            <div style="text-align:center; margin-bottom:48px;">
-                <span class="section-tag anim-fade-up">Our Catalog</span>
-                <h2 class="section-title anim-fade-up" data-delay="100">Peptides We Offer for <span class="text-gradient">Research</span></h2>
-                <p style="font-size:1.0625rem; color:var(--text-secondary); max-width:640px; margin:0 auto; line-height:1.7;" class="anim-fade-up" data-delay="200">Each compound is selected based on scientific relevance, purity feasibility, and demand from the research community. All products are for laboratory use only.</p>
-            </div>
-            <div class="peptide-info-grid">
-                <div class="peptide-info-card anim-fade-up" data-delay="0">
-                    <div class="peptide-info-card__icon">🧬</div>
-                    <h4>Dihexa</h4>
-                    <p>A copper-binding tripeptide (Gly-His-Lys) naturally found in human plasma. Researched for its role in tissue remodeling, wound healing pathways, and collagen synthesis signaling in dermatological studies.</p>
-                </div>
-                <div class="peptide-info-card anim-fade-up" data-delay="80">
-                    <div class="peptide-info-card__icon">⚡</div>
-                    <h4>Cerebrolysin</h4>
-                    <p>An investigational tri-agonist peptide targeting GIP, GLP-1, and glucagon receptors simultaneously. Currently in Phase 2/3 clinical trials. Used in metabolic receptor binding research and pathway analysis.</p>
-                </div>
-                <div class="peptide-info-card anim-fade-up" data-delay="160">
-                    <div class="peptide-info-card__icon">🔬</div>
-                    <h4>MHT</h4>
-                    <p>A multi-target research blend designed for advanced in-vitro studies involving metabolic and hormonal pathway modulation. Formulated for researchers studying complex receptor interactions.</p>
-                </div>
-                <div class="peptide-info-card anim-fade-up" data-delay="240">
-                    <div class="peptide-info-card__icon">🧠</div>
-                    <h4>Selank</h4>
-                    <p>A synthetic heptapeptide analogue of tuftsin, studied for its immunomodulatory properties and effects on BDNF expression. Investigated in anxiety-related pathway research and immune function studies.</p>
-                </div>
-                <div class="peptide-info-card anim-fade-up" data-delay="320">
-                    <div class="peptide-info-card__icon">🔮</div>
-                    <h4>Semax</h4>
-                    <p>Derived from the ACTH(4-10) fragment, Semax is studied for neuroprotective and neurotrophic properties. Research focuses on BDNF/NGF pathway activation and cognitive function models.</p>
-                </div>
-                <div class="peptide-info-card anim-fade-up" data-delay="400">
-                    <div class="peptide-info-card__icon">🛡️</div>
-                    <h4>Selank</h4>
-                    <p>A body protection compound-derived pentadecapeptide studied in preclinical models for angiogenesis, nitric oxide modulation, and tissue repair signaling pathways.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Important Disclaimer Section -->
-    <section class="about-section">
-        <div class="container">
-            <div style="max-width:800px; margin:0 auto; text-align:center;">
-                <span class="section-tag anim-fade-up">Important Notice</span>
-                <h2 class="section-title anim-fade-up" data-delay="100">Research Use Only</h2>
-                <div class="research-banner anim-fade-up" data-delay="200" style="text-align:left;">
-                    <span class="research-banner__icon">⚠️</span>
-                    <div>
-                        <p style="margin-bottom:12px;"><strong>All products sold by Helyx are strictly for laboratory research and in-vitro use only.</strong></p>
-                        <p style="margin-bottom:12px; color:var(--text-secondary); font-size:0.875rem;">These compounds are not medicines, supplements, or food products. They are not intended for human or animal consumption, and are not intended to diagnose, treat, cure, or prevent any disease or condition.</p>
-                        <p style="margin-bottom:12px; color:var(--text-secondary); font-size:0.875rem;">We do not provide dosage guidance, usage instructions, or therapeutic recommendations. All products should only be handled by qualified individuals in controlled laboratory environments.</p>
-                        <p style="color:var(--text-secondary); font-size:0.875rem;">None of the statements on this website have been evaluated by the U.S. Food and Drug Administration (FDA). By purchasing from Helyx, you acknowledge and agree to these terms.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <img src="assets/helyx-logo.png" alt="Helyx" class="footer__logo">
-                    <p class="footer__desc">Helyx is a research-focused supplier of high-purity peptides for laboratory and in-vitro use only.</p>
-                </div>
-                <div class="footer__col"><h4 class="footer__col-title">Products</h4><a href="products.html" class="footer__link">All Peptides</a><a href="products.html" class="footer__link">Cerebrolysin</a><a href="products.html" class="footer__link">Selank</a></div>
-                <div class="footer__col"><h4 class="footer__col-title">Company</h4><a href="learn.html" class="footer__link">Learn</a><a href="about.html" class="footer__link">About</a><a href="lab.html" class="footer__link">Our Lab</a><a href="blog.html" class="footer__link">Blog</a></div>
-                <div class="footer__col"><h4 class="footer__col-title">Support</h4><a href="#" class="footer__link">Contact</a><a href="#" class="footer__link">Shipping</a><a href="#" class="footer__link">Terms</a></div>
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="assets/helyx-logo.png" alt="Helyx" class="footer__logo">
+                <p class="footer__tag">A quiet journal for the protocol you're already running.</p>
             </div>
-            <div class="footer__bottom">
-                <div class="footer__disclaimer"><strong>Disclaimer:</strong> All products are for laboratory research use only. <strong>Not for human or animal consumption.</strong> Not evaluated by the FDA.</div>
-                <div class="footer__copy">© 2026 Helyx LLC. All Rights Reserved.</div>
+            <div class="footer__links">
+                <a href="index.html">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#how-it-works">How it works</a>
+                <a href="index.html#report">Clinical Report</a>
+                <a href="login.html">Sign in</a>
             </div>
+            <div class="footer__legal">
+                <a href="learn.html">Privacy</a>
+                <a href="learn.html#terms">Terms</a>
+                <a href="learn.html#disclaimer">Medical disclaimer</a>
+                <a href="mailto:hello@helyx.us">hello@helyx.us</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© 2026 Helyx.</span>
+            <span>Not medical advice. Talk to a clinician before starting any protocol.</span>
         </div>
     </footer>
 
-    <script src="js/global.js?v=1775891677"></script>
+    <div id="chatbot-root"></div>
+    <script src="js/global.js"></script>
     <script src="js/chatbot.js"></script>
-    <script src="js/auth.js"></script>
 </body>
 </html>

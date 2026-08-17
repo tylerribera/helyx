@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    HELYX — Express Server
-   Main entry point
+   Wellness journal — accounts, waitlist, password reset.
    ═══════════════════════════════════════════════════════════════ */
 
 const path = require('path');
@@ -11,37 +11,32 @@ const helmet = require('helmet');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
+const validator = require('validator');
 
 const authRoutes = require('./routes-auth');
-const orderRoutes = require('./routes-orders');
-const { webhookRouter } = require('./routes-orders');
-const nmiRoutes = require('./routes-nmi');
+const db = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:8080';
 
-// Trust Cloudflare proxy (for rate limiting & IP detection)
 app.set('trust proxy', 1);
 
 // ── Security ──────────────────────────────────────────────────
-app.use(helmet({
-    contentSecurityPolicy: false // handled by HTML meta tags
-}));
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(cors({
-    origin: ['https://helyx.us', 'https://www.helyx.us', 'http://localhost:3000'],
+    origin: ['https://helyx.us', 'https://www.helyx.us', 'http://localhost:3000', 'http://localhost:8765'],
     credentials: true
 }));
 
 // ── Parsing ───────────────────────────────────────────────────
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '256kb' }));
 app.use(cookieParser());
 
 // ── Rate Limiting ─────────────────────────────────────────────
 const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 20, // 20 attempts per window
+    windowMs: 15 * 60 * 1000,
+    max: 20,
     message: { error: 'Too many attempts — please try again in 15 minutes' },
     standardHeaders: true,
     legacyHeaders: false
@@ -54,41 +49,63 @@ const generalLimiter = rateLimit({
     legacyHeaders: false
 });
 
+const waitlistLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Slow down — try again later.' }
+});
+
 app.use('/api/', generalLimiter);
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
 app.use('/api/auth/forgot-password', authLimiter);
 app.use('/api/auth/reset-password', authLimiter);
 
-// ── Static Files (serve frontend) ────────────────────────────
-app.use(express.static(path.join(__dirname, '..'), {
-    extensions: ['html']
-}));
+// ── Static frontend ───────────────────────────────────────────
+app.use(express.static(path.join(__dirname, '..'), { extensions: ['html'] }));
 
 // ── API Routes ────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/nmi', nmiRoutes);
-app.use('/api/webhooks', webhookRouter);
 
-// ── Health Check ──────────────────────────────────────────────
+// Waitlist signup
+app.post('/api/waitlist', waitlistLimiter, (req, res) => {
+    try {
+        const raw = String((req.body && req.body.email) || '').trim();
+        if (!raw || !validator.isEmail(raw)) {
+            return res.status(400).json({ error: 'Please enter a valid email.' });
+        }
+        const email = validator.normalizeEmail(raw);
+        const source = String((req.body && req.body.source) || 'web').slice(0, 32);
+        const ip = req.ip || null;
+
+        db.prepare(
+            'INSERT OR IGNORE INTO waitlist (email, source, ip_address) VALUES (?, ?, ?)'
+        ).run(email, source, ip);
+
+        res.json({ message: "You're on the list." });
+    } catch (err) {
+        console.error('Waitlist error:', err);
+        res.status(500).json({ error: 'Something went wrong — please try again.' });
+    }
+});
+
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// ── Fallback to index.html for SPA-like routes ───────────────
-app.get('*', (req, res) => {
-    // If requesting an API route that doesn't exist
+// 404 for unmatched API routes
+app.use((req, res, next) => {
     if (req.path.startsWith('/api/')) {
         return res.status(404).json({ error: 'Endpoint not found' });
     }
-    // Serve the requested HTML file or fall back to index
-    const filePath = path.join(__dirname, '..', req.path);
-    res.sendFile(filePath, err => {
-        if (err) {
-            res.sendFile(path.join(__dirname, '..', 'index.html'));
-        }
-    });
+    next();
+});
+
+// Fallback to index.html for unmatched paths
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // ── Error Handler ─────────────────────────────────────────────
