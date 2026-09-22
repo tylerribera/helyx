@@ -1,0 +1,16 @@
+{
+  "name": "Helyx",
+  "short_name": "Helyx",
+  "description": "Brain health, researched. A sourced catalog of 200+ nootropic compounds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E1116",
+  "theme_color": "#0E1116",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
