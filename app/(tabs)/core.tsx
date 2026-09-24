@@ -1,5 +1,6 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { PageMeta } from '@/components/seo';
 import { Body, Card, Screen, Section, Small, Title } from '@/components/ui';
 import { useProfile } from '@/state/profile';
 import { colors, radius, space, type } from '@/theme';
@@ -17,6 +18,11 @@ export default function Core() {
 
   return (
     <Screen>
+      <PageMeta
+        title="Helyx Core"
+        description="A personalised protocol built around your goals, plus nutrition, sleep, and technique guidance that changes how well anything else works."
+        path="/core"
+      />
       <Title>Helyx Core</Title>
 
       <Card>

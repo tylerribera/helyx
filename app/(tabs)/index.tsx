@@ -1,5 +1,6 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { PageMeta } from '@/components/seo';
 import { Badge, Body, Card, Empty, Heading, Row, Screen, Section, Small, Title } from '@/components/ui';
 import { dailyCompound, isDraft } from '@/data/catalog';
 import { suggestFor } from '@/data/suggest';
@@ -20,6 +21,11 @@ export default function Today() {
 
   return (
     <Screen>
+      <PageMeta
+        title="Brain health, researched"
+        description="A sourced catalog of nootropic compounds. Every claim cited, every compound reviewed by a human before it publishes."
+        path="/"
+      />
       <Title>Today</Title>
 
       <Section title="Daily nootropic">

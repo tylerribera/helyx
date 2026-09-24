@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { PageMeta } from '@/components/seo';
 import { Body, Screen, Small, Title } from '@/components/ui';
 import { Goal, type ExperienceLevel, type OnboardingProfile } from '@/schema';
 import { useProfile } from '@/state/profile';
@@ -66,6 +67,12 @@ export default function Onboarding() {
 
   return (
     <Screen>
+      <PageMeta
+        title="Set up Helyx"
+        description="Answer a few questions to personalise your compound suggestions."
+        path="/onboarding"
+        noindex
+      />
       {step === 'experience' && (
         <>
           <Title>How familiar are you?</Title>

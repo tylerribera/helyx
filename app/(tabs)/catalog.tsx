@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { PageMeta } from '@/components/seo';
 import { Badge, Body, Card, Empty, Heading, Row, Screen, Small, Title } from '@/components/ui';
 import { isDraft, searchCompounds } from '@/data/catalog';
 import { colors, radius, space, riskColor, type } from '@/theme';
@@ -19,6 +20,11 @@ export default function Catalog() {
 
   return (
     <Screen>
+      <PageMeta
+        title="Compound catalog"
+        description="Every nootropic compound in Helyx, with dosages, side effects, legal status, interactions, and the research behind each one."
+        path="/catalog"
+      />
       <Title>Catalog</Title>
 
       <TextInput

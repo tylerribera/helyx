@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { PageMeta } from '@/components/seo';
 import { Body, Card, Screen, Section, Small, Title } from '@/components/ui';
 import { useProfile } from '@/state/profile';
 import { colors, radius, space, type } from '@/theme';
@@ -24,6 +25,11 @@ export default function Ask() {
 
   return (
     <Screen>
+      <PageMeta
+        title="Ask"
+        description="Ask questions about nootropic compounds and get answers tailored to your goals, experience level, and safety constraints."
+        path="/ask"
+      />
       <Title>Ask</Title>
 
       <Card style={{ borderLeftWidth: 3, borderLeftColor: colors.riskModerate }}>
