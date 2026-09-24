@@ -17,15 +17,32 @@ export default function Today() {
   const daily = dailyCompound();
   const suggestions = profile ? suggestFor(profile) : [];
 
-  if (!ready) return <Screen><Empty message="Loading..." /></Screen>;
+  /**
+   * Metadata must render before the `ready` guard below. Static rendering runs
+   * in Node, where the profile has not loaded yet, so anything returned early
+   * is what the crawler sees — an early return above this left the homepage
+   * with an empty <title>.
+   */
+  const meta = (
+    <PageMeta
+      title="Today"
+      description="Your daily nootropic and compound suggestions matched to your goals."
+      path="/today"
+    />
+  );
+
+  if (!ready) {
+    return (
+      <Screen>
+        {meta}
+        <Empty message="Loading..." />
+      </Screen>
+    );
+  }
 
   return (
     <Screen>
-      <PageMeta
-        title="Brain health, researched"
-        description="A sourced catalog of nootropic compounds. Every claim cited, every compound reviewed by a human before it publishes."
-        path="/"
-      />
+      {meta}
       <Title>Today</Title>
 
       <Section title="Daily nootropic">

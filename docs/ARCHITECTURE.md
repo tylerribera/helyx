@@ -12,7 +12,8 @@ frontend to keep in sync.
 ```
 app/                      Expo Router. File path = URL path.
   _layout.tsx             Root stack + providers
-  (tabs)/                 Today · Catalog · Ask · Core
+  index.tsx               helyx.us landing page (web) / redirect to tabs (native)
+  (tabs)/                 /today · /catalog · /ask · /core
   compound/[slug].tsx     The SEO surface. 200+ of these are why the site exists.
   onboarding.tsx
   +html.tsx               Web-only HTML shell. Smart banners live here.
@@ -29,6 +30,24 @@ supabase/
 scripts/validate-content  CI gate for the schema rules
 docs/
 ```
+
+### Landing page vs app
+
+`/` is a marketing page with email capture; the app lives at `/today` and the
+other tab routes. On native, `app/index.tsx` returns a `<Redirect>` to the tabs
+immediately — someone who already installed the app does not need to be sold on
+it.
+
+This split exists because the catalog is currently empty. Every compound is a
+draft, so a visitor landing on the app shell would see nothing. Once there is
+real content, making the app the site's front door is a matter of changing that
+redirect; the routes are already in place and indexable.
+
+The landing page renders the logo with a raw `<img>` rather than React Native's
+`Image`, because react-native-web applies an image source as a background style
+via JavaScript — the logo would be absent from the server-rendered HTML and pop
+in after hydration. The `Platform.OS !== 'web'` guard above it means the raw DOM
+element is never reached on native.
 
 ### The web build
 

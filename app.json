@@ -11,7 +11,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "us.helyx.app",
-      "associatedDomains": ["applinks:helyx.us"]
+      "associatedDomains": [
+        "applinks:helyx.us"
+      ]
     },
     "android": {
       "package": "us.helyx.app",
@@ -26,8 +28,16 @@
         {
           "action": "VIEW",
           "autoVerify": true,
-          "data": [{ "scheme": "https", "host": "helyx.us" }],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "data": [
+            {
+              "scheme": "https",
+              "host": "helyx.us"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ]
     },
@@ -36,7 +46,10 @@
       "output": "static",
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-status-bar"],
+    "plugins": [
+      "expo-router",
+      "expo-status-bar"
+    ],
     "experiments": {
       "typedRoutes": true
     }

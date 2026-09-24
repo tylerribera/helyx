@@ -16,6 +16,9 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.bg },
           }}
         >
+          {/* The landing page carries its own header, and on native it only
+              redirects, so a stack header would flash before the handoff. */}
+          <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="onboarding" options={{ title: 'Set up Helyx', presentation: 'modal' }} />
           <Stack.Screen name="compound/[slug]" options={{ title: '' }} />
