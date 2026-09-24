@@ -1,0 +1,52 @@
+name: CI
+
+# Typecheck, validate content, and prove the web build works.
+#
+# Deployment is Cloudflare Pages' job — it builds from this repo on push. This
+# workflow exists so a broken build or a compound that fails the publishing
+# rules is caught here, on a pull request, rather than discovered after it has
+# already shipped to helyx.us.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+
+      # Typecheck plus the content gate: >= 4 qualifying sources, every claim
+      # cited, human sign-off, all four jurisdictions.
+      - name: Typecheck and validate content
+        run: npm run check
+
+      # Static rendering fails in ways a typecheck cannot catch, so build for
+      # real. Same command Cloudflare Pages runs.
+      - name: Build web
+        run: npm run export:web
+        env:
+          EXPO_PUBLIC_SITE_URL: https://helyx.us
+
+      # Cheap guards against the deploy silently losing something that matters.
+      - name: Verify build output
+        run: |
+          test -f dist/index.html   || { echo "::error::dist/index.html missing"; exit 1; }
+          test -f dist/404.html     || { echo "::error::dist/404.html missing"; exit 1; }
+          test -f dist/_headers     || { echo "::error::dist/_headers missing — security and cache headers would be dropped"; exit 1; }
+          grep -q "helyx-banner" dist/index.html || { echo "::error::smart banner missing from index.html"; exit 1; }
+          echo "Build output verified."

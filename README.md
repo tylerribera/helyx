@@ -25,6 +25,7 @@ Supabase project URL and anon key.
 | `npm start` | Dev server |
 | `npm run web` | Web only |
 | `npm run export:web` | Static site → `dist/` |
+| `npm run build:web` | `check` then `export:web` — what Cloudflare Pages runs |
 | `npm run typecheck` | TypeScript |
 | `npm run validate:content` | Schema + publishing rules |
 | `npm run check` | Both of the above |

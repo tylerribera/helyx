@@ -98,12 +98,60 @@ Suggestions also always carry a `because` array. A recommendation the user
 cannot interrogate is a black box, and on this subject a black box is not
 acceptable.
 
+## Deployment
+
+helyx.us is hosted on **Cloudflare Pages**, which builds from this repository on
+every push to `main`.
+
+Cloudflare was chosen over GitHub Pages because the domain's DNS and CDN already
+terminate there, and because GitHub Pages offers no control over response
+headers — `public/_headers` (security headers, immutable caching on
+fingerprinted assets, revalidation on HTML) has no GitHub Pages equivalent.
+Per-branch preview deployments come free, which matters once more than one
+person is working on this.
+
+**GitHub Pages is deliberately disabled.** Two hosts claiming the same custom
+domain is what made the site serve stale content for a day: a Cloudflare Pages
+custom-domain binding silently overrides the DNS record pointing at GitHub, so
+requests never reached GitHub at all while every diagnostic said DNS was
+correct. Do not re-enable it.
+
+### Cloudflare Pages settings
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build:web` |
+| Output directory | `dist` |
+| Node version | from `.node-version` (20) |
+| Environment variable | `EXPO_PUBLIC_SITE_URL=https://helyx.us` |
+| Environment variable | `EXPO_PUBLIC_IOS_APP_ID` — set once the app is registered |
+
+`npm run build:web` runs `npm run check` first, so a failing typecheck or a
+compound that violates the publishing rules aborts the deploy rather than
+shipping.
+
+### What runs where
+
+- **Cloudflare Pages** — builds and serves helyx.us.
+- **GitHub Actions (`ci.yml`)** — typechecks, validates content, and builds on
+  every push and pull request. It does not deploy. Its job is to fail on a PR,
+  before a merge triggers a real deploy.
+
+### Build steps that live in the repo, not in host config
+
+`scripts/post-export.mjs` runs after the Expo export and copies
+`+not-found.html` to `404.html`, which is the filename both hosts actually serve
+for unresolved paths. It is a script rather than a line of YAML so the build
+behaves the same on a laptop, in CI, and on Cloudflare — a step that exists only
+in one host's config stops happening the moment you change hosts.
+
 ## Commands
 
 ```
 npm start                  Dev server (press i / a / w)
 npm run web                Web only
 npm run export:web         Static site → dist/
+npm run build:web          check + export:web (what Cloudflare Pages runs)
 npm run typecheck
 npm run validate:content   Schema + publishing rules
 npm run check              Both

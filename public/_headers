@@ -1,0 +1,25 @@
+# Cloudflare Pages response headers.
+#
+# This file is one of the concrete reasons for hosting here rather than on
+# GitHub Pages, which offers no control over response headers at all.
+
+/*
+  # Clickjacking, MIME sniffing, and referrer leakage.
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  # No feature of this site needs any of these.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# Expo fingerprints these filenames with a content hash, so a changed file gets
+# a new URL. They can therefore be cached permanently and never revalidated.
+/_expo/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML must revalidate, or a deploy takes an hour to reach anyone who has
+# already visited. This is the header whose absence kept the old site pinned.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

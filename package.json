@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "export:web": "expo export --platform web",
+    "export:web": "expo export --platform web && node scripts/post-export.mjs",
+    "build:web": "npm run check && npm run export:web",
     "typecheck": "tsc --noEmit",
     "validate:content": "tsx scripts/validate-content.ts",
     "check": "npm run typecheck && npm run validate:content"
